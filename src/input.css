@@ -1,0 +1,188 @@
+@import "tailwindcss";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@theme {
+  --color-blue-50: #f5edfa;
+  --color-blue-100: #eadcf2;
+  --color-blue-200: #c9ade0;
+  --color-blue-300: #a782cf;
+  --color-blue-400: #653ba8;
+  --color-blue-500: #2a0984;
+  --color-blue-600: #230778;
+  --color-blue-700: #1b0563;
+  --color-blue-800: #14034f;
+  --color-blue-900: #0d023b;
+  --color-blue-950: #070126;
+}
+@layer components {
+  .sidebar-gradient {
+    @apply bg-gradient-to-b from-blue-500 to-blue-700;
+  }
+
+  .nav-item {
+    @apply flex items-center justify-between rounded p-2 cursor-pointer transition-all duration-200 hover:bg-white/10 hover:translate-x-0.5;
+  }
+
+  .nav-item.active {
+    @apply bg-yellow-400 text-black font-medium shadow-lg shadow-yellow-400/30;
+  }
+
+  .nav-sub-item {
+    @apply rounded px-3 py-2 cursor-pointer text-sm transition-all duration-200 hover:bg-white/10 hover:translate-x-0.5;
+  }
+
+  .nav-sub-item.active {
+    @apply bg-yellow-400 text-black font-medium shadow-md shadow-yellow-400/30;
+  }
+
+  .nav-icon {
+    @apply mr-3 w-4 flex-shrink-0;
+  }
+
+  .chevron-icon {
+    @apply text-sm transition-transform duration-200;
+  }
+
+  .chevron-icon.rotated {
+    @apply rotate-180;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 whitespace-nowrap hover:bg-blue-700 text-white px-4 py-1 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95;
+  }
+  .btn-primary-outline {
+    @apply text-blue-600 border whitespace-nowrap border-blue-600 hover:bg-gray-100  px-4 py-1 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-1 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95;
+  }
+
+  .input-field {
+    @apply border text-gray-500 text-sm rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200;
+  }
+
+  .table-heading {
+    @apply text-left py-4 px-6 font-semibold text-gray-900 bg-gray-200;
+  }
+  .table-header {
+    @apply text-left py-4 px-6 font-semibold text-gray-900;
+  }
+  .table-row-style td {
+    @apply px-4 py-2 h-[40px];
+  }
+  .pagination-btn {
+    @apply min-w-9 h-9 px-2 rounded-md bg-white text-gray-900 font-medium hover:bg-gray-200 shadow-sm;
+  }
+
+  .pagination-active {
+    @apply bg-[#2D2484] text-white font-semibold;
+  }
+
+  .pagination-wrapper {
+    @apply flex items-center gap-2 rounded-md;
+  }
+  .breadcrumb-item {
+    @apply bg-gray-100 px-3 py-0.5 border-2 border-gray-300 rounded text-sm text-gray-900 font-semibold transition-colors duration-200 hover:bg-gray-300 cursor-pointer;
+  }
+
+  .page-section {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden;
+  }
+
+  .nav-section {
+    @apply px-2;
+  }
+
+  .nav-group {
+    @apply ml-6  space-y-1 max-h-0 overflow-hidden transition-all duration-300 ease-in-out;
+  }
+
+  .nav-group.expanded {
+    @apply max-h-48;
+  }
+
+  .logo-container {
+    @apply flex items-center p-2  border-blue-400 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30;
+  }
+
+  .logo-icon {
+    @apply border-2 border-yellow-400 rounded-full w-10 h-10 flex items-center justify-center mr-3 transition-transform duration-200 hover:scale-110;
+  }
+
+  .header-btn {
+    @apply p-2  rounded-full text-gray-500 hover:text-gray-700 transition-all duration-200 hover:scale-110 active:scale-95 bg-gray-100;
+  }
+
+  .sort-icon {
+    @apply ml-2 text-gray-400 cursor-pointer hover:text-gray-600 transition-colors duration-200;
+  }
+
+  .empty-state {
+    @apply text-center py-12 text-gray-500;
+  }
+
+  .empty-state-icon {
+    @apply text-4xl text-gray-300 mb-4;
+  }
+
+  .filter-container {
+    @apply flex items-center space-x-4 mb-6;
+  }
+
+  .select-wrapper {
+    @apply relative;
+  }
+
+  .select-chevron {
+    @apply absolute right-3 top-3 text-gray-400 text-sm pointer-events-none;
+  }
+
+  .search-wrapper {
+    @apply relative flex-1 max-w-xs my-2;
+  }
+
+  .search-icon {
+    @apply absolute left-3 top-3 text-gray-400;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(67, 56, 202, 0.3);
+  }
+
+  .animate-pulse-soft {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+}
+
+/* Custom Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}

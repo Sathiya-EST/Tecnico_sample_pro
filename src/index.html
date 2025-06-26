@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Technico</title>
+  </head>
+
+  <body class="bg-gray-100/100 font-sans">
+    <!-- Sidebar -->
+    <div
+      class="fixed left-0 top-0 h-full w-64 sidebar-gradient text-white shadow-xl z-50"
+    >
+      <!-- Logo -->
+      <div class="logo-container">
+        <div class="logo-icon">
+          <h1 class="font-bold text-yellow-500">T</h1>
+        </div>
+        <h1 class="text-xl font-bold text-shadow">Technico</h1>
+      </div>
+
+      <!-- Menu Toggle -->
+      <div>
+        <div class="flex items-center gap-x-5 ml-4">
+          <i class="fas fa-bars"></i>
+          <span class="font-medium">Menu</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="mt-4 animate-slide-in">
+        <!-- Overview -->
+        <div class="nav-section">
+          <div class="nav-item" data-toggle="overview-menu">
+            <div class="flex items-center">
+              <i class="fas fa-th nav-icon"></i>
+              <span>Overview</span>
+            </div>
+            <i class="fas fa-caret-down chevron-icon"></i>
+          </div>
+          <div class="nav-group" id="overview-menu">
+            <div class="nav-sub-item" data-route="/overview/my-technico">
+              My Technico
+            </div>
+            <div class="nav-sub-item" data-route="/overview/dashboard">
+              Dashboard
+            </div>
+          </div>
+        </div>
+
+        <!-- Database -->
+        <div class="nav-section">
+          <div class="nav-item" data-toggle="database-menu">
+            <div class="flex items-center">
+              <i class="fa-regular fas fa-database nav-icon"></i>
+              <span>Database</span>
+            </div>
+            <i class="fas fa-caret-down chevron-icon"></i>
+          </div>
+          <div class="nav-group" id="database-menu">
+            <div class="nav-sub-item" data-route="/database/tags">Tags</div>
+          </div>
+        </div>
+
+        <!-- Outstanding Item -->
+        <div class="nav-section">
+          <div class="nav-item" data-toggle="outstanding-menu">
+            <div class="flex items-center">
+              <i class="fas fa-business-time nav-icon"></i>
+              <span>Outstanding Item</span>
+            </div>
+            <i class="fas fa-caret-down chevron-icon"></i>
+          </div>
+          <div class="nav-group expanded" id="outstanding-menu">
+            <div
+              class="nav-sub-item active"
+              data-route="/outstanding/checksheets"
+            >
+              Checksheets
+            </div>
+            <div class="nav-sub-item" data-route="/outstanding/punchlists">
+              Punchlists
+            </div>
+            <div class="nav-sub-item" data-route="/outstanding/preservation">
+              Preservation
+            </div>
+            <div class="nav-sub-item" data-route="/outstanding/loop-tags">
+              Loop Tags
+            </div>
+            <div class="nav-sub-item" data-route="/outstanding/approvals">
+              Approvals
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 mb-6 min-h-screen">
+      <!-- Header -->
+      <header
+        class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 backdrop-blur-xs"
+      >
+        <div class="flex items-center justify-between px-6 py-2">
+          <div class="flex items-center space-x-4">
+            <h1 class="text-xl font-bold text-gray-900 text-shadow">
+              Technico
+            </h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="header-btn relative" title="Notifications">
+              <i class="fas fa-bell text-md"></i>
+              <span
+                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center animate-pulse-soft"
+                >3</span
+              >
+            </button>
+            <button class="header-btn" title="Help">
+              <i class="fas fa-question-circle text-md"></i>
+            </button>
+            <button class="header-btn" title="Settings">
+              <i class="fas fa-cog text-md"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+              <div>
+                <p class="text-md text-slate-700 text-bold">UserName</p>
+                <p class="text-xs text-slate-700">user@gmail.com</p>
+              </div>
+              <div>
+                <button
+                  class="bg-gray-100 text-gray-700 rounded-full p-2 hover:bg-gray-200 transition-all duration-200"
+                >
+                  <i class="fas fa-user"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-px h-8 bg-gray-300"></div>
+              <div id="datetime">
+                <p class="text-md text-slate-700" id="date"></p>
+                <p class="text-xs text-slate-600" id="time"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Breadcrumb -->
+      <div class="m-2 rounded-xl">
+        <div class="px-4 py-2 bg-white">
+          <div class="flex items-center space-x-2" id="breadcrumb">
+            <span class="breadcrumb-item" data-route="/outstanding"
+              >Outstanding Items</span
+            >
+            <i class="fas fa-chevron-right text-xs text-gray-600"></i>
+            <span class="breadcrumb-item" data-route="/outstanding/checksheets"
+              >Checksheets</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="p-4 animate-slide-in bg-white mx-2 rounded-md overflow-auto">
+        <!-- Page Header -->
+        <div class="flex items-center flex-wrap justify-between space-x-6">
+          <h2
+            class="text-2xl mb-2 font-semibold text-gray-900 text-shadow"
+            id="page-title"
+          >
+            Checksheets
+          </h2>
+          <div class="flex items-center space-x-3 flex-wrap">
+            <div class="select-wrapper">
+              <select
+                class="input-field border-gray-300 appearance-none pr-8 bg-white"
+              >
+                <option>Entire Project</option>
+                <option>Phase 1</option>
+                <option>Phase 2</option>
+                <option>Phase 3</option>
+              </select>
+              <i class="fas fa-chevron-down select-chevron"></i>
+            </div>
+            <div class="w-px h-8 bg-gray-300"></div>
+
+            <button class="btn-primary">Edit</button>
+            <button class="btn-primary-outline">Layouts</button>
+            <button class="btn-primary-outline">Tag Details</button>
+            <button class="btn-primary-outline">Import</button>
+            <button class="btn-primary-outline">Export</button>
+            <button class="btn-primary-outline">Reset Grid</button>
+            <button class="btn-primary-outline">
+              <i class="fas fa-filter"></i>
+            </button>
+            <button class="btn-primary-outline">
+              <i class="fas fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="search-wrapper">
+          <input
+            type="text"
+            placeholder="Search"
+            class="input-field w-full pl-10 pr-4 border-gray-600"
+          />
+          <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <!-- Table -->
+        <div class="page-section">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="border-b border-gray-200">
+                <tr class="table-heading">
+                  <th class="table-header">
+                    <span>Tag Desc</span>
+                  </th>
+                  <th class="table-header">
+                    <span>Construction Phase Ref</span>
+                  </th>
+                  <th class="table-header">
+                    <span>Parent Tag</span>
+                  </th>
+                  <th class="table-header">
+                    <span>Type Ref</span>
+                  </th>
+                  <th class="table-header">
+                    <span>SubType Ref</span>
+                  </th>
+                  <th class="table-header">
+                    <span>Discipline Ref</span>
+                  </th>
+                  <th class="table-header">Site Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="flex justify-between items-center p-4 bg-gray-200">
+              <div>
+                <p class="font-semibold">Page 1 of 15</p>
+              </div>
+              <!-- Pagination -->
+              <div class="pagination-wrapper">
+                <button class="pagination-btn text-gray-700">&lt;</button>
+                <button class="pagination-btn">First</button>
+                <button class="pagination-btn pagination-active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span
+                  class="w-9 h-9 flex items-center justify-center text-gray-500"
+                  >...</span
+                >
+                <button class="pagination-btn">15</button>
+                <button class="pagination-btn">Last</button>
+                <button class="pagination-btn text-gray-700">&gt;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer flex justify-center space-x-4 items-center mt-4">
+        <button class="btn-primary-outline">Issue</button>
+        <button class="btn-primary-outline">Print</button>
+        <button class="btn-primary">Add to New FCR</button>
+        <button class="btn-primary">Mark as Complete</button>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
