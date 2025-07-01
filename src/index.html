@@ -1,355 +1,692 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./output.css" rel="stylesheet" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
     <title>Technico</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../dist/output.css" />
   </head>
-
-  <body class="bg-gray-100/100 font-sans">
-    <!-- Sidebar -->
-    <div
-      class="fixed left-0 top-0 h-full w-64 sidebar-gradient text-white shadow-xl z-50"
-    >
-      <!-- Logo -->
-      <div class="logo-container">
-        <div class="logo-icon">
-          <h1 class="font-bold text-yellow-500">T</h1>
-        </div>
-        <h1 class="text-xl font-bold text-shadow">Technico</h1>
-      </div>
-
-      <!-- Menu Toggle -->
-      <div>
-        <div class="flex items-center gap-x-5 ml-4">
-          <i class="fas fa-bars"></i>
-          <span class="font-medium">Menu</span>
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <nav class="mt-4 animate-slide-in">
-        <!-- Overview -->
-        <div class="nav-section">
-          <div class="nav-item" data-toggle="overview-menu">
-            <div class="flex items-center">
-              <i class="fas fa-th nav-icon"></i>
-              <span>Overview</span>
-            </div>
-            <i class="fas fa-caret-down chevron-icon"></i>
-          </div>
-          <div class="nav-group" id="overview-menu">
-            <div class="nav-sub-item" data-route="/overview/my-technico">
-              My Technico
-            </div>
-            <div class="nav-sub-item" data-route="/overview/dashboard">
-              Dashboard
-            </div>
-          </div>
-        </div>
-
-        <!-- Database -->
-        <div class="nav-section">
-          <div class="nav-item" data-toggle="database-menu">
-            <div class="flex items-center">
-              <i class="fa-regular fas fa-database nav-icon"></i>
-              <span>Database</span>
-            </div>
-            <i class="fas fa-caret-down chevron-icon"></i>
-          </div>
-          <div class="nav-group" id="database-menu">
-            <div class="nav-sub-item" data-route="/database/tags">Tags</div>
-          </div>
-        </div>
-
-        <!-- Outstanding Item -->
-        <div class="nav-section">
-          <div class="nav-item" data-toggle="outstanding-menu">
-            <div class="flex items-center">
-              <i class="fas fa-business-time nav-icon"></i>
-              <span>Outstanding Item</span>
-            </div>
-            <i class="fas fa-caret-down chevron-icon"></i>
-          </div>
-          <div class="nav-group expanded" id="outstanding-menu">
-            <div
-              class="nav-sub-item active"
-              data-route="/outstanding/checksheets"
-            >
-              Checksheets
-            </div>
-            <div class="nav-sub-item" data-route="/outstanding/punchlists">
-              Punchlists
-            </div>
-            <div class="nav-sub-item" data-route="/outstanding/preservation">
-              Preservation
-            </div>
-            <div class="nav-sub-item" data-route="/outstanding/loop-tags">
-              Loop Tags
-            </div>
-            <div class="nav-sub-item" data-route="/outstanding/approvals">
-              Approvals
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Main Content -->
-    <div class="ml-64 mb-6 min-h-screen">
-      <!-- Header -->
-      <header
-        class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 backdrop-blur-xs"
+  <body class="h-full text-theme-primary bg-theme-background">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="sidebar border-theme bg-brand-navbar rounded-r-xl"
       >
-        <div class="flex items-center justify-between px-6 py-2">
-          <div class="flex items-center space-x-4">
-            <h1 class="text-xl font-bold text-gray-900 text-shadow">
+        <!-- Logo -->
+        <div class="logo-container">
+          <div class="flex items-center gap-x-2">
+            <img src="./assets/images/logo.svg" alt="Logo" />
+            <h1 class="text-xl font-bold text-shadow" id="sidebar-title">
               Technico
             </h1>
           </div>
-          <div class="flex items-center space-x-4">
-            <button class="header-btn relative" title="Notifications">
-              <i class="fas fa-bell text-md"></i>
-              <span
-                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center animate-pulse-soft"
-                >3</span
-              >
-            </button>
-            <button class="header-btn" title="Help">
-              <i class="fas fa-question-circle text-md"></i>
-            </button>
-            <button class="header-btn" title="Settings">
-              <i class="fas fa-cog text-md"></i>
-            </button>
-            <div class="flex items-center space-x-2">
-              <div>
-                <p class="text-md text-slate-700 text-bold">UserName</p>
-                <p class="text-xs text-slate-700">user@gmail.com</p>
-              </div>
-              <div>
-                <button
-                  class="bg-gray-100 text-gray-700 rounded-full p-2 hover:bg-gray-200 transition-all duration-200"
-                >
-                  <i class="fas fa-user"></i>
+        </div>
+        <div class="sidebar-header">
+          <div class="flex items-center gap-2">
+            <!-- Menu icon shown when sidebar is collapsed -->
+            <div id="menuTrigger" class="menu-trigger">
+              <img
+                src="./assets/images/menu-icon.svg"
+                alt="Menu Icon"
+                class="nav-icon"
+              />
+            </div>
+            <span class="text-lg font-bold sidebar-label">Menu</span>
+          </div>
+
+          <button id="collapseTrigger" class="toggle-btn text-theme-primary">
+            <img
+              src="./assets/images/collapse-icon.svg"
+              alt="Collapse Sidebar"
+              class="nav-icon"
+            />
+          </button>
+        </div>
+        <nav class="sidebar-nav">
+          <!-- Overview -->
+          <div class="nav-section">
+            <div
+              class="nav-item hover:transform-border"
+              data-toggle="overview-menu"
+              data-tooltip="Overview"
+            >
+              <div class="icon-container">
+                <button>
+                  <svg
+                    viewBox="0 0 14 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.77778 4.66667V0H14V4.66667H7.77778ZM0 7.77778V0H6.22222V7.77778H0ZM7.77778 14V6.22222H14V14H7.77778ZM0 14V9.33333H6.22222V14H0ZM1.55556 6.22222H4.66667V1.55556H1.55556V6.22222ZM9.33333 12.4444H12.4444V7.77778H9.33333V12.4444ZM9.33333 3.11111H12.4444V1.55556H9.33333V3.11111ZM1.55556 12.4444H4.66667V10.8889H1.55556V12.4444Z"
+                      fill="white"
+                    />
+                  </svg>
                 </button>
+                <span>Overview</span>
               </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-px h-8 bg-gray-300"></div>
-              <div id="datetime">
-                <p class="text-md text-slate-700" id="date"></p>
-                <p class="text-xs text-slate-600" id="time"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <!-- Breadcrumb -->
-      <div class="m-2 rounded-xl">
-        <div class="px-4 py-2 bg-white">
-          <div class="flex items-center space-x-2" id="breadcrumb">
-            <span class="breadcrumb-item" data-route="/outstanding"
-              >Outstanding Items</span
-            >
-            <i class="fas fa-chevron-right text-xs text-gray-600"></i>
-            <span class="breadcrumb-item" data-route="/outstanding/checksheets"
-              >Checksheets</span
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- Content Area -->
-      <div class="p-4 animate-slide-in bg-white mx-2 rounded-md overflow-auto">
-        <!-- Page Header -->
-        <div class="flex items-center flex-wrap justify-between space-x-6">
-          <h2
-            class="text-2xl mb-2 font-semibold text-gray-900 text-shadow"
-            id="page-title"
-          >
-            Checksheets
-          </h2>
-          <div class="flex items-center space-x-3 flex-wrap">
-            <div class="select-wrapper">
-              <select
-                class="input-field border-gray-300 appearance-none pr-8 bg-white"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
               >
-                <option>Entire Project</option>
-                <option>Phase 1</option>
-                <option>Phase 2</option>
-                <option>Phase 3</option>
-              </select>
-              <i class="fas fa-chevron-down select-chevron"></i>
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="overview-menu">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/overview/my-technico"
+                data-tooltip="My Technico"
+              >
+                My Technico
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/overview/dashboard"
+                data-tooltip="Dashboard"
+              >
+                Dashboard
+              </div>
+            </div>
+          </div>
+          <!-- Database -->
+          <div class="nav-section">
+            <div
+              class="nav-item hover:transform-border"
+              data-toggle="database-menu"
+              data-tooltip="Database"
+            >
+              <div class="icon-container">
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+                    <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3" />
+                  </svg>
+                </button>
+                <span>Database</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="database-menu">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/database/tags"
+                data-tooltip="Tags"
+              >
+                Tags
+              </div>
+            </div>
+          </div>
+          <!-- Outstanding Item -->
+          <div class="nav-section">
+            <div
+              class="nav-item hover:transform-border"
+              data-toggle="outstanding-menu"
+              data-tooltip="Outstanding Item"
+            >
+              <div class="icon-container">
+                <svg
+                  viewBox="0 0 14 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.3158 15C9.29649 15 8.42763 14.6518 7.70921 13.9554C6.99079 13.2589 6.63158 12.4167 6.63158 11.4286C6.63158 10.4405 6.99079 9.59822 7.70921 8.90179C8.42763 8.20536 9.29649 7.85714 10.3158 7.85714C11.3351 7.85714 12.2039 8.20536 12.9224 8.90179C13.6408 9.59822 14 10.4405 14 11.4286C14 12.4167 13.6408 13.2589 12.9224 13.9554C12.2039 14.6518 11.3351 15 10.3158 15ZM11.55 13.125L12.0658 12.625L10.6842 11.2857V9.28572H9.94737V11.5714L11.55 13.125ZM1.47368 14.2857C1.06842 14.2857 0.721491 14.1458 0.432895 13.8661C0.144298 13.5863 0 13.25 0 12.8571V2.85714C0 2.46429 0.144298 2.12798 0.432895 1.84821C0.721491 1.56845 1.06842 1.42857 1.47368 1.42857H4.55C4.68509 1.0119 4.94912 0.669643 5.3421 0.401786C5.73509 0.133929 6.16491 0 6.63158 0C7.12281 0 7.56184 0.133929 7.94868 0.401786C8.33553 0.669643 8.59649 1.0119 8.73158 1.42857H11.7895C12.1947 1.42857 12.5417 1.56845 12.8303 1.84821C13.1189 2.12798 13.2632 2.46429 13.2632 2.85714V7.32143C13.0421 7.16667 12.8088 7.03571 12.5632 6.92857C12.3175 6.82143 12.0596 6.72619 11.7895 6.64286V2.85714H10.3158V5H2.94737V2.85714H1.47368V12.8571H5.37895C5.46491 13.119 5.56316 13.369 5.67368 13.6071C5.78421 13.8452 5.9193 14.0714 6.07895 14.2857H1.47368ZM6.63158 2.85714C6.84035 2.85714 7.01535 2.78869 7.15658 2.65179C7.29781 2.51488 7.36842 2.34524 7.36842 2.14286C7.36842 1.94048 7.29781 1.77083 7.15658 1.63393C7.01535 1.49702 6.84035 1.42857 6.63158 1.42857C6.42281 1.42857 6.24781 1.49702 6.10658 1.63393C5.96535 1.77083 5.89474 1.94048 5.89474 2.14286C5.89474 2.34524 5.96535 2.51488 6.10658 2.65179C6.24781 2.78869 6.42281 2.85714 6.63158 2.85714Z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span>Outstanding Item</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="outstanding-menu">
+              <div
+                class="nav-sub-item active"
+                data-route="/outstanding/checksheets"
+              >
+                Checksheets
+              </div>
+              <div class="nav-sub-item" data-route="/outstanding/punchlists">
+                Punchlists
+              </div>
+              <div class="nav-sub-item" data-route="/outstanding/preservation">
+                Preservation
+              </div>
+              <div class="nav-sub-item" data-route="/outstanding/loop-tags">
+                Loop Tags
+              </div>
+              <div class="nav-sub-item" data-route="/outstanding/approvals">
+                Approvals
+              </div>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main-layout">
+        <!-- Header -->
+
+        <header class="header border-theme bg-brand-header">
+          <div class="text-lg font-semibold">Tecnico</div>
+          <div class="flex gap-x-6 items-center">
+            <div class="flex items-center gap-1">
+              <div class="space-x-1 flex">
+                <!-- Notification -->
+                <button
+                  id="NotificationBtn"
+                  class="p-2 rounded-full hover:bg-theme-accent focus:outline-none"
+                  title="Notification"
+                >
+                  <svg
+                    viewBox="0 0 14 19"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="header-icon"
+                  >
+                    <path
+                      d="M0 15.8V14H1.75V7.7C1.75 6.455 2.11458 5.34875 2.84375 4.38125C3.57292 3.41375 4.52083 2.78 5.6875 2.48V1.85C5.6875 1.475 5.8151 1.15625 6.07031 0.89375C6.32552 0.63125 6.63542 0.5 7 0.5C7.36458 0.5 7.67448 0.63125 7.92969 0.89375C8.1849 1.15625 8.3125 1.475 8.3125 1.85V2.48C9.47917 2.78 10.4271 3.41375 11.1562 4.38125C11.8854 5.34875 12.25 6.455 12.25 7.7V14H14V15.8H0ZM7 18.5C6.51875 18.5 6.10677 18.3238 5.76406 17.9713C5.42135 17.6188 5.25 17.195 5.25 16.7H8.75C8.75 17.195 8.57865 17.6188 8.23594 17.9713C7.89323 18.3238 7.48125 18.5 7 18.5ZM3.5 14H10.5V7.7C10.5 6.71 10.1573 5.8625 9.47188 5.1575C8.78646 4.4525 7.9625 4.1 7 4.1C6.0375 4.1 5.21354 4.4525 4.52812 5.1575C3.84271 5.8625 3.5 6.71 3.5 7.7V14Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+                <!-- Help -->
+                <button
+                  id="helpBtn"
+                  class="p-2 rounded-full hover:bg-theme-accent focus:outline-none"
+                  title="Help"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 14 15"
+                    class="header-icon"
+                  >
+                    <path
+                      d="M6.965 11.7C7.21 11.7 7.41708 11.6154 7.58625 11.4462C7.75542 11.2771 7.84 11.07 7.84 10.825C7.84 10.58 7.75542 10.3729 7.58625 10.2037C7.41708 10.0346 7.21 9.95 6.965 9.95C6.72 9.95 6.51292 10.0346 6.34375 10.2037C6.17458 10.3729 6.09 10.58 6.09 10.825C6.09 11.07 6.17458 11.2771 6.34375 11.4462C6.51292 11.6154 6.72 11.7 6.965 11.7ZM6.335 9.005H7.63C7.63 8.62 7.67375 8.31667 7.76125 8.095C7.84875 7.87333 8.09667 7.57 8.505 7.185C8.80833 6.88167 9.0475 6.59292 9.2225 6.31875C9.3975 6.04458 9.485 5.715 9.485 5.33C9.485 4.67667 9.24583 4.175 8.7675 3.825C8.28917 3.475 7.72333 3.3 7.07 3.3C6.405 3.3 5.86542 3.475 5.45125 3.825C5.03708 4.175 4.74833 4.595 4.585 5.085L5.74 5.54C5.79833 5.33 5.92958 5.1025 6.13375 4.8575C6.33792 4.6125 6.65 4.49 7.07 4.49C7.44333 4.49 7.72333 4.59208 7.91 4.79625C8.09667 5.00042 8.19 5.225 8.19 5.47C8.19 5.70333 8.12 5.92208 7.98 6.12625C7.84 6.33042 7.665 6.52 7.455 6.695C6.94167 7.15 6.62667 7.49417 6.51 7.7275C6.39333 7.96083 6.335 8.38667 6.335 9.005ZM7 14.5C6.03167 14.5 5.12167 14.3162 4.27 13.9488C3.41833 13.5813 2.6775 13.0825 2.0475 12.4525C1.4175 11.8225 0.91875 11.0817 0.55125 10.23C0.18375 9.37833 0 8.46833 0 7.5C0 6.53167 0.18375 5.62167 0.55125 4.77C0.91875 3.91833 1.4175 3.1775 2.0475 2.5475C2.6775 1.9175 3.41833 1.41875 4.27 1.05125C5.12167 0.68375 6.03167 0.5 7 0.5C7.96833 0.5 8.87833 0.68375 9.73 1.05125C10.5817 1.41875 11.3225 1.9175 11.9525 2.5475C12.5825 3.1775 13.0813 3.91833 13.4488 4.77C13.8162 5.62167 14 6.53167 14 7.5C14 8.46833 13.8162 9.37833 13.4488 10.23C13.0813 11.0817 12.5825 11.8225 11.9525 12.4525C11.3225 13.0825 10.5817 13.5813 9.73 13.9488C8.87833 14.3162 7.96833 14.5 7 14.5ZM7 13.1C8.56333 13.1 9.8875 12.5575 10.9725 11.4725C12.0575 10.3875 12.6 9.06333 12.6 7.5C12.6 5.93667 12.0575 4.6125 10.9725 3.5275C9.8875 2.4425 8.56333 1.9 7 1.9C5.43667 1.9 4.1125 2.4425 3.0275 3.5275C1.9425 4.6125 1.4 5.93667 1.4 7.5C1.4 9.06333 1.9425 10.3875 3.0275 11.4725C4.1125 12.5575 5.43667 13.1 7 13.1Z"
+                    />
+                  </svg>
+                </button>
+                <!-- Help Modal -->
+                <div
+                  id="helpModal"
+                  class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm hidden"
+                >
+                  <div
+                    class="min-w-[50vw] rounded-lg shadow-xl w-96 relative border border-theme"
+                  >
+                    <button
+                      id="closeHelpModal"
+                      class="hover:rotate-90 absolute top-1 right-1"
+                    >
+                      <img
+                        src="./assets/images/close-icon.svg"
+                        alt="Close Icon"
+                        class="w-8 h-8"
+                      />
+                    </button>
+                    <div class="bg-brand-navbar p-4 rounded-t-lg">
+                      <div class="flex items-center gap-x-2">
+                        <img
+                          src="./assets/images/brand-logo.png"
+                          alt="Logo"
+                          class="w-24 h-24"
+                        />
+                        <div class="space-y-2">
+                          <img
+                            src="./assets/images/TECNICO-text.svg"
+                            alt="Logo"
+                            class="h-10"
+                          />
+                          <p>Version: 1.0</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-4 h-40 flex flex-col bg-theme-background">
+                      <h2 class="text-xl font-semibold">
+                        Tecnico EPC global projects private limited
+                      </h2>
+                      <a href="#" class="text-blue-300 text-sm"
+                        >Info@tecnicoepc.com</a
+                      >
+
+                      <!-- Push this to bottom -->
+                      <div class="mt-auto text-center text-slate-500">
+                        <p>© 2025, Tecnico. All rights reserved</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Settings Button -->
+                <button
+                  id="settingsBtn"
+                  class="p-2 rounded-full hover:bg-theme-accent focus:outline-none"
+                  title="Settings"
+                >
+                  <svg
+                    width="14"
+                    height="15"
+                    viewBox="0 0 14 15"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="header-icon"
+                  >
+                    <path
+                      d="M5.08458 14.5L4.80597 12.26C4.65506 12.2017 4.51285 12.1317 4.37935 12.05C4.24585 11.9683 4.11526 11.8808 3.98756 11.7875L1.91542 12.6625L0 9.3375L1.79353 7.9725C1.78192 7.89083 1.77612 7.81208 1.77612 7.73625V7.26375C1.77612 7.18792 1.78192 7.10917 1.79353 7.0275L0 5.6625L1.91542 2.3375L3.98756 3.2125C4.11526 3.11917 4.24876 3.03167 4.38806 2.95C4.52736 2.86833 4.66667 2.79833 4.80597 2.74L5.08458 0.5H8.91542L9.19403 2.74C9.34494 2.79833 9.48715 2.86833 9.62065 2.95C9.75415 3.03167 9.88474 3.11917 10.0124 3.2125L12.0846 2.3375L14 5.6625L12.2065 7.0275C12.2181 7.10917 12.2239 7.18792 12.2239 7.26375V7.73625C12.2239 7.81208 12.2123 7.89083 12.1891 7.9725L13.9826 9.3375L12.0672 12.6625L10.0124 11.7875C9.88474 11.8808 9.75124 11.9683 9.61194 12.05C9.47264 12.1317 9.33333 12.2017 9.19403 12.26L8.91542 14.5H5.08458ZM6.30348 13.1H7.6791L7.92289 11.245C8.28275 11.1517 8.6165 11.0146 8.92413 10.8337C9.23176 10.6529 9.51327 10.4342 9.76866 10.1775L11.4925 10.895L12.1716 9.705L10.6741 8.5675C10.7322 8.40417 10.7728 8.23208 10.796 8.05125C10.8192 7.87042 10.8308 7.68667 10.8308 7.5C10.8308 7.31333 10.8192 7.12958 10.796 6.94875C10.7728 6.76792 10.7322 6.59583 10.6741 6.4325L12.1716 5.295L11.4925 4.105L9.76866 4.84C9.51327 4.57167 9.23176 4.34708 8.92413 4.16625C8.6165 3.98542 8.28275 3.84833 7.92289 3.755L7.69652 1.9H6.32089L6.07711 3.755C5.71725 3.84833 5.3835 3.98542 5.07587 4.16625C4.76824 4.34708 4.48673 4.56583 4.23134 4.8225L2.50746 4.105L1.82836 5.295L3.32587 6.415C3.26783 6.59 3.2272 6.765 3.20398 6.94C3.18076 7.115 3.16915 7.30167 3.16915 7.5C3.16915 7.68667 3.18076 7.8675 3.20398 8.0425C3.2272 8.2175 3.26783 8.3925 3.32587 8.5675L1.82836 9.705L2.50746 10.895L4.23134 10.16C4.48673 10.4283 4.76824 10.6529 5.07587 10.8337C5.3835 11.0146 5.71725 11.1517 6.07711 11.245L6.30348 13.1ZM7.03483 9.95C7.70813 9.95 8.28275 9.71083 8.75871 9.2325C9.23466 8.75417 9.47264 8.17667 9.47264 7.5C9.47264 6.82333 9.23466 6.24583 8.75871 5.7675C8.28275 5.28917 7.70813 5.05 7.03483 5.05C6.34992 5.05 5.77239 5.28917 5.30224 5.7675C4.83209 6.24583 4.59701 6.82333 4.59701 7.5C4.59701 8.17667 4.83209 8.75417 5.30224 9.2325C5.77239 9.71083 6.34992 9.95 7.03483 9.95Z"
+                    />
+                  </svg>
+                </button>
+                <!-- Settings Drawer -->
+                <div
+                  id="settingsDrawerWrapper"
+                  class="fixed inset-0 z-50 hidden overflow-hidden pb-20"
+                >
+                  <!-- Overlay -->
+                  <div
+                    id="drawerOverlay"
+                    class="absolute inset-0 bg-gray-800/10 bg-opacity-40"
+                  ></div>
+
+                  <!-- Panel -->
+                  <div
+                    id="drawerPanel"
+                    class="absolute right-0 top-0 h-full w-96 bg-theme-surface transition-transform duration-300 transform translate-x-full border-l border-theme"
+                  >
+                    <!-- Panel Header -->
+                    <div class="panel-header">
+                      <div></div>
+                      <h2 class="text-xl font-semibold text-theme-primary">
+                        Settings
+                      </h2>
+                      <button id="closeSettings" class="hover:rotate-90">
+                        <img
+                          src="./assets/images/close-icon.svg"
+                          alt="Close Icon"
+                          class="w-8 h-8"
+                        />
+                      </button>
+                    </div>
+
+                    <!-- Panel Content -->
+                    <div class="p-3 overflow-y-auto h-full space-y-2">
+                      <!-- Theme Section -->
+                      <div class="text-center space-y-4">
+                        <p class="text-lg font-semibold">Theme</p>
+                        <div class="flex justify-between gap-6">
+                          <!-- Light -->
+                          <button
+                            onclick="setTheme('light')"
+                            class="theme-button"
+                            data-theme="light"
+                          >
+                            <img
+                              src="./assets/images/light-theme-icon.svg"
+                              alt="Light Theme"
+                              class="theme-icon"
+                            />
+                            <span>Light Theme</span>
+                          </button>
+
+                          <!-- Dark -->
+                          <button
+                            onclick="setTheme('dark')"
+                            class="theme-button"
+                            data-theme="dark"
+                          >
+                            <img
+                              src="./assets/images/dark-theme-icon.svg"
+                              alt="Dark Theme"
+                              class="theme-icon"
+                            />
+                            <span>Dark Theme</span>
+                          </button>
+
+                          <!-- Blue -->
+                          <button
+                            onclick="setTheme('blue')"
+                            class="theme-button"
+                            data-theme="blue"
+                          >
+                            <img
+                              src="./assets/images/blue-theme-icon.svg"
+                              alt="Blue Theme"
+                              class="theme-icon"
+                            />
+                            <span>Blue Theme</span>
+                          </button>
+                        </div>
+                      </div>
+                      <hr class="border-t border-theme" />
+
+                      <!-- Font Size Section -->
+                      <div class="text-center space-y-4">
+                        <p class="text-lg font-semibold">Font Variation</p>
+                        <div class="flex justify-center gap-2">
+                          <button
+                            onclick="setFontSize('font-sm')"
+                            class="font-badge border-theme font-size-sm"
+                            data-font-size="font-sm"
+                          >
+                            Small
+                          </button>
+                          <button
+                            onclick="setFontSize('font-md')"
+                            class="font-badge border-theme font-size-md"
+                            data-font-size="font-md"
+                          >
+                            Medium
+                          </button>
+                          <button
+                            onclick="setFontSize('font-lg')"
+                            class="font-badge border-theme font-size-lg"
+                            data-font-size="font-lg"
+                          >
+                            Large
+                          </button>
+                        </div>
+                      </div>
+                      <hr class="border-t border-theme" />
+                      <!-- color scheme -->
+                      <div class="text-center space-y-4">
+                        <p class="text-lg font-semibold">Color Adjustments</p>
+                        <div class="flex justify-center gap-x-4">
+                          <span
+                            class="color-circle bg-[#2D257D] border-theme"
+                            onclick="setColorScheme('blue-scheme')"
+                            data-color-scheme="blue-scheme"
+                          ></span>
+                          <span
+                            class="color-circle bg-[#A700AF] border-theme"
+                            onclick="setColorScheme('pink-scheme')"
+                            data-color-scheme="pink-scheme"
+                          ></span>
+                          <span
+                            class="color-circle bg-[#3378A9] border-theme"
+                            onclick="setColorScheme('skyblue-scheme')"
+                            data-color-scheme="skyblue-scheme"
+                          ></span>
+                          <span
+                            class="color-circle bg-[#257D4D] border-theme"
+                            data-color-scheme="green-scheme"
+                            onclick="setColorScheme('green-scheme')"
+                          ></span>
+                          <span
+                            class="color-circle bg-[#865E0A] border-theme"
+                            data-color-scheme="yellow-scheme"
+                            onclick="setColorScheme('yellow-scheme')"
+                          ></span>
+                          <span
+                            class="color-circle bg-purple-700 border-theme"
+                            data-color-scheme="purple-scheme"
+                            onclick="setColorScheme('purple-scheme')"
+                          ></span>
+                        </div>
+                      </div>
+                      <hr class="border-t border-theme" />
+                      <!-- Accessibility -->
+                      <div class="text-center space-y-4">
+                        <p class="text-lg font-semibold">Accessibility</p>
+                        <div class="flex justify-center gap-x-4">
+                          <div class="space-y-3">
+                            <button
+                              onclick="setAccessibility('high-saturate')"
+                              class="px-8 py-4 rounded border border-theme flex"
+                              data-accessibility-mode="high-saturate"
+                            >
+                              <svg
+                                width="24"
+                                height="25"
+                                viewBox="0 0 24 25"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-8 h-8 fill-current transition-colors duration-300"
+                              >
+                                <path
+                                  d="M12 24.5C10.34 24.5 8.78 24.185 7.32 23.555C5.86 22.925 4.59 22.07 3.51 20.99C2.43 19.91 1.575 18.64 0.945 17.18C0.315 15.72 0 14.16 0 12.5C0 10.84 0.315 9.28 0.945 7.82C1.575 6.36 2.43 5.09 3.51 4.01C4.59 2.93 5.86 2.075 7.32 1.445C8.78 0.815 10.34 0.5 12 0.5C13.66 0.5 15.22 0.815 16.68 1.445C18.14 2.075 19.41 2.93 20.49 4.01C21.57 5.09 22.425 6.36 23.055 7.82C23.685 9.28 24 10.84 24 12.5C24 14.16 23.685 15.72 23.055 17.18C22.425 18.64 21.57 19.91 20.49 20.99C19.41 22.07 18.14 22.925 16.68 23.555C15.22 24.185 13.66 24.5 12 24.5ZM13.2 22.01C15.58 21.71 17.575 20.665 19.185 18.875C20.795 17.085 21.6 14.96 21.6 12.5C21.6 10.04 20.795 7.915 19.185 6.125C17.575 4.335 15.58 3.29 13.2 2.99V22.01Z"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </button>
+
+                            <p>High Saturation</p>
+                          </div>
+                          <div class="space-y-3">
+                            <button
+                              onclick="setAccessibility('low-saturate')"
+                              class="px-10 py-4 rounded border border-theme flex"
+                              data-accessibility-mode="low-saturate"
+                            >
+                              <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-8 h-8 fill-current transition-colors duration-300"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M4,14 C4,18.3349143 7.581722,22 12,22 C16.418278,22 20,18.3349143 20,14 L4,14 Z"
+                                />
+                                <path
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="1"
+                                  d="M4,14 C4,11.0544813 6.66666667,7.05448133 12,2 C17.3333333,7.05448133 20,11.0544813 20,14"
+                                />
+                              </svg>
+                            </button>
+                            <p>Low Saturation</p>
+                          </div>
+                          <div class="space-y-3">
+                            <button
+                              onclick="setAccessibility('invert-mode')"
+                              class="px-10 py-4 rounded border border-theme flex"
+                              data-accessibility-mode="invert-mode"
+                            >
+                              <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-8 h-8 fill-current transition-colors duration-300"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  fill-rule="evenodd"
+                                  d="M4,14 C4,11.0544813 6.66666667,7.05448133 12,2 C17.3333333,7.05448133 20,11.0544813 20,14 C20,18.3349143 16.5521622,21.8645429 12.2491793,21.9961932 L12,22 C7.581722,22 4,18.418278 4,14 Z M12,4.793 L11.7832437,5.01193635 C7.89798368,8.95774552 6,12.0287291 6,14 C6,17.3137085 8.6862915,20 12,20 L12,4.793 Z"
+                                />
+                              </svg>
+                            </button>
+                            <p>Invert Colors</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <!-- User Info (Trigger) -->
+              <div
+                id="user-info"
+                class="flex items-center space-x-2 hover:bg-theme-accent rounded-md px-2 py-1 cursor-pointer"
+              >
+                <div>
+                  <p class="text-md font-bold">User Name</p>
+                  <p class="text-xs">user@gmail.com</p>
+                </div>
+
+                <img
+                  src="./assets/images/user-avatar.svg"
+                  alt="User Avatar"
+                  class="w-8 h-8 rounded-full"
+                />
+              </div>
+
+              <!-- User Popover -->
+              <div
+                id="user-popover"
+                class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-theme-surface ring-1 ring-black ring-opacity-5 p-4 z-50 hidden"
+              >
+                <div
+                  class="w-full h-full flex flex-col items-center justify-center text-center space-y-2 mb-2"
+                >
+                  <img
+                    src="./assets/images/user-avatar.svg"
+                    alt="User Avatar"
+                    class="w-16 h-16 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-semibold">User Name</p>
+                  </div>
+                  <button
+                    class="bg-gradient-to-r from-yellow-400 to-yellow-700 text-white font-bold px-6 py-2 rounded-full shadow"
+                  >
+                    Admin
+                  </button>
+                </div>
+                <hr class="border-t border-theme" />
+                <div class="text-left space-y-2 mt-2">
+                  <div class="flex items-center space-x-3">
+                    <!-- Mail Icon -->
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                    <span>user@gmail.com</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <!-- Phone Icon -->
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      ></path>
+                    </svg>
+                    <span>098765432</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <!-- Location Icon -->
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      ></path>
+                    </svg>
+                    <span>Singapore</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-center mt-4">
+                  <button id="logoutBtn" class="theme-btn">Logout</button>
+                </div>
+              </div>
             </div>
             <div class="w-px h-8 bg-gray-300"></div>
 
-            <button class="btn-primary">Edit</button>
-            <button class="btn-primary-outline">Layouts</button>
-            <button class="btn-primary-outline">Tag Details</button>
-            <button class="btn-primary-outline">Import</button>
-            <button class="btn-primary-outline">Export</button>
-            <button class="btn-primary-outline">Reset Grid</button>
-            <button class="btn-primary-outline">
-              <i class="fas fa-filter"></i>
-            </button>
-            <button class="btn-primary-outline">
-              <i class="fas fa-rotate-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Search -->
-        <div class="search-wrapper">
-          <input
-            type="text"
-            placeholder="Search"
-            class="input-field w-full pl-10 pr-4 border-gray-600"
-          />
-          <i class="fas fa-search search-icon"></i>
-        </div>
-
-        <!-- Table -->
-        <div class="page-section">
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="border-b border-gray-200">
-                <tr class="table-heading">
-                  <th class="table-header">
-                    <span>Tag Desc</span>
-                  </th>
-                  <th class="table-header">
-                    <span>Construction Phase Ref</span>
-                  </th>
-                  <th class="table-header">
-                    <span>Parent Tag</span>
-                  </th>
-                  <th class="table-header">
-                    <span>Type Ref</span>
-                  </th>
-                  <th class="table-header">
-                    <span>SubType Ref</span>
-                  </th>
-                  <th class="table-header">
-                    <span>Discipline Ref</span>
-                  </th>
-                  <th class="table-header">Site Location</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr class="table-row-style even:bg-gray-100 odd:bg-white">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="flex justify-between items-center p-4 bg-gray-200">
-              <div>
-                <p class="font-semibold">Page 1 of 15</p>
-              </div>
-              <!-- Pagination -->
-              <div class="pagination-wrapper">
-                <button class="pagination-btn text-gray-700">&lt;</button>
-                <button class="pagination-btn">First</button>
-                <button class="pagination-btn pagination-active">1</button>
-                <button class="pagination-btn">2</button>
-                <button class="pagination-btn">3</button>
-                <span
-                  class="w-9 h-9 flex items-center justify-center text-gray-500"
-                  >...</span
-                >
-                <button class="pagination-btn">15</button>
-                <button class="pagination-btn">Last</button>
-                <button class="pagination-btn text-gray-700">&gt;</button>
+            <div class="flex items-center gap-2">
+              <div id="datetime">
+                <p class="text-md" id="date"></p>
+                <p class="text-xs" id="time"></p>
               </div>
             </div>
           </div>
+        </header>
+
+        <div class="mx-2 mt-2 rounded-xl">
+          <div class="px-4 py-2 bg-theme-surface rounded-lg">
+            <div class="flex items-center space-x-2" id="breadcrumb"></div>
+          </div>
         </div>
-      </div>
-      <div class="page-footer flex justify-center space-x-4 items-center mt-4">
-        <button class="btn-primary-outline">Issue</button>
-        <button class="btn-primary-outline">Print</button>
-        <button class="btn-primary">Add to New FCR</button>
-        <button class="btn-primary">Mark as Complete</button>
+        <!-- <div id="breadcrumb-container"></div> -->
+
+        <!-- Content -->
+        <main class="content-wrapper bg-theme-background">
+          <div id="main-content" class="h-full">
+            <!-- bg-theme-surface  -->
+            <div data-include="./pages/overview-my-technico.html"></div>
+          </div>
+        </main>
       </div>
     </div>
-    <script src="./script.js"></script>
+
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/overview.js"></script>
+    <script src="./assets/js/database.js"></script>
+    <script src="./assets/js/outstanding.js"></script>
+  
   </body>
 </html>

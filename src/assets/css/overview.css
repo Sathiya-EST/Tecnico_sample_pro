@@ -1,0 +1,79 @@
+.gradient-blue {
+  background: linear-gradient(135deg, #6e60f2 0%, #5148b5 50%, #0b0178 100%);
+}
+.gradient-green {
+  background: linear-gradient(135deg, #64ce49 0%, #24b300 50%, #2bbc07 100%);
+}
+.gradient-red {
+  background: linear-gradient(135deg, #f56b6e 0%, #bb070a 50%, #b70003 100%);
+}
+.gradient-pink {
+  background: linear-gradient(135deg, #ff5bf4 0%, #c51aae 50%, #b8009f 100%);
+}
+
+.circle-1 {
+  background: rgba(255, 255, 255, 0.281);
+  border-radius: 50%;
+  position: absolute;
+  width: 7.5rem; /* 120px */
+  height: 10rem; /* 160px */
+  top: 0.2rem;
+  right: -3.5rem;
+}
+
+.circle-2 {
+  background: rgba(255, 255, 255, 0.281);
+  border-radius: 50%;
+  position: absolute;
+  width: 10rem; /* 160px */
+  height: 7.5rem; /* 120px */
+  bottom: -3rem;
+  right: -1rem;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+}
+
+/* project select */
+.icon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+.accordion-panel {
+  display: none;
+  padding-left: 1.5rem;
+}
+.accordion-panel.show {
+  display: block;
+}
+.accordion-toggle:hover {
+  background-color: rgb(var(--brand-primary));
+  color: white;
+}
+/* dashboard-filter START */
+.icon-btn {
+  @apply cursor-pointer bg-transparent p-2;
+}
+
+.modal-overlay {
+  @apply hidden fixed inset-0 bg-black/50 z-[999] justify-center items-center;
+}
+
+.modal-overlay.show {
+  @apply flex;
+}
+
+.modal-content {
+  @apply  rounded-lg w-full max-w-5xl shadow-lg;
+}
+.select-input{
+  @apply w-full border rounded p-1.5 pr-10 appearance-none text-slate-500;
+}
+/* dashboard-filter END */
+
