@@ -439,7 +439,7 @@ function updateDateTime() {
 
 class NavigationManager {
   constructor() {
-    this.currentRoute = "/overview/my-technico";
+    this.currentRoute = "/outstanding/approvals";
     this.menuEventsbound = false;
     this.routeConfig = {
       "/overview/my-technico": {
