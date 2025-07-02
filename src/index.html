@@ -199,6 +199,85 @@
               </div>
             </div>
           </div>
+          <!-- Certificates -->
+          <div class="nav-section">
+            <div
+              class="nav-item hover:transform-border"
+              data-route="/certificates"
+              data-tooltip="Certificates"
+            >
+              <div class="icon-container">
+                <button>
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1.27273 13C0.922727 13 0.623106 12.8788 0.373864 12.6363C0.124621 12.3938 0 12.1024 0 11.7619V4.95238H1.27273V11.7619H12.0909V13H1.27273ZM3.81818 10.5238C3.46818 10.5238 3.16856 10.4026 2.91932 10.1601C2.67008 9.91766 2.54545 9.62619 2.54545 9.28571V2.47619H5.72727V1.2381C5.72727 0.897619 5.85189 0.606151 6.10114 0.36369C6.35038 0.12123 6.65 0 7 0H9.54545C9.89545 0 10.1951 0.12123 10.4443 0.36369C10.6936 0.606151 10.8182 0.897619 10.8182 1.2381V2.47619H14V9.28571C14 9.62619 13.8754 9.91766 13.6261 10.1601C13.3769 10.4026 13.0773 10.5238 12.7273 10.5238H3.81818ZM3.81818 9.28571H12.7273V3.71429H3.81818V9.28571ZM7 2.47619H9.54545V1.2381H7V2.47619Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+                <span>Certificates</span>
+              </div>
+            </div>
+          </div>
+          <!-- Scanning -->
+          <div class="nav-section">
+            <div
+              class="nav-item hover:transform-border"
+              data-toggle="scanning-menu"
+              data-tooltip="Scanning"
+            >
+              <div class="icon-container">
+                <button>
+                  <svg
+                    width="14"
+                    height="15"
+                    viewBox="0 0 14 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0.181763 3.40909V0H3.59085V1.36364H1.5454V3.40909H0.181763ZM12.4545 3.40909V1.36364H10.409V0H13.8181V3.40909H12.4545ZM0.181763 15V11.5909H1.5454V13.6364H3.59085V15H0.181763ZM10.409 15V13.6364H12.4545V11.5909H13.8181V15H10.409ZM3.59085 11.5909H10.409V3.40909H3.59085V11.5909ZM3.59085 12.9545C3.21585 12.9545 2.89483 12.821 2.62779 12.554C2.36074 12.2869 2.22722 11.9659 2.22722 11.5909V3.40909C2.22722 3.03409 2.36074 2.71307 2.62779 2.44602C2.89483 2.17898 3.21585 2.04545 3.59085 2.04545H10.409C10.784 2.04545 11.1051 2.17898 11.3721 2.44602C11.6391 2.71307 11.7727 3.03409 11.7727 3.40909V11.5909C11.7727 11.9659 11.6391 12.2869 11.3721 12.554C11.1051 12.821 10.784 12.9545 10.409 12.9545H3.59085ZM4.95449 6.13636H9.0454V4.77273H4.95449V6.13636ZM4.95449 8.18182H9.0454V6.81818H4.95449V8.18182ZM4.95449 10.2273H9.0454V8.86364H4.95449V10.2273Z"
+                      fill="white"
+                    />
+                  </svg>
+                </button>
+                <span>Scanning</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="scanning-menu">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/scanning/scanning"
+                data-tooltip="Scanning"
+              >
+                Scanning
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/scanning/recently-scanned"
+                data-tooltip="Recently Scanned"
+              >
+                Recently Scanned
+              </div>
+            </div>
+          </div>
         </nav>
       </aside>
 
@@ -671,13 +750,12 @@
             <div class="flex items-center space-x-2" id="breadcrumb"></div>
           </div>
         </div>
-        <!-- <div id="breadcrumb-container"></div> -->
 
         <!-- Content -->
         <main class="content-wrapper bg-theme-background">
           <div id="main-content" class="h-full">
             <!-- bg-theme-surface  -->
-            <div data-include="./pages/overview-my-technico.html"></div>
+            <div data-include="./pages/certificates.html"></div>
           </div>
         </main>
       </div>
@@ -687,6 +765,7 @@
     <script src="./assets/js/overview.js"></script>
     <script src="./assets/js/database.js"></script>
     <script src="./assets/js/outstanding.js"></script>
-  
+    <script src="./assets/js/certificate.js"></script>
+    <script src="./assets/js/scanning.js"></script>
   </body>
 </html>

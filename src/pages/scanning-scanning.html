@@ -1,34 +1,43 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Checksheets</p>
+    <p class="text-xl font-semibold">Scanning</p>
 
-    <div class="flex flex-wrap gap-2 items-center justify-end">
-      <project-select></project-select>
-      <div class="w-px h-8 bg-theme-border"></div>
-      <edit-phase-button></edit-phase-button>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Layouts
-        </button>
-      </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Show Details
-        </button>
-      </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Export
-        </button>
-      </span>
-      <span>
-        <!-- <button class="theme-btn-primary-outline whitespace-nowrap">
-          Reset Grid
-        </button> -->
-        <reset-grid-modal></reset-grid-modal>
-      </span>
-      <checksheets-filter></checksheets-filter>
-
+    <div class="flex flex-wrap gap-6 items-center justify-end">
+      <scan-modal></scan-modal>
+      <!-- Siurce select -->
+      <label class="block">Source</label>
+      <div class="relative">
+        <select
+          class="bg-theme-background select-input border-theme pr-10 appearance-none"
+          aria-label="Select Source"
+        >
+          <option disabled selected hidden value="">Select</option>
+          <option disabled class="font-bold text-gray-500">
+            Select Source
+          </option>
+          <option>PDF file</option>
+          <option>TIFF file</option>
+        </select>
+        <span
+          class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </span>
+      </div>
+      <label class="block">Mode</label>
+      <mode-select></mode-select>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
           viewBox="0 0 24 24"

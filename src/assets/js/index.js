@@ -439,7 +439,7 @@ function updateDateTime() {
 
 class NavigationManager {
   constructor() {
-    this.currentRoute = "/outstanding/approvals";
+    this.currentRoute = "/scanning/scanning";
     this.menuEventsbound = false;
     this.routeConfig = {
       "/overview/my-technico": {
@@ -497,9 +497,9 @@ class NavigationManager {
         breadcrumb: ["Outstanding Items", "Approvals"],
         description: "Document approval workflow",
       },
-      "/certificates/certificates": {
+      "/certificates": {
         title: "Certificates",
-        breadcrumb: ["Certificates", "Certificates"],
+        breadcrumb: ["Certificates"],
         description: "Quality and compliance certificates",
       },
       "/scanning/scanning": {
@@ -618,43 +618,45 @@ class NavigationManager {
     elementsToClean.forEach((el) => el.classList.remove("active"));
 
     // Clear all expanded states and rotated chevrons
-    const groupsToClean = document.querySelectorAll(".nav-group");
-    groupsToClean.forEach((group) => group.classList.remove("expanded"));
-
-    const chevronsToClean = document.querySelectorAll(".chevron-icon");
-    chevronsToClean.forEach((chevron) => chevron.classList.remove("rotated"));
+    document
+      .querySelectorAll(".nav-group")
+      .forEach((group) => group.classList.remove("expanded"));
+    document
+      .querySelectorAll(".chevron-icon")
+      .forEach((chevron) => chevron.classList.remove("rotated"));
 
     // Find the navigation item to highlight
     let activeItem = document.querySelector(
       `[data-route="${this.currentRoute}"]:not([data-close])`
     );
 
-    // If no exact match found, find the parent route
     if (!activeItem) {
       activeItem = this.findParentRoute();
     }
 
     if (activeItem) {
-      // Highlight the active sub-item
       activeItem.classList.add("active");
-      // Find the parent menu group
-      const parentMenu = activeItem.closest(".nav-group");
-      if (activeItem) {
-        // Highlight the active sub-item
-        activeItem.classList.add("active");
 
+      const isSubItem = activeItem.classList.contains("nav-sub-item");
+      const navItem = activeItem.closest(".nav-item");
+
+      if (navItem) {
+        // ✅ Always highlight parent nav-item regardless of whether sub-item or direct
+        navItem.classList.add("active");
+      }
+
+      if (isSubItem) {
+        // ✅ Expand parent group
         const parentMenu = activeItem.closest(".nav-group");
-
         if (parentMenu) {
           parentMenu.classList.add("expanded");
 
-          // Get the parent .nav-item that contains the .icon-container
           const parentNavItem = parentMenu.previousElementSibling;
           if (parentNavItem) {
             const iconContainer =
               parentNavItem.querySelector(".icon-container");
             if (iconContainer) {
-              iconContainer.classList.add("active"); // ✅ Highlight the icon
+              iconContainer.classList.add("active");
             }
 
             const chevron = parentNavItem.querySelector(".chevron-icon");
@@ -664,59 +666,22 @@ class NavigationManager {
           }
         }
       }
-      // if (parentMenu) {
-      //   // Expand the parent menu
-      //   parentMenu.classList.add("expanded");
-      //   const menuId = parentMenu.id;
-      //   const toggleButton = document.querySelector(`[data-toggle="${menuId}"]`);
-      //   if (toggleButton) {
-      //     // Add active state to the toggle button's icon container
-      //     const iconContainer = toggleButton.querySelector(".icon-container");
-      //     if (iconContainer) {
-      //       iconContainer.classList.add("active");
-      //     }
-
-      //     // Rotate the chevron
-      //     const chevron = toggleButton.querySelector(".chevron-icon");
-      //     console.log("Chevron in toggle:", chevron);
-
-      //     if (chevron) {
-      //       chevron.classList.add("rotated");
-      //       console.log("✅ Rotated chevron");
-      //     }
-      //   }
-      // } else {
-      //   // This is a top-level item, highlight its icon directly
-      //   const iconContainer = activeItem.querySelector(".icon-container");
-      //   console.log("Top-level icon container:", iconContainer);
-
-      //   if (iconContainer) {
-      //     iconContainer.classList.add("active");
-      //     console.log("✅ Activated top-level icon container");
-      //   }
-      // }
     } else {
-      console.log("❌ No active item found for route:", this.currentRoute);
+      console.warn("❌ No active item found for route:", this.currentRoute);
     }
   }
 
   findParentRoute() {
     const currentPath = this.currentRoute;
-    // Check if this is a child route (has more than 2 path segments)
     const pathSegments = currentPath
       .split("/")
       .filter((segment) => segment.length > 0);
     if (pathSegments.length > 2) {
-      // Build parent route by removing the last segment
       const parentRoute = "/" + pathSegments.slice(0, -1).join("/");
-      console.log("Trying parent route:", parentRoute);
-
-      // Look for navigation item with parent route
       const parentItem = document.querySelector(
         `[data-route="${parentRoute}"]:not([data-close])`
       );
       if (parentItem) {
-        console.log("✅ Found parent route item:", parentItem);
         return parentItem;
       }
     }
@@ -725,17 +690,12 @@ class NavigationManager {
     const allRouteItems = document.querySelectorAll(
       "[data-route]:not([data-close])"
     );
-    console.log("Searching through all route items for closest match...");
-
     for (let item of allRouteItems) {
       const itemRoute = item.getAttribute("data-route");
       if (currentPath.startsWith(itemRoute) && itemRoute !== currentPath) {
-        console.log("✅ Found matching base route:", itemRoute, item);
         return item;
       }
     }
-
-    console.log("❌ No parent route found");
     return null;
   }
   toggleMenu(menuId) {
@@ -749,33 +709,6 @@ class NavigationManager {
       chevron.classList.toggle("rotated");
     }
   }
-  // toggleMenu(menuId) {
-  //   const menu = document.getElementById(menuId);
-  //   const toggleButton = document.querySelector(`[data-toggle="${menuId}"]`);
-
-  //   if (menu && toggleButton) {
-  //     const chevron = toggleButton.querySelector(".chevron-icon");
-  //     const iconContainer = toggleButton.querySelector(".icon-container");
-
-  //     menu.classList.toggle("expanded");
-
-  //     // Toggle chevron rotation
-  //     if (chevron) {
-  //       chevron.classList.toggle("rotated");
-  //     }
-
-  //     // Toggle icon active state based on menu expansion and current route
-  //     if (iconContainer) {
-  //       const hasActiveChild = menu.querySelector(".nav-sub-item.active");
-  //       const shouldBeActive = menu.classList.contains("expanded") && hasActiveChild;
-  //       if (shouldBeActive) {
-  //         iconContainer.classList.add("active");
-  //       } else if (!hasActiveChild) {
-  //         iconContainer.classList.remove("active");
-  //       }
-  //     }
-  //   }
-  // }
 
   isSidebarCollapsed() {
     const sidebar = document.querySelector(".sidebar");
@@ -787,12 +720,8 @@ class NavigationManager {
     const contentContainer = document.getElementById("main-content");
 
     if (!contentContainer || !config) {
-      console.log("❌ Content container or config not found");
       return;
     }
-
-    console.log("📄 Updating content for:", this.currentRoute);
-
     const pagePath = `./pages/${routeToFile(this.currentRoute)}`;
 
     fetch(pagePath)
@@ -815,7 +744,6 @@ class NavigationManager {
     this.boundHandleRouteClick = this.handleRouteClick.bind(this);
     this.boundHandleCloseClick = this.handleCloseClick.bind(this);
 
-    // Only bind route events for navigation items
     document
       .querySelectorAll("[data-route]:not([data-close])")
       .forEach((item) => {
@@ -824,8 +752,6 @@ class NavigationManager {
           item.addEventListener("click", this.boundHandleRouteClick);
         }
       });
-
-    // Bind close button events separately
     document.querySelectorAll("[data-close]").forEach((button) => {
       button.removeEventListener("click", this.boundHandleCloseClick);
       button.addEventListener("click", this.boundHandleCloseClick);

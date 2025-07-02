@@ -1,11 +1,22 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Checksheets</p>
+    <p class="text-xl font-semibold">Certificates</p>
 
-    <div class="flex flex-wrap gap-2 items-center justify-end">
+    <div class="flex flex-wrap gap-4 items-center justify-end">
       <project-select></project-select>
       <div class="w-px h-8 bg-theme-border"></div>
-      <edit-phase-button></edit-phase-button>
+      <span>
+        <button class="theme-btn whitespace-nowrap">Create Cert</button>
+      </span>
+      <span>
+        <button class="theme-btn whitespace-nowrap">Add Partial Cert</button>
+      </span>
+      <span>
+        <button class="theme-btn whitespace-nowrap">View Req</button>
+      </span>
+      <span>
+        <button class="theme-btn whitespace-nowrap">Update Attachment</button>
+      </span>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Layouts
@@ -13,21 +24,18 @@
       </span>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
-          Show Details
+          Tag Details
         </button>
       </span>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
-          Export
+          Import
         </button>
       </span>
       <span>
-        <!-- <button class="theme-btn-primary-outline whitespace-nowrap">
-          Reset Grid
-        </button> -->
         <reset-grid-modal></reset-grid-modal>
       </span>
-      <checksheets-filter></checksheets-filter>
+      <certificate-filter></certificate-filter>
 
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
@@ -57,25 +65,28 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>Icon</span>
+              <span>Checksheet Ref</span>
             </th>
             <th class="table-header">
-              <span>Tag No</span>
+              <span>Cert No</span>
             </th>
             <th class="table-header">
-              <span>Tag Desc</span>
+              <span>Cert Type</span>
             </th>
             <th class="table-header">
-              <span>Construction Phase Ref</span>
+              <span>Progress</span>
             </th>
             <th class="table-header">
-              <span>Parent Tag</span>
+              <span>Progress (%)</span>
             </th>
             <th class="table-header">
-              <span>Type Ref</span>
+              <span>Applies To</span>
             </th>
             <th class="table-header">
-              <span>SubType Ref</span>
+              <span>Cert Disciplice Ref</span>
+            </th>
+            <th class="table-header">
+              <span>Checksheet Type Ref</span>
             </th>
           </tr>
         </thead>
@@ -88,8 +99,10 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -106,8 +119,10 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -124,8 +139,10 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -142,8 +159,10 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -175,9 +194,9 @@
     </div>
   </div>
   <div class="footer-container">
-    <button class="theme-btn-primary-outline">Issue</button>
-    <add-to-new-fcr-modal></add-to-new-fcr-modal>
-    <button class="theme-btn">Mark as Complete</button>
-    <button class="theme-btn-primary-outline">Print</button>
+    <button class="theme-btn-primary-outline">Update Cert</button>
+    <delete-cert></delete-cert>
+    <mark-offered></mark-offered>
+    <mark-accepted></mark-accepted>
   </div>
 </div>

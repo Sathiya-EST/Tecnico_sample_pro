@@ -98,6 +98,11 @@ nav .collapsed .icon-container.active {
   max-height: 500px; /* Adjust based on your content */
   opacity: 1;
 }
+.nav-item.active {
+  /* background-color: rgb(var(--secondary));
+  color: rgb(var(--text-primary)); */
+  @apply bg-yellow-400 text-black;
+}
 
 /* Sub Items */
 .nav-sub-item {
@@ -111,6 +116,8 @@ nav .collapsed .icon-container.active {
 }
 
 .nav-sub-item.active {
+  /* background-color: rgb(var(--secondary));
+  color: rgb(var(--text-primary)); */
   @apply bg-yellow-400 text-black;
 }
 
@@ -215,7 +222,11 @@ nav .collapsed .icon-container.active {
 }
 .content {
   @apply rounded-lg h-full flex-1 overflow-y-auto p-3;
-  background-color: rgb(var(--surface));
+  /* background-color: rgb(var(--surface)); */
+}
+.footer-container {
+  @apply flex w-full justify-center space-x-4 py-2;
+  background-color: rgb(var(--breadcrumb-background));
 }
 .page-section {
   @apply rounded-lg shadow-sm border overflow-hidden;
@@ -258,6 +269,6 @@ nav .collapsed .icon-container.active {
   @apply opacity-70;
   /* background-color: rgb(var(--background)); */
 }
-.edit-icon{
-    color: rgb(var(--brand-primary));
+.edit-icon {
+  color: rgb(var(--brand-primary));
 }

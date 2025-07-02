@@ -5,6 +5,7 @@
 @import "./assets/css/layout.css";
 @import "./assets/css/overview.css";
 @import "./assets/css/outstanding.css";
+@import "./assets/css/scanning.css";
 
 :root {
   --primary: 45, 37, 125;
@@ -218,11 +219,18 @@ button {
 .bg-theme-background {
   background-color: rgb(var(--background));
 }
+.bg-theme {
+  background-color: rgb(var(--background));
+}
+.bg-success {
+  background-color: rgb(var(--success));
+}
 .bg-theme-surface {
   background-color: rgb(var(--surface));
 }
 .bg-theme-primary {
   background-color: rgb(var(--primary)) !important;
+  color:rgb(255,255,255)
 }
 .bg-theme-secondary {
   background-color: rgb(var(--secondary));
@@ -335,4 +343,8 @@ label {
   background-color: rgb(var(--modal-background));
   @apply opacity-95 border;
   border-color: rgb(var(--text));
+}
+.scannning-frame {
+  background-image: url("../src/assets/images/scan_bg.png");
+  @apply min-h-[64vh]
 }
