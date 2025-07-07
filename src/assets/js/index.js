@@ -613,11 +613,11 @@ class NavigationManager {
       },
       "/project-info/ncr-admin/add": {
         title: "Add NCR Type",
-        breadcrumb: ["Project Info", "NCR Admin","Add NCR Type"],
+        breadcrumb: ["Project Info", "NCR Admin", "Add NCR Type"],
       },
       "/project-info/ncr-admin/edit": {
         title: "Edit NCR Type",
-        breadcrumb: ["Project Info", "NCR Admin","Edit NCR Type"],
+        breadcrumb: ["Project Info", "NCR Admin", "Edit NCR Type"],
       },
       "/project-info/localisations": {
         title: "Localisations",
@@ -625,11 +625,11 @@ class NavigationManager {
       },
       "/project-info/localisations/add": {
         title: "Add Localisation",
-        breadcrumb: ["Project Info", "Localisations","Add Localisation"],
+        breadcrumb: ["Project Info", "Localisations", "Add Localisation"],
       },
       "/project-info/localisations/edit": {
         title: "Edit Localisation",
-        breadcrumb: ["Project Info", "Localisations","Edit Localisation"],
+        breadcrumb: ["Project Info", "Localisations", "Edit Localisation"],
       },
       "/project-info/custom-fields": {
         title: "Custom Fields",
@@ -637,11 +637,11 @@ class NavigationManager {
       },
       "/project-info/custom-fields/add": {
         title: "Add Custom Field",
-        breadcrumb: ["Project Info", "Custom Fields","Add Custom Field"],
+        breadcrumb: ["Project Info", "Custom Fields", "Add Custom Field"],
       },
       "/project-info/custom-fields/edit": {
         title: "Edit Custom Field",
-        breadcrumb: ["Project Info", "Custom Fields","Edit Custom Field"],
+        breadcrumb: ["Project Info", "Custom Fields", "Edit Custom Field"],
       },
       "/project-info/itr-equivalence": {
         title: "ITR Equivalence",
@@ -649,23 +649,47 @@ class NavigationManager {
       },
       "/project-info/itr-equivalence/add": {
         title: "Add ITR Equivalence",
-        breadcrumb: ["Project Info", "ITR Equivalence","Add ITR Equivalence"],
+        breadcrumb: ["Project Info", "ITR Equivalence", "Add ITR Equivalence"],
       },
       "/project-info/itr-equivalence/edit": {
         title: "Edit ITR Equivalence",
-        breadcrumb: ["Project Info", "ITR Equivalence","Edit ITR Equivalence"],
+        breadcrumb: ["Project Info", "ITR Equivalence", "Edit ITR Equivalence"],
       },
       "/project-info/shutdown-isolation": {
         title: "Shutdown & Isolation",
         breadcrumb: ["Project Info", "Shutdown & Isolation"],
       },
+      "/project-info/shutdown-isolation/add": {
+        title: "Add Shutdown",
+        breadcrumb: ["Project Info", "Shutdown & Isolation", "Add Shutdown"],
+      },
+      "/project-info/shutdown-isolation/edit": {
+        title: "Edit Shutdown",
+        breadcrumb: ["Project Info", "Shutdown & Isolation", "Edit Shutdown"],
+      },
       "/project-info/workpack-ctradmin": {
         title: "Workpack & CTR Admin",
         breadcrumb: ["Project Info", "Workpack & CTR Admin"],
       },
+      "/project-info/workpack-ctradmin/add": {
+        title: "Add Workpack",
+        breadcrumb: ["Project Info", "Workpack & CTR Admin","Add Workpack"],
+      },
+      "/project-info/workpack-ctradmin/edit": {
+        title: "Edit Workpack",
+        breadcrumb: ["Project Info", "Workpack & CTR Admin","Edit Workpack"],
+      },
       "/project-info/checksheet-admin": {
         title: "Checksheet Admin",
         breadcrumb: ["Project Info", "Checksheet Admin"],
+      },
+      "/project-info/checksheet-admin/add": {
+        title: "Add Checksheet",
+        breadcrumb: ["Project Info", "Checksheet Admin","Add Checksheet"],
+      },
+      "/project-info/checksheet-admin/edit": {
+        title: "Edit Checksheet",
+        breadcrumb: ["Project Info", "Checksheet Admin","Edit Checksheet"],
       },
       "/doc-reg/checksheet-master": {
         title: "Checksheet Masters",

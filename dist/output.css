@@ -1364,6 +1364,11 @@
   transition-duration: var(--tw-duration, var(--default-transition-duration));
   --tw-duration: 300ms;
   transition-duration: 300ms;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 .sidebar-header {
   display: flex;
@@ -1487,7 +1492,7 @@ nav .collapsed .icon-container.active {
   opacity: 0;
 }
 .nav-group.expanded {
-  max-height: 500px;
+  max-height: 700px;
   opacity: 1;
 }
 .nav-item.active {
@@ -1977,7 +1982,7 @@ input:focus + .switch-slider {
 }
 .tab-button.active {
   color: rgb(var(--primary));
-  background: rgb(var(--card));
+  background: rgb(var(--background));
   border-bottom-color: rgb(var(--primary));
 }
 @keyframes fadeIn {

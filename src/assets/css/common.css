@@ -103,7 +103,7 @@
 
 .tab-button.active {
   color: rgb(var(--primary));
-  background: rgb(var(--card));
+  background: rgb(var(--background));
   border-bottom-color: rgb(var(--primary));
 }
 

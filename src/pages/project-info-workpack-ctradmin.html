@@ -1,11 +1,11 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Shutdown & Isolation</p>
+    <p class="text-xl font-semibold">Workpack & CTR Admin</p>
 
     <div class="flex flex-wrap gap-4 items-center justify-end">
       <button
         id="project-info-add-btn"
-        data-route="/project-info/itr-equivalence/add"
+        data-route="/project-info/workpack-ctradmin/add"
         data-close
         class="theme-btn"
       >
@@ -13,7 +13,7 @@
       </button>
       <button
         id="project-info-add-btn"
-        data-route="/project-info/itr-equivalence/edit"
+        data-route="/project-info/workpack-ctradmin/edit"
         data-close
         class="theme-btn"
       >
@@ -24,12 +24,6 @@
           Export
         </button>
       </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Import
-        </button>
-      </span>
-      <reset-grid-modal></reset-grid-modal>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
           viewBox="0 0 24 24"
@@ -48,9 +42,21 @@
       </button>
     </div>
   </div>
+  <div class="tab-header">
+    <button class="tab-button active" onclick="switchTab(event, 'tab1')">
+      Workpack Types
+    </button>
+    <button class="tab-button" onclick="switchTab(event, 'tab2')">
+      Procedure Types
+    </button>
+    <button class="tab-button" onclick="switchTab(event, 'tab2')">
+      Workflows
+    </button>
+  </div>
   <div>
     <search-input></search-input>
   </div>
+
   <!-- Table -->
   <div class="page-section border-theme">
     <div class="overflow-x-auto">
@@ -58,23 +64,43 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>EPC</span>
+              <span>Ref</span>
             </th>
             <th class="table-header">
-              <span>EPC’s ITR</span>
+              <span>Desc</span>
             </th>
             <th class="table-header">
-              <span>Equivalent Checksheet</span>
+              <span>Category</span>
+            </th>
+            <th class="table-header">
+              <span>Authorisation Required</span>
+            </th>
+            <th class="table-header">
+              <span>Applies To Site Location</span>
+            </th>
+            <th class="table-header">
+              <span>Workflow</span>
+            </th>
+            <th class="table-header">
+              <span>Download Punchists Offline</span>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr class="table-row-style">
-              <td></td>
-              <td></td>
-              <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -83,8 +109,16 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -93,8 +127,16 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -103,8 +145,16 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
