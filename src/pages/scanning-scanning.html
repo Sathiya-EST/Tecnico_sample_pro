@@ -1,41 +1,11 @@
-<div class="content space-y-4">
+<div class="space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
     <p class="text-xl font-semibold">Scanning</p>
 
-    <div class="flex flex-wrap gap-6 items-center justify-end">
+    <div class="flex flex-wrap gap-4 items-center justify-end">
       <scan-modal></scan-modal>
-      <!-- Siurce select -->
       <label class="block">Source</label>
-      <div class="relative">
-        <select
-          class="bg-theme-background select-input border-theme pr-10 appearance-none"
-          aria-label="Select Source"
-        >
-          <option disabled selected hidden value="">Select</option>
-          <option disabled class="font-bold text-gray-500">
-            Select Source
-          </option>
-          <option>PDF file</option>
-          <option>TIFF file</option>
-        </select>
-        <span
-          class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-        >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
-        </span>
-      </div>
+      <source-select></source-select>
       <label class="block">Mode</label>
       <mode-select></mode-select>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
@@ -66,25 +36,16 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>Icon</span>
+              <span>Item</span>
             </th>
             <th class="table-header">
-              <span>Tag No</span>
+              <span>Barcode</span>
             </th>
             <th class="table-header">
-              <span>Tag Desc</span>
+              <span>Page Number</span>
             </th>
             <th class="table-header">
-              <span>Construction Phase Ref</span>
-            </th>
-            <th class="table-header">
-              <span>Parent Tag</span>
-            </th>
-            <th class="table-header">
-              <span>Type Ref</span>
-            </th>
-            <th class="table-header">
-              <span>SubType Ref</span>
+              <span>Expected Pages</span>
             </th>
           </tr>
         </thead>
@@ -94,14 +55,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -112,14 +67,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -130,14 +79,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -148,14 +91,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -184,9 +121,9 @@
     </div>
   </div>
   <div class="footer-container">
-    <button class="theme-btn-primary-outline">Issue</button>
-    <add-to-new-fcr-modal></add-to-new-fcr-modal>
-    <button class="theme-btn">Mark as Complete</button>
-    <button class="theme-btn-primary-outline">Print</button>
+    <button class="theme-btn-primary-outline">Clear</button>
+    <button class="theme-btn-primary-outline">Mark as Additional Page</button>
+    <button class="theme-btn-primary-outline">Update</button>
+    <button class="theme-btn">Process</button>
   </div>
 </div>

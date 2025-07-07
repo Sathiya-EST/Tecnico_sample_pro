@@ -221,7 +221,7 @@ nav .collapsed .icon-container.active {
   @apply w-full flex-col items-center justify-center space-x-2;
 }
 .content {
-  @apply rounded-lg h-full flex-1 overflow-y-auto p-3;
+  @apply rounded-lg min-h-[90%] flex-1 overflow-y-auto p-3;
   /* background-color: rgb(var(--surface)); */
 }
 .footer-container {
@@ -271,4 +271,38 @@ nav .collapsed .icon-container.active {
 }
 .edit-icon {
   color: rgb(var(--brand-primary));
+}
+
+.switch-slider {
+  transition: transform 0.3s ease;
+}
+
+.switch-bg {
+  transition: background-color 0.3s ease;
+}
+
+input:checked + .switch-slider {
+  transform: translateX(20px);
+}
+
+input:checked ~ .switch-bg .switch-slider {
+  transform: translateX(20px);
+}
+
+input:checked ~ .switch-bg {
+  background-color: rgb(var(--primary)); /* green-500 */
+}
+
+/* Large switch translations */
+input:checked ~ .switch-bg .switch-slider.large {
+  transform: translateX(24px);
+}
+
+/* Icon switch translations */
+input:checked ~ .switch-bg .switch-slider.icon {
+  transform: translateX(24px);
+}
+
+input:focus + .switch-slider {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }

@@ -1,0 +1,96 @@
+<div class="content space-y-4">
+  <p class="text-xl font-semibold">Add Tasks</p>
+  <div class="border border-theme rounded-b-md flex-col space-y-4  max-w-5xl">
+    <div class="p-4 space-y-4">
+      <p class="text-xl font-semibold">Tecnico Doc Details</p>
+      <file-upload
+        label="Tecnico Doc Details"
+        placeholder="Choose file"
+      ></file-upload>
+      <label class="flex items-center gap-2 mt-6">
+        <input type="radio" class="w-4 h-4" />Store Attachments in Database
+      </label>
+    </div>
+    <div class="footer-container">
+      <button class="theme-btn-primary-outline">DB Settings</button>
+      <button class="theme-btn-primary-outline">Attachment Task</button>
+      <button class="theme-btn-primary-outline">Attach Audit</button>
+      <button class="theme-btn">Save Doc Path</button>
+    </div>
+  </div>
+  <div class="border border-theme max-w-5xl h-auto overflow-auto rounded-md p-4">
+    <p class="text-xl font-semibold">Project Settings</p>
+
+    <div class="grid grid-cols-2 gap-4 items-center mt-6">
+      <div>
+        <label class="block text-sm font-medium">Project Name</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Date Format</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Licensed tag</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <label class="flex items-center gap-2">
+        <input type="radio" class="w-4 h-4" />Licensed for Offline Client
+      </label>
+      <div class="space-y-1">
+        <label class="block text-sm font-medium">License Expiry</label>
+        <input
+          type="date"
+          id="licanseExpiry"
+          name="licanseExpiryDate"
+          placeholder="Date"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Project C1</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Project C2</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Project C3</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Project C4</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+    </div>
+  </div>
+</div>

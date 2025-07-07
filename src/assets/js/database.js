@@ -279,29 +279,6 @@ class TagAdd extends HTMLElement {
 }
 customElements.define("tag-add", TagAdd);
 
-class SearchInput extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <div class="relative w-full max-w-sm">
-        <!-- Search Icon -->
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
-               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
-          </svg>
-        </div>
-
-        <!-- Input Field -->
-        <input
-          type="text"
-          placeholder="Search..."
-          class="w-full pl-10 pr-4 py-2 rounded-md border  focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent bg-theme-background text-sm"
-        />
-      </div>
-    `;
-  }
-}
-customElements.define("search-input", SearchInput);
 
 class DeleteModal extends HTMLElement {
   connectedCallback() {

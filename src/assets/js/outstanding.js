@@ -191,68 +191,6 @@ class EditPhase extends HTMLElement {
 }
 customElements.define("edit-phase", EditPhase);
 
-class ResetGridModal extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <!-- Trigger Button -->
-      <button id="openResetModal" class="theme-btn-primary-outline" aria-label="Reset Grid Modal">Reset Grid</button>
-      
-      <!-- Modal Overlay -->
-      <div id="resetModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
-        <!-- Modal Content -->
-        <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
-          <!-- Header -->
-          <div class="w-full flex items-center justify-center gap-3 p-4 mb-2">
-            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18A2 2 0 0 0 3.24 21H20.76A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-            </svg>
-          </div>
-          
-          <!-- Body -->
-          <div class="space-y-2 text-center">
-          <p class="text-xl font-semibold" >Reset Grid</p>
-            <p >This will reset all the data in the grid, </p>
-            <p >Are you sure?</p>
-          </div>
-          
-          <!-- Footer -->
-          <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
-            <button data-close class="theme-btn-outline">Cancel</button>
-            <button data-close class="theme-warning-btn">Reset</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    const modal = this.querySelector("#resetModal");
-    const openBtn = this.querySelector("#openResetModal");
-
-    // Open modal
-    openBtn.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-    });
-
-    // Close modal
-    this.querySelectorAll("[data-close]").forEach((el) => {
-      el.addEventListener("click", () => {
-        modal.classList.add("hidden");
-      });
-    });
-
-    // Click outside to close
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-      }
-    });
-  }
-}
-customElements.define("reset-grid-modal", ResetGridModal);
-
 class ChecksheetsFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

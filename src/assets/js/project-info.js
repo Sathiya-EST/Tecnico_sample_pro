@@ -1,0 +1,1797 @@
+class UnitFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Tag Count", "Show Deleted", "Show Progress",
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("unit-filter", UnitFilter);
+
+class AddUnit extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 gap-4 items-center mt-6">
+            <!-- Input fields -->
+           
+    ${[
+        "Unit Reference",
+        "Unit Description",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+            ${["Imported", "Verified"]
+        .map(
+          (label) => `
+                    <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+                        `
+        )
+        .join("")}
+                ${["Verified By"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+                  ${[
+        "Verifying Responsibble Group",
+        "Verified At",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+                 ${["Under MOC", "Prevent Auto Population Of Certificates"]
+        .map(
+          (label) => `
+                    <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+                        `
+        )
+        .join("")}
+                  ${[
+        "Unit C1",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+                ${["Archived"]
+        .map(
+          (label) => `
+                    <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+                        `
+        )
+        .join("")}
+                </div>
+    `;
+  }
+}
+customElements.define("add-unit", AddUnit);
+
+class SitLocationFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Tag Count", "Show Deleted"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("site-location-filter", SitLocationFilter);
+
+class AddSiteLocation extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 gap-4 items-center mt-6">
+            <!-- Input fields -->
+           
+    ${[
+        "Site Location",
+        "Site Location  Description",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+                ${["Added At"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="addedDate"
+                      name="addedDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+                 ${[
+        "Added By",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+                  
+                 ${["Imported", "Completed", "Verified"]
+        .map(
+          (label) => `
+                    <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+                        `
+        )
+        .join("")}
+                 ${["Verified By"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="addedDate"
+                      name="addedDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+                   ${[
+        "Verifying Responsibble Group", "Verified At"
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+                </div>
+    `;
+  }
+}
+customElements.define("add-site-location", AddSiteLocation);
+
+class TypeFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Tag Count", "Show Deleted"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("type-filter", TypeFilter);
+
+class AddType extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Type Ref", "Type Description"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-type", AddType);
+
+class VerificationFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Include Descriptions", "Show Tag Count", "Show Associated Tags", "Show Verified"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("verification-filter", VerificationFilter);
+
+class UnVerifyModal extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <!-- Trigger Button -->
+      <button id="openResetModal" class="theme-btn-primary-outline" aria-label="Un-Verify Modal">Un-Verify</button>
+      
+      <!-- Modal Overlay -->
+      <div id="resetModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+        <!-- Modal Content -->
+        <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+          <!-- Header -->
+          <div class="w-full flex items-center justify-center gap-3 p-4 mb-2">
+            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18A2 2 0 0 0 3.24 21H20.76A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          
+          <!-- Body -->
+          <div class="space-y-2 text-center">
+          <p class="text-xl font-semibold" >Un-Verify</p>
+            <p >This will Un-verify the selected data, </p>
+            <p >Are you sure?</p>
+          </div>
+          
+          <!-- Footer -->
+          <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+            <button data-close class="theme-btn-outline">Cancel</button>
+            <button data-close class="theme-warning-btn">Yes, Proceed</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const modal = this.querySelector("#resetModal");
+    const openBtn = this.querySelector("#openResetModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("un-verify-modal", UnVerifyModal);
+
+class FirstPassModal extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openFirstPassModalModal" class="theme-btn"  aria-label="markOffered Modal">First Pass</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+<svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+    <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+  </g>
+</svg>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">First Pass</p>
+              <p >This will make the data as first level Pass,</p>
+              <p >Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openFirstPassModalModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("first-pass-modal", FirstPassModal);
+
+class SecondPassModal extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openSecondPassModalModal" class="theme-btn"  aria-label="markOffered Modal">Second Pass</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+<svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+    <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+  </g>
+</svg>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Second Pass</p>
+              <p>This will make the data as Second level Pass,</p>
+              <p>Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openSecondPassModalModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("second-pass-modal", SecondPassModal);
+
+class DisciplineFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Item Count", "Show Deleted"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("dicipline-filter", DisciplineFilter);
+
+class AddDiscipline extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Ref", "Description"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-discipline", AddDiscipline);
+
+class EditDisciplineSaveButton extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <span>
+        <!-- Save Changes Button (triggers modal) -->
+        <button id="openEditModal" class="theme-btn whitespace-nowrap">Save Changes</button>
+        
+        <!-- Modal Overlay -->
+        <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+                <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="currentColor"></path> 
+                </g>
+              </svg>            
+              </div>
+            <p class="text-xl font-semibold text-center w-full">Edit</p>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p>This will edit the current Discipline,</p>
+              <p>Are you sure?</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button id="confirmSave" data-route="/project-info/disciplines" data-close class="theme-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    `;
+
+    const modal = this.querySelector("#editModal");
+    const openBtn = this.querySelector("#openEditModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define(
+  "edit-discipline-save-button",
+  EditDisciplineSaveButton
+);
+
+class TagGroupFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Tag Count", "Show Deleted"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("tag-group-filter", TagGroupFilter);
+
+class AddTagGroup extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="grid grid-cols-4 gap-4 mt-6">
+
+        <!-- Tag Group -->
+        <div class="col-span-1 space-y-1">
+          <label class="block text-sm font-medium">Tag Group</label>
+          <input
+            type="text"
+            class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+            placeholder="Enter"
+          />
+        </div>
+        <div class="col-span-3"></div>
+
+        <!-- Tag Description -->
+        <div class="col-span-1 space-y-1">
+          <label class="block text-sm font-medium">Tag Description</label>
+          <input
+            type="text"
+            class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+            placeholder="Enter"
+          />
+        </div>
+        <div class="col-span-3"></div>
+
+        <!-- Imported Radio -->
+        <div class="col-span-1">
+          <label class="flex items-center gap-2 mt-2">
+            <input type="radio" class="w-4 h-4" />
+            Imported
+          </label>
+        </div>
+        <div class="col-span-3"></div>
+
+        <!-- Added By -->
+        <div class="col-span-1 space-y-1">
+          <label class="block text-sm font-medium">Added By</label>
+          <input
+            type="text"
+            class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+            placeholder="Enter"
+          />
+        </div>
+        <div class="col-span-3"></div>
+
+        <!-- Added Date -->
+        <div class="col-span-1 space-y-1">
+          <label class="block text-sm font-medium">Added Date</label>
+          <input
+            type="date"
+            id="addedDate"
+            name="addedDate"
+            class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          />
+        </div>
+        <div class="col-span-3"></div>
+
+      </div>
+    `;
+  }
+}
+customElements.define("add-tag-group", AddTagGroup);
+
+class AddPunchListAdmin extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                  ${[
+        "Punchlist Category",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+         ${[
+        "Prevent Checksheet Completion"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+        ${["Added At"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+         ${[
+        "Added By",
+      ]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+          ${[
+        "2 Step Verification"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+    `;
+  }
+}
+customElements.define("add-punchlist-admin", AddPunchListAdmin);
+
+class PunchlistForm extends HTMLElement {
+  connectedCallback() {
+    const fileUploadId = `file-upload-${Math.random().toString(36).slice(2)}`;
+
+    this.innerHTML = `
+      <button class="theme-btn-primary-outline" id="puchlistFormBtn" aria-label="Open Punchlist Form Modal">Punchlist Form</button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+              <button data-close class="text-2xl w-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center" id="templateRadioGroup"> 
+              <label class="flex items-center gap-2">
+                <input type="radio" name="template" value="default" class="w-4 h-4" checked /> Use Default
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" name="template" value="custom" class="w-4 h-4" /> Custom Template
+              </label>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface space-y-4 p-3 gap-4 rounded-b-lg border-t border-theme">
+            <div>
+              <file-upload id="${fileUploadId}" disabled></file-upload>
+            </div>
+            <div class="flex justify-center">
+              <button data-close class="theme-btn w-[6rem]">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#puchlistFormBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+
+    // Enable/Disable File Upload
+    const fileUploadEl = () => this.querySelector(`#${fileUploadId}`);
+    const radios = this.querySelectorAll('input[name="template"]');
+
+    radios.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "custom" && radio.checked) {
+          fileUploadEl().removeAttribute("disabled");
+          fileUploadEl().connectedCallback(); // re-render component
+        } else if (radio.value === "default" && radio.checked) {
+          fileUploadEl().setAttribute("disabled", "");
+          fileUploadEl().connectedCallback(); // re-render component
+        }
+      });
+    });
+  }
+}
+customElements.define("punchlist-form", PunchlistForm);
+
+class TQAdminFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay" id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-4 gap-4 items-center"> 
+                   ${[
+        "Show Deleted"
+      ]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("tq-admin-filter", TQAdminFilter);
+
+class AddTQAdmin extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Reference", "Description"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+  ${["Added At"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+         <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+  ${["Added By"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-tq-admin", AddTQAdmin);
+
+class AddNCRType extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Description"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-ncr-type", AddNCRType);
+
+class EditNCRTypeSaveButton extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <span>
+        <!-- Save Changes Button (triggers modal) -->
+        <button id="openEditModal" class="theme-btn whitespace-nowrap">Save Changes</button>
+        
+        <!-- Modal Overlay -->
+        <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+                <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="currentColor"></path> 
+                </g>
+              </svg>            
+              </div>
+            <p class="text-xl font-semibold text-center w-full">Edit</p>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p>This will edit the current NCR Type,</p>
+              <p>Are you sure?</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button id="confirmSave" data-route="/project-info/ncr-admin" data-close class="theme-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    `;
+
+    const modal = this.querySelector("#editModal");
+    const openBtn = this.querySelector("#openEditModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define(
+  "edit-ncr-type-save-button",
+  EditNCRTypeSaveButton
+);
+
+class AddLocalisation extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Text", "Replacement"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-localisation", AddLocalisation);
+
+class EditLocalisationSaveButton extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <span>
+        <!-- Save Changes Button (triggers modal) -->
+        <button id="openEditModal" class="theme-btn whitespace-nowrap">Save Changes</button>
+        
+        <!-- Modal Overlay -->
+        <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+                <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="currentColor"></path> 
+                </g>
+              </svg>            
+              </div>
+            <p class="text-xl font-semibold text-center w-full">Edit</p>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p>This will edit the current Localisation,</p>
+              <p>Are you sure?</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button id="confirmSave" data-route="/project-info/localisations" data-close class="theme-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    `;
+
+    const modal = this.querySelector("#editModal");
+    const openBtn = this.querySelector("#openEditModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define(
+  "edit-localisation-save-button",
+  EditLocalisationSaveButton
+);
+
+class AddCustomFields extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["Custom Field", "Bookmark"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-custom-field", AddCustomFields);
+
+class EditCustomFieldSaveButton extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <span>
+        <!-- Save Changes Button (triggers modal) -->
+        <button id="openEditModal" class="theme-btn whitespace-nowrap">Save Changes</button>
+        
+        <!-- Modal Overlay -->
+        <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+                <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="currentColor"></path> 
+                </g>
+              </svg>            
+              </div>
+            <p class="text-xl font-semibold text-center w-full">Edit</p>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p>This will edit the current Custom Field,</p>
+              <p>Are you sure?</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button id="confirmSave" data-route="/project-info/custom-fields" data-close class="theme-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    `;
+
+    const modal = this.querySelector("#editModal");
+    const openBtn = this.querySelector("#openEditModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define(
+  "edit-custom-field-save-button",
+  EditCustomFieldSaveButton
+);
+
+class AddITREquivalence extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 items-start gap-4 mt-6">
+
+  ${["EPC", "EPC’s ITR", "Equivalent Checksheet"]
+        .map(
+          (label) => `
+      <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+    `
+        )
+        .join("")}
+</div>
+    `;
+  }
+}
+customElements.define("add-equivalence", AddITREquivalence);
+
+class EditITREquaivalenceSaveButton extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <span>
+        <!-- Save Changes Button (triggers modal) -->
+        <button id="openEditModal" class="theme-btn whitespace-nowrap">Save Changes</button>
+        
+        <!-- Modal Overlay -->
+        <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+                <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier"> 
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="currentColor"></path> 
+                </g>
+              </svg>            
+              </div>
+            <p class="text-xl font-semibold text-center w-full">Edit</p>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p>This will edit the current ITR Equivalence,</p>
+              <p>Are you sure?</p>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button id="confirmSave" data-route="/project-info/itr-equivalence" data-close class="theme-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </span>
+    `;
+
+    const modal = this.querySelector("#editModal");
+    const openBtn = this.querySelector("#openEditModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define(
+  "edit-equivalence-save-button",
+  EditITREquaivalenceSaveButton
+);

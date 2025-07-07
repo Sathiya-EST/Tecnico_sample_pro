@@ -4,7 +4,7 @@ class ModeSelect extends HTMLElement {
         <div class="relative inline-block text-left">
           <button id="dropdownBtn" class="w-48 bg-theme-background border border-theme px-4 py-2 rounded-md text-left cursor-pointer flex justify-between items-center">
             <span>Select Mode</span>
-            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
@@ -70,7 +70,6 @@ class ModeSelect extends HTMLElement {
     });
   }
 }
-
 customElements.define("mode-select", ModeSelect);
 
 class ScanModal extends HTMLElement {
@@ -149,9 +148,9 @@ class ScanModal extends HTMLElement {
 
             <!-- Footer -->
             <div class="flex justify-end gap-3 footer-container px-5 py-3 border-t">
-              <button id="scanAgainBtn" class="border border-purple-700 text-purple-700 px-4 py-1 rounded">Scan Again</button>
-              <button id="cancelScanBtn" class="border border-purple-700 text-purple-700 px-4 py-1 rounded">Cancel Scan</button>
-              <button class="bg-purple-700 text-white px-4 py-1 rounded">Upload</button>
+              <scan-again></scan-again>
+              <cancel-scan></cancel-scan>
+              <button class="theme-btn" id="uploadScan">Upload</button>
             </div>
           </div>
         </div>
@@ -160,24 +159,275 @@ class ScanModal extends HTMLElement {
     const modal = this.querySelector("#modal");
     const openBtn = this.querySelector("#openScanBtn");
     const closeBtn = this.querySelector("#closeModalBtn");
-    const scanAgainBtn = this.querySelector("#scanAgainBtn");
-    const cancelScanBtn = this.querySelector("#cancelScanBtn");
+    const uploadBtn = this.querySelector("#uploadScan");
 
     openBtn.addEventListener("click", () => modal.classList.remove("hidden"));
     closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
-
-    scanAgainBtn.addEventListener("click", () => {
-      alert("Scan Again initiated.");
-    });
-
-    cancelScanBtn.addEventListener("click", () => {
-      alert("Scan cancelled.");
-    });
+    uploadBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) modal.classList.add("hidden");
     });
   }
 }
-
 customElements.define("scan-modal", ScanModal);
+
+class ScanAgain extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <!-- Trigger Button -->
+      <button id="openResetModal" class="theme-btn-primary-outline" aria-label="Reset Grid Modal">Scan Again</button>
+      
+      <!-- Modal Overlay -->
+      <div id="resetModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+        <!-- Modal Content -->
+        <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+          <!-- Header -->
+          <div class="w-full flex items-center justify-center gap-3 p-4 mb-2">
+            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18A2 2 0 0 0 3.24 21H20.76A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          
+          <!-- Body -->
+          <div class="space-y-2 text-center">
+          <p class="text-xl font-semibold" >Scan Again</p>
+            <p>This will restart the scanning process,</p>
+            <p>Are you sure?</p>
+          </div>
+          
+          <!-- Footer -->
+          <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+            <button data-close class="theme-btn-outline">Cancel</button>
+            <button data-close class="theme-warning-btn">Yes, Proceed</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const modal = this.querySelector("#resetModal");
+    const openBtn = this.querySelector("#openResetModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("scan-again", ScanAgain);
+
+class CancelScan extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <!-- Trigger Button -->
+      <button id="openResetModal" class="theme-btn-primary-outline" aria-label="Reset Grid Modal">Cancel Scan</button>
+      
+      <!-- Modal Overlay -->
+      <div id="resetModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
+        <!-- Modal Content -->
+        <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+          <!-- Header -->
+          <div class="w-full flex items-center justify-center gap-3 p-4 mb-2">
+            <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18A2 2 0 0 0 3.24 21H20.76A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          
+          <!-- Body -->
+          <div class="space-y-2 text-center">
+          <p class="text-xl font-semibold" >Cancel Scan</p>
+            <p>This will cancel the scanning process,</p>
+            <p>Are you sure?</p>
+          </div>
+          
+          <!-- Footer -->
+          <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+            <button data-close class="theme-btn-outline">Cancel</button>
+            <button data-close class="theme-warning-btn">Yes, Proceed</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const modal = this.querySelector("#resetModal");
+    const openBtn = this.querySelector("#openResetModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("cancel-scan", CancelScan);
+
+class SourceSelect extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="relative">
+        <select
+          class="bg-theme-background select-input border-theme pr-10 appearance-none"
+          aria-label="Select Source"
+        >
+          <option disabled selected hidden value="">Select</option>
+          <option disabled class="font-bold">
+            Select Source
+          </option>
+          <option>PDF file</option>
+          <option>TIFF file</option>
+        </select>
+        <span
+          class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 "
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </span>
+      </div>
+    `;
+  }
+}
+customElements.define("source-select", SourceSelect);
+
+/* Recently Scanned Filter */
+class RecentlyScannedFilter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+      <div class="modal-overlay " id="filterPopup">
+        <div class="modal-content border border-theme bg-theme-background ">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Filter</h2>
+            <div class="space-x-4">
+            <button class="theme-btn-outline">Clear Filter</button>
+            <button data-close class="text-2xl w-2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            </div>
+
+          </div>
+
+          <!-- Modal Body -->
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-2 gap-4 items-center">
+              ${["Checksheet Completed With-in", "Doc Type"]
+                .map(
+                  (label) => `
+                <div class="space-y-1">
+                  <label class="block">${label}</label>
+                  <div class="relative">
+                    <select class="bg-theme-background select-input border-theme pr-10 appearance-none">
+                      <option>Select</option>
+                    </select>
+                    <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Apply</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("recently-scanned", RecentlyScannedFilter);
