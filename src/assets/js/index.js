@@ -422,13 +422,28 @@ function updateDateTime() {
 
 class NavigationManager {
   constructor() {
-    this.currentRoute = "/project-info/unit";
+    this.currentRoute = "/overview/my-technico";
     this.menuEventsbound = false;
     this.routeConfig = {
       "/overview/my-technico": {
         title: "My Technico",
         breadcrumb: ["Overview", "My Technico"],
-        description: "Personal dashboard and overview",
+      },
+      "/overview/my-technico/workpacks": {
+        title: "Workpacks",
+        breadcrumb: ["Overview", "My Technico","Workpacks"],
+      },
+      "/overview/my-technico/checksheets": {
+        title: "Checksheets",
+        breadcrumb: ["Overview", "My Technico","Checksheets"],
+      },
+      "/overview/my-technico/punchlists": {
+        title: "Punchlists",
+        breadcrumb: ["Overview", "My Technico","Punchlists"],
+      },
+      "/overview/my-technico/technical-queries": {
+        title: "Technical Queries",
+        breadcrumb: ["Overview", "My Technico","Technical Queries"],
       },
       "/overview/dashboard": {
         title: "Dashboard",
