@@ -6,12 +6,16 @@
       <project-select></project-select>
 
       <div class="w-px h-8 bg-theme-border"></div>
-      <add-tag-button></add-tag-button>
       <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Layouts
-        </button>
-      </span>
+        <button
+          data-route="/database/tags/add"
+          data-close
+          class="theme-btn whitespace-nowrap"
+        >
+          Add
+        </button></span
+      >
+      <show-layout-modal></show-layout-modal>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Show Details
@@ -22,11 +26,7 @@
           Export
         </button>
       </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Reset Grid
-        </button>
-      </span>
+      <reset-grid-modal></reset-grid-modal>
       <database-filter></database-filter>
 
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
@@ -174,8 +174,11 @@
       <button class="pagination-btn">&gt;</button>
     </div>
   </div>
-  <div class="flex w-full justify-center space-x-4">
-    <delete-modal></delete-modal>
-    <button class="theme-btn">Mark as Verified</button>
+  <div class="footer-container">
+    <delete-modal
+      title="You are about to delete a Tag"
+      description="This will delete the tag from Database.Are you sure?"
+    ></delete-modal>
+    <mark-verified></mark-verified>
   </div>
 </div>

@@ -1,0 +1,135 @@
+<div class="content space-y-4">
+  <div class="flex flex-wrap justify-between gap-2 items-center">
+    <p class="text-xl font-semibold">Import Data</p>
+
+    <div class="flex flex-wrap gap-4 items-center justify-end">
+      <span>
+        <clear-down></clear-down>
+      </span>
+      <span>
+        <prevent-db-clear-down></prevent-db-clear-down>
+      </span>
+      <span>
+        <get-all-import-sheets></get-all-import-sheets>
+      </span>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Export
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="border border-theme p-2 rounded-md space-y-4">
+    <p class="text-xl font-semibold">Data Import</p>
+    <div class="flex space-x-4">
+      <button
+        class="font-badge border-theme-primary active-badge"
+        data-font-size="database-hierarchy"
+      >
+        Database Hierarchy
+      </button>
+      <button
+        class="font-badge border-theme-primary"
+        data-font-size="documents"
+      >
+        Documents
+      </button>
+      <button
+        class="font-badge border-theme-primary"
+        data-font-size="punchlists"
+      >
+        Punchlists
+      </button>
+      <button
+        class="font-badge border-theme-primary"
+        data-font-size="workpacks"
+      >
+        Workpacks
+      </button>
+      <button
+        class="font-badge border-theme-primary"
+        data-font-size="users-and-community"
+      >
+        Users and Community
+      </button>
+    </div>
+    <data-import-form></data-import-form>
+  </div>
+  <div class="border border-theme p-2 rounded-md space-y-4">
+    <p class="text-xl font-semibold">Preview</p>
+
+    <div>
+      <search-input></search-input>
+    </div>
+    <!-- Table -->
+    <div class="page-section border-theme">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="border-b border-gray-200">
+            <tr class="table-heading">
+              <th class="table-header">
+                <span>Preview</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row-style">
+              <td></td>
+            </tr>
+            <tr class="table-row-style even-row">
+              <td></td>
+            </tr>
+            <tr class="table-row-style">
+              <td></td>
+            </tr>
+            <tr class="table-row-style even-row">
+              <td></td>
+            </tr>
+            <tr class="table-row-style">
+              <td></td>
+            </tr>
+            <tr class="table-row-style even-row">
+              <td></td>
+            </tr>
+            <tr class="table-row-style">
+              <td></td>
+            </tr>
+            <tr class="table-row-style even-row">
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="table-footer">
+      <div>
+        <p class="font-semibold">Page 1 of 15</p>
+      </div>
+      <!-- Pagination -->
+      <div class="pagination-wrapper">
+        <button class="pagination-btn">&lt;</button>
+        <button class="pagination-btn">First</button>
+        <button class="pagination-btn pagination-active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <span class="w-9 h-9 flex items-center justify-center">...</span>
+        <button class="pagination-btn">15</button>
+        <button class="pagination-btn">Last</button>
+        <button class="pagination-btn">&gt;</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-container">
+    <clear-preview-grid></clear-preview-grid>
+    <reset-grid-modal></reset-grid-modal>
+    <span>
+      <button class="theme-btn-primary-outline whitespace-nowrap">
+        Export Grid
+      </button>
+    </span>
+    <span>
+      <button class="theme-btn whitespace-nowrap">Pop-out Preview</button>
+    </span>
+  </div>
+</div>

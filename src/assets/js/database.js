@@ -42,36 +42,36 @@ class DatabaseFilter extends HTMLElement {
             <div class="grid grid-cols-4 gap-4 items-center">
               <!-- Select fields -->
               ${["Tag No", "Tag Desc"]
-                .map(
-                  (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Discipline",
-                "SubSystem Group",
-                "Type",
-                "SubType",
-                "Tag Group",
-                "Cable Tag",
-                "Spare Field 3",
-                "Added Date",
-                "Site Location",
-                "Module/Area",
-                "Area Code",
-                "Tag Location",
-                "LTP Number",
-                "COW",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Discipline",
+        "SubSystem Group",
+        "Type",
+        "SubType",
+        "Tag Group",
+        "Cable Tag",
+        "Spare Field 3",
+        "Added Date",
+        "Site Location",
+        "Module/Area",
+        "Area Code",
+        "Tag Location",
+        "LTP Number",
+        "COW",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -86,22 +86,22 @@ class DatabaseFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
                ${[
-                 "Deleted Only",
-                 "Include Soft Tags",
-                 "Include Descriptions",
-                 "Loop Tags Only",
-               ]
-                 .map(
-                   (label) => `
+        "Deleted Only",
+        "Include Soft Tags",
+        "Include Descriptions",
+        "Loop Tags Only",
+      ]
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-                 )
-                 .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -138,50 +138,25 @@ class DatabaseFilter extends HTMLElement {
 }
 customElements.define("database-filter", DatabaseFilter);
 
-class AddTagButton extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-   <span> <button data-route="/database/tags/add" data-close class="theme-btn whitespace-nowrap">Add Tag</button></span>
-    `;
-  }
-}
-customElements.define("add-tag-button", AddTagButton);
-class TagCancelButton extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-   <span> <button data-route="/database/tags" data-close class="theme-btn-outline">Cancel</button></span>
-    `;
-  }
-}
-customElements.define("tag-cancel-button", TagCancelButton);
-class TagSaveButton extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-   <span> <button data-route="/database/tags" data-close class="theme-btn min-w-[6rem]">Add</button></span>
-    `;
-  }
-}
-customElements.define("tag-save-button", TagSaveButton);
-
 class TagAdd extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
         <div class="grid grid-cols-4 gap-4 items-center mt-6">
             <!-- Input fields -->
             ${[
-              "Tag Number",
-              "Tag Description",
-              "Tag Unit",
-              "Tag System Ref",
-              "Tag SubSystem Ref",
-              "Tag Location",
-              "Tag Area",
-              "Tag Type",
-              "Tag Sub Type",
-              "Tag Discipline",
-            ]
-              .map(
-                (label) => `
+        "Tag Number",
+        "Tag Description",
+        "Tag Unit",
+        "Tag System Ref",
+        "Tag SubSystem Ref",
+        "Tag Location",
+        "Tag Area",
+        "Tag Type",
+        "Tag Sub Type",
+        "Tag Discipline",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -191,33 +166,33 @@ class TagAdd extends HTMLElement {
                 />
             </div>
             `
-              )
-              .join("")}
+        )
+        .join("")}
             ${["Soft Tag", "Loop Tag"]
-              .map(
-                (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2 text-sm">
                 <input type="radio" class="w-4 h-4" name="${label.replace(
-                  /\s+/g,
-                  ""
-                )}" /> ${label}
+            /\s+/g,
+            ""
+          )}" /> ${label}
                 </label>
             `
-              )
-              .join("")}
+        )
+        .join("")}
     ${[
-      "Manufacturer",
-      "PO Number",
-      "Loop Tag",
-      "Commodity Code",
-      "From Tag",
-      "To Tag",
-      "Cable Length",
-      "Spool Tag",
-      "Tag Group",
-    ]
-      .map(
-        (label) => `
+        "Manufacturer",
+        "PO Number",
+        "Loop Tag",
+        "Commodity Code",
+        "From Tag",
+        "To Tag",
+        "Cable Length",
+        "Spool Tag",
+        "Tag Group",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -227,28 +202,28 @@ class TagAdd extends HTMLElement {
                 />
             </div>
             `
-      )
-      .join("")}
+        )
+        .join("")}
     ${["Hazardous Tag"]
-      .map(
-        (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2 text-sm">
                 <input type="radio" class="w-4 h-4" name="${label.replace(
-                  /\s+/g,
-                  ""
-                )}" /> ${label}
+            /\s+/g,
+            ""
+          )}" /> ${label}
                 </label>
             `
-      )
-      .join("")}
+        )
+        .join("")}
                 ${[
-                  "Serial Number",
-                  "Primary Drawing",
-                  "Tag Import Source",
-                  "RFID",
-                ]
-                  .map(
-                    (label) => `
+        "Serial Number",
+        "Primary Drawing",
+        "Tag Import Source",
+        "RFID",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -258,20 +233,20 @@ class TagAdd extends HTMLElement {
                 />
             </div>
             `
-                  )
-                  .join("")}
+        )
+        .join("")}
                     ${["Cable Tag", "Spool Tag"]
-                      .map(
-                        (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2 text-sm">
                 <input type="radio" class="w-4 h-4" name="${label.replace(
-                  /\s+/g,
-                  ""
-                )}" /> ${label}
+            /\s+/g,
+            ""
+          )}" /> ${label}
                 </label>
             `
-                      )
-                      .join("")}
+        )
+        .join("")}
                 
                 </div>
     `;
@@ -279,69 +254,47 @@ class TagAdd extends HTMLElement {
 }
 customElements.define("tag-add", TagAdd);
 
-class SearchInput extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <div class="relative w-full max-w-sm">
-        <!-- Search Icon -->
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
-               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
-          </svg>
-        </div>
-
-        <!-- Input Field -->
-        <input
-          type="text"
-          placeholder="Search..."
-          class="w-full pl-10 pr-4 py-2 rounded-md border  focus:outline-none focus:ring-2 focus:ring-theme focus:border-transparent bg-theme-background text-sm"
-        />
-      </div>
-    `;
-  }
-}
-customElements.define("search-input", SearchInput);
-
-class DeleteModal extends HTMLElement {
+class MarkAsVerified extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
         <!-- Trigger Button -->
        
-        <button id="openDeleteModal" class="theme-destructive-btn"  aria-label="Delete Modal">Delete</button>
+        <button id="openMarkOfferedModal" class="theme-btn"  aria-label="markOffered Modal">Mark as Verified</button>
         <!-- Modal Overlay -->
-        <div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
           <!-- Modal Content -->
           <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
             <!-- Header -->
              <div class="w-full flex items-center justify-center gap-3 p-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 6h18"/>
-              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-              <line x1="10" y1="11" x2="10" y2="17"/>
-              <line x1="14" y1="11" x2="14" y2="17"/>
-            </svg>
+<svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+    <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+  </g>
+</svg>
             </div>
 
             <!-- Body -->
             <div class="space-y-2 text-center">
-              <p class="text-xl font-semibold">You are about to delete a tag.</p>
-              <p >This will delete the tag from Database.</p>
-              <p >Are you sure?</p>
+              <p class="text-xl font-semibold">Mark as Verified</p>
+              <p>This will mark the selected Tag as verified,</p>
+              <p>Are you sure?</p>
             </div>
 
             <!-- Footer -->
             <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
               <button data-close class="theme-btn-outline">Cancel</button>
-              <button data-close class="theme-destructive-btn">Delete</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
             </div>
           </div>
         </div>
       `;
 
-    const modal = this.querySelector("#deleteModal");
-    const openBtn = this.querySelector("#openDeleteModal");
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openMarkOfferedModal");
 
     // Open modal
     openBtn.addEventListener("click", () => {
@@ -363,5 +316,4 @@ class DeleteModal extends HTMLElement {
     });
   }
 }
-
-customElements.define("delete-modal", DeleteModal);
+customElements.define("mark-verified", MarkAsVerified);

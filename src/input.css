@@ -3,8 +3,7 @@
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 @import "./assets/css/layout.css";
-@import "./assets/css/overview.css";
-@import "./assets/css/outstanding.css";
+@import "./assets/css/common.css";
 
 :root {
   --primary: 45, 37, 125;
@@ -35,7 +34,7 @@
 
 /* Dark Mode */
 .dark {
-  --primary: 96 165 250;
+  --primary: 45, 37, 125;
   --secondary: 255, 206, 51;
   --accent: 196 181 253;
   --background: 17 24 39;
@@ -60,7 +59,7 @@
 
 /* Blue Mode */
 .blue {
-  --primary: 224 242 254;
+  --primary: 45, 37, 125;
   --secondary: 255, 206, 51;
   --accent: 191 219 254;
   --background: 13 13 78;
@@ -218,11 +217,19 @@ button {
 .bg-theme-background {
   background-color: rgb(var(--background));
 }
+.bg-theme {
+  background-color: rgb(var(--background));
+}
+.bg-success {
+  background-color: rgb(var(--success));
+}
 .bg-theme-surface {
   background-color: rgb(var(--surface));
 }
 .bg-theme-primary {
-  background-color: rgb(var(--primary)) !important;
+  /* !important; */
+  background-color: rgb(var(--primary));
+  color: rgb(255, 255, 255);
 }
 .bg-theme-secondary {
   background-color: rgb(var(--secondary));
@@ -247,7 +254,14 @@ button {
   border-color: rgb(var(--border));
 }
 .border-theme-primary {
-  border-color: rgb(var(--primary));
+  border-color: rgb(var(--btn-primary));
+  color: rgb(var(--btn-primary));
+  @apply border;
+}
+.border-theme-primary .active-badge {
+  background-color: rgb(var(--btn-primary));
+  color: rgb(var(--btn-primary));
+  @apply border;
 }
 
 .hover\:bg-theme-primary:hover {
@@ -296,8 +310,8 @@ button.active {
 }
 .active-badge {
   @apply shadow-lg;
-  background-color: rgb(var(--primary));
-  color: rgb(var(--border));
+  background-color: rgb(var(--brand-primary));
+  color: white;
 }
 .active-theme {
   @apply shadow-lg;
@@ -335,4 +349,11 @@ label {
   background-color: rgb(var(--modal-background));
   @apply opacity-95 border;
   border-color: rgb(var(--text));
+}
+.scannning-frame {
+  background-image: url("../src/assets/images/scan_bg.png");
+  @apply min-h-[64vh];
+}
+.badge {
+  @apply inline-block px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 border border-blue-300 rounded-full;
 }

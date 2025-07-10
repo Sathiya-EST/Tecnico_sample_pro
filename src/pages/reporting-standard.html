@@ -1,0 +1,24 @@
+<div class="content space-y-4 h-full flex flex-col">
+  <!-- Header -->
+  <div class="flex flex-wrap justify-between gap-2 items-center">
+    <p class="text-xl font-semibold">Standard Reports</p>
+    <div class="flex flex-wrap gap-2 items-center justify-end">
+      <label class="block">Reports</label>
+      <reporting-select></reporting-select>
+      <span>
+        <button class="theme-btn whitespace-nowrap">Run Report</button>
+      </span>
+      <clear-reports-data></clear-reports-data>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Report Scheduler
+        </button>
+      </span>
+      <add-to-favourite-modal></add-to-favourite-modal>
+      <reporting-standard-filter></reporting-standard-filter>
+    </div>
+  </div>
+
+  <!-- Fills available height -->
+  <div class="flex-1 border border-theme"></div>
+</div>
