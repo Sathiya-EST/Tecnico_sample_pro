@@ -1459,7 +1459,7 @@ customElements.define("search-input", SearchInput);
 class ProjectSelect extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-     <div class="relative max-w-auto min-w-[5rem]">
+     <div class="relative max-w-auto min-w-[10rem]">
   <!-- Dropdown Trigger -->
   <div
     id="dropdownTrigger"

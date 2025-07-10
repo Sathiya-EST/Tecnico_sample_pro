@@ -4225,7 +4225,7 @@ class NCRAdmin extends HTMLElement {
           <button class="theme-btn-primary-outline whitespace-nowrap">
             Export
           </button>
-        </span>
+          </span>
             <reset-grid-modal></reset-grid-modal>
             <button class="plain-icon" aria-label="Refresh">
               <!-- Refresh Icon -->

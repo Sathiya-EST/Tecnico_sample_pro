@@ -514,6 +514,9 @@
   .min-w-\[5rem\] {
     min-width: 5rem;
   }
+  .min-w-\[10rem\] {
+    min-width: 10rem;
+  }
   .min-w-\[50vw\] {
     min-width: 50vw;
   }
