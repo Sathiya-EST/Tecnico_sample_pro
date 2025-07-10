@@ -23,11 +23,7 @@
           Show Details
         </button>
       </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Layouts
-        </button>
-      </span>
+      <show-layout-modal></show-layout-modal>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
@@ -187,10 +183,12 @@
     <button class="theme-btn-primary-outline">Print</button>
     <button class="theme-btn-primary-outline">View Template</button>
     <button class="theme-btn-primary-outline">Update Template</button>
-    <button class="theme-btn-primary-outline">Update Template</button>
-    <button class="theme-warning-btn">Reject</button>
-    <button class="theme-destructive-btn">Delete</button>
-    <button class="theme-btn">Complete</button>
-    <button class="theme-btn">Accept</button>
+    <reject-change-request></reject-change-request>
+    <delete-modal
+      title="Delete Change Request"
+      description="This will delete the selected Change Request from the list. Are you sure?"
+    ></delete-modal>
+    <complete-change-req></complete-change-req>
+    <accept-change-req></accept-change-req>
   </div>
 </div>

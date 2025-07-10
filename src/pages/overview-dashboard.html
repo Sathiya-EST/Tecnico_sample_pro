@@ -1,8 +1,71 @@
-<div class="content flex justify-between">
-  <p class="text-lg font-semibold">Dashboard</p>
-  <div class="flex gap-x-4">
-    <project-select></project-select>
-    <div class="w-px h-10 bg-theme-border"></div>
-    <dashboard-filter></dashboard-filter>
+<div class="content space-y-4">
+  <div class="flex justify-between">
+    <p class="text-lg font-semibold">Dashboard</p>
+    <div class="flex gap-x-4">
+      <project-select></project-select>
+      <div class="w-px h-10 bg-theme-border"></div>
+      <dashboard-filter></dashboard-filter>
+    </div>
+  </div>
+  <div>
+    <search-input></search-input>
+  </div>
+  <!-- Table -->
+  <div class="page-section border-theme">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="border-b border-gray-200">
+          <tr class="table-heading">
+            <th class="table-header">
+              <span>Description</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row-style">
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="table-footer">
+    <div>
+      <p class="font-semibold">Page 1 of 15</p>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <button class="pagination-btn">&lt;</button>
+      <button class="pagination-btn">First</button>
+      <button class="pagination-btn pagination-active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <span class="w-9 h-9 flex items-center justify-center">...</span>
+      <button class="pagination-btn">15</button>
+      <button class="pagination-btn">Last</button>
+      <button class="pagination-btn">&gt;</button>
+    </div>
   </div>
 </div>

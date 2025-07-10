@@ -39,6 +39,9 @@
   transform: translateY(-4px);
 }
 
+.user-popover{
+  @apply  w-56 rounded-md shadow-lg  ring-1 ring-black  p-4 z-50 hidden;
+}
 /* project select */
 .icon {
   width: 1rem;
@@ -93,18 +96,19 @@
   color: rgb(var(--text-label));
   position: relative;
   transition: all 0.2s ease;
-  @apply bg-none font-semibold cursor-pointer whitespace-nowrap border-b-4 p-2 px-4;
+  @apply bg-none font-semibold cursor-pointer whitespace-nowrap border-b p-2 px-4;
 }
 
 .tab-button:hover {
-  color: rgb(var(--primary));
-  background: rgba(var(--primary), 0.05);
+  color: rgb(var(--brand-primary));
+  background: rgba(var(--brand-primary), 0.05);
 }
 
 .tab-button.active {
-  color: rgb(var(--primary));
+  color: rgb(var(--brand-primary));
   background: rgb(var(--background));
-  border-bottom-color: rgb(var(--primary));
+  border-bottom-color: rgb(var(--brand-primary));
+  @apply border-b-4;
 }
 
 @keyframes fadeIn {

@@ -1,23 +1,24 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Users</p>
+    <p class="text-xl font-semibold">Systems</p>
 
     <div class="flex flex-wrap gap-4 items-center justify-end">
       <button
-        id="eng-companies-save-btn"
-        data-route="/admin/user-acc/add"
+        id="project-info-add-btn"
+        data-route="/project-info/systems/add"
         data-close
         class="theme-btn"
       >
-        Add
+        Add New
       </button>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
         </button>
       </span>
+      <show-layout-modal></show-layout-modal>
       <reset-grid-modal></reset-grid-modal>
-      <admin-users-filter></admin-users-filter>
+      <system-filter></system-filter>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
           viewBox="0 0 24 24"
@@ -46,25 +47,19 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>User Name</span>
+              <span>Unit Ref</span>
             </th>
             <th class="table-header">
-              <span>Full Name</span>
+              <span>System Ref</span>
             </th>
             <th class="table-header">
-              <span>Organisation</span>
+              <span>System Description</span>
             </th>
             <th class="table-header">
-              <span>Tel</span>
+              <span>System Engineer 1</span>
             </th>
             <th class="table-header">
-              <span>Mobile Tel</span>
-            </th>
-            <th class="table-header">
-              <span>User Level</span>
-            </th>
-            <th class="table-header">
-              <span>Email Address</span>
+              <span>System Engineer 2</span>
             </th>
           </tr>
         </thead>
@@ -75,12 +70,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -93,12 +84,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -111,12 +98,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -129,12 +112,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -162,14 +141,5 @@
       <button class="pagination-btn">Last</button>
       <button class="pagination-btn">&gt;</button>
     </div>
-  </div>
-  <div class="footer-container">
-    <delete-modal
-      title="Delete"
-      description="This will delete the selected row. Are you sure?"
-    ></delete-modal>
-    <button class="theme-btn-primary-outline whitespace-nowrap">Details</button>
-    <admin-link></admin-link>
-    <admin-unlink></admin-unlink>
   </div>
 </div>

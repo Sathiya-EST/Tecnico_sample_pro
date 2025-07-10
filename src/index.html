@@ -179,10 +179,7 @@
               </svg>
             </div>
             <div class="nav-group" id="outstanding-menu">
-              <div
-                class="nav-sub-item active"
-                data-route="/outstanding/checksheets"
-              >
+              <div class="nav-sub-item" data-route="/outstanding/checksheets">
                 Checksheets
               </div>
               <div class="nav-sub-item" data-route="/outstanding/punchlists">
@@ -203,7 +200,7 @@
           <div class="nav-section">
             <div
               class="nav-item hover:transform-border"
-              data-route="/certificates"
+              data-toggle="certificates-menu"
               data-tooltip="Certificates"
             >
               <div class="icon-container">
@@ -220,6 +217,27 @@
                   </svg>
                 </button>
                 <span>Certificates</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="certificates-menu">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/certificates"
+                data-tooltip="Certificates"
+              >
+                Certificates
               </div>
             </div>
           </div>
@@ -430,23 +448,58 @@
               <div
                 class="nav-sub-item tooltip"
                 data-route="/project-info/unit"
-                data-tooltip="Units, System & SubSystems"
+                data-tooltip="Units"
               >
-                Units, System & SubSystems
+                Units
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-info/systems"
+                data-tooltip="Systems"
+              >
+                Systems
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-info/sub-systems"
+                data-tooltip="Sub Systems"
+              >
+                Sub Systems
               </div>
               <div
                 class="nav-sub-item tooltip"
                 data-route="/project-info/site-locations"
-                data-tooltip="Site Location & Areas"
+                data-tooltip="Site Location"
               >
-                Site Location & Areas
+                Site Location
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-info/site-area"
+                data-tooltip="Site Area"
+              >
+                Site Area
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-info/site-sub-area"
+                data-tooltip="Site Sub Area"
+              >
+                Site Sub Area
               </div>
               <div
                 class="nav-sub-item tooltip"
                 data-route="/project-info/types"
-                data-tooltip="Types & SubTypes"
+                data-tooltip="Types"
               >
-                Types & SubTypes
+                Types
+              </div>
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-info/sub-types"
+                data-tooltip="SubTypes"
+              >
+                SubTypes
               </div>
               <div
                 class="nav-sub-item tooltip"
@@ -520,17 +573,17 @@
               </div>
               <div
                 class="nav-sub-item tooltip"
-                data-route="/project-info/shutdown-isolation"
+                data-route="/project-info/si"
                 data-tooltip="Shutdown & Isolation"
               >
                 Shutdown & Isolation
               </div>
               <div
                 class="nav-sub-item tooltip"
-                data-route="/project-info/workpack-ctradmin"
-                data-tooltip="Workpack & CTR Admin"
+                data-route="/project-info/workpack-ctpadmin"
+                data-tooltip="Workpack & CTP Admin"
               >
-                Workpack & CTR Admin
+                Workpack & CTP Admin
               </div>
               <div
                 class="nav-sub-item tooltip"
@@ -799,12 +852,12 @@
           <div class="nav-section">
             <div
               class="nav-item hover:transform-border"
-              data-route="/project-documents"
+              data-toggle="project-docs-menu"
               data-tooltip="Project Documents"
             >
               <div class="icon-container">
                 <button>
-                  <svg
+                 <svg
                     class="w-4 h-4 text-current"
                     viewBox="0 0 14 14"
                     fill="currentColor"
@@ -817,18 +870,39 @@
                 </button>
                 <span>Project Documents</span>
               </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="project-docs-menu">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/project-documents"
+                data-tooltip="Project Documents"
+              >
+                Project Documents
+              </div>
             </div>
           </div>
           <!-- Data Importing -->
-          <div class="nav-section">
+           <div class="nav-section">
             <div
               class="nav-item hover:transform-border"
-              data-route="/data-importing"
+              data-toggle="/data-importing"
               data-tooltip="Data Importing"
             >
               <div class="icon-container">
                 <button>
-                  <svg
+                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 14 17"
                     fill="currentColor"
@@ -839,6 +913,27 @@
                   </svg>
                 </button>
                 <span>Data Importing</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+                width="16"
+                height="16"
+                class="chevron-icon"
+                fill="currentColor"
+              >
+                <path
+                  d="M31.3 192h257.4c28.4 0 42.8 34.5 22.6 54.6l-128.7 128c-12.5 12.5-32.8 12.5-45.3 0l-128.7-128C-11.5 226.5 2.9 192 31.3 192z"
+                />
+              </svg>
+            </div>
+            <div class="nav-group" id="/data-importing">
+              <div
+                class="nav-sub-item tooltip"
+                data-route="/data-importing"
+                data-tooltip="Data Importing"
+              >
+                Data Importing
               </div>
             </div>
           </div>
@@ -879,7 +974,7 @@
             <div class="nav-group" id="admin-menu">
               <div
                 class="nav-sub-item tooltip"
-                data-route="/admin/user-acc"
+                data-route="/admin/security"
                 data-tooltip="User Accounts"
               >
                 User Accounts
@@ -1283,10 +1378,10 @@
               <!-- User Popover -->
               <div
                 id="user-popover"
-                class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-theme-surface ring-1 ring-black ring-opacity-5 p-4 z-50 hidden"
+                class="absolute right-0 mt-2 w-64 border-6 border-theme rounded-md shadow-2xl  bg-theme-surface ring-1 ring-black ring-opacity-5 p-4 z-50 hidden"
               >
                 <div
-                  class="w-full h-full flex flex-col items-center justify-center text-center space-y-2 mb-2"
+                  class="w-full h-full  flex flex-col items-center justify-center text-center space-y-2 mb-2"
                 >
                   <img
                     src="./assets/images/user-avatar.svg"

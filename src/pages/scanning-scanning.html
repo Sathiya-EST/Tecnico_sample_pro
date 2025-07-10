@@ -1,4 +1,4 @@
-<div class="space-y-4">
+<div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
     <p class="text-xl font-semibold">Scanning</p>
 
@@ -121,9 +121,13 @@
     </div>
   </div>
   <div class="footer-container">
-    <button class="theme-btn-primary-outline">Clear</button>
-    <button class="theme-btn-primary-outline">Mark as Additional Page</button>
+    <clear-modal></clear-modal>
+    <mark-as-additional-page></mark-as-additional-page>
     <button class="theme-btn-primary-outline">Update</button>
-    <button class="theme-btn">Process</button>
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected scanned Document.Are you sure?"
+    ></delete-modal>
+    <process-modal></process-modal>
   </div>
 </div>

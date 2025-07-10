@@ -1,4 +1,496 @@
-class AdminUsers extends HTMLElement {
+
+class AdminSecurity extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="space-y-4">
+        <div class="tab-header">
+          <button class="tab-button active" onclick="this.closest('admin-security').switchTab(event, 'tab1')">Users</button>
+          <button class="tab-button" onclick="this.closest('admin-security').switchTab(event, 'tab2')">Groups</button>
+          <button class="tab-button" onclick="this.closest('admin-security').switchTab(event, 'tab3')">User Levels</button>
+        </div>
+
+        ${this.getTabHTML('tab1', 'Users')}
+        ${this.getTabHTML('tab2', 'Groups')}
+        ${this.getTabHTML('tab3', 'User Levels')}
+      </div>
+    `;
+  }
+  switchTab(event, tabId) {
+    const tabs = this.querySelectorAll(".tab-content");
+    const buttons = this.querySelectorAll(".tab-button");
+
+    tabs.forEach(tab => tab.classList.add("hidden"));
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    this.querySelector(`#${tabId}`).classList.remove("hidden");
+    event.currentTarget.classList.add("active");
+  }
+
+  getTabHTML(id, label) {
+    const tabComponents = {
+      'tab1': `
+        <div class="flex justify-between">
+          <search-input></search-input>
+          <div class="flex flex-wrap gap-4 items-center justify-end">
+      <button
+        id="eng-companies-save-btn"
+        data-route="/admin/security/user-acc/add"
+        data-close
+        class="theme-btn"
+      >
+        Add
+      </button>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Details
+        </button>
+      </span>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Export
+        </button>
+      </span>
+      <reset-grid-modal></reset-grid-modal>
+      <admin-users-filter></admin-users-filter>
+      <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+        >
+          <path
+            d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+        </div>
+           <!-- Table -->
+  <div class="page-section border-theme">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="border-b border-gray-200">
+          <tr class="table-heading">
+            <th class="table-header">
+              <span>User Name</span>
+            </th>
+            <th class="table-header">
+              <span>Full Name</span>
+            </th>
+            <th class="table-header">
+              <span>Organisation</span>
+            </th>
+            <th class="table-header">
+              <span>Tel</span>
+            </th>
+            <th class="table-header">
+              <span>Mobile Tel</span>
+            </th>
+            <th class="table-header">
+              <span>User Level</span>
+            </th>
+            <th class="table-header">
+              <span>Email Address</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="table-footer">
+    <div>
+      <p class="font-semibold">Page 1 of 15</p>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <button class="pagination-btn">&lt;</button>
+      <button class="pagination-btn">First</button>
+      <button class="pagination-btn pagination-active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <span class="w-9 h-9 flex items-center justify-center">...</span>
+      <button class="pagination-btn">15</button>
+      <button class="pagination-btn">Last</button>
+      <button class="pagination-btn">&gt;</button>
+    </div>
+  </div>
+  <div class="footer-container">
+  <admin-unlink></admin-unlink>
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected row. Are you sure?"
+    ></delete-modal>
+    <admin-link></admin-link>
+  </div>
+              `,
+      'tab2': `
+        <div class="flex justify-between">
+          <search-input></search-input>
+          <div class="flex flex-wrap gap-4 items-center justify-end">
+      <button
+        id="eng-companies-save-btn"
+        data-route="/admin/security/user-group/add"
+        data-close
+        class="theme-btn"
+      >
+        Add
+      </button>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Details
+        </button>
+      </span>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Copy
+        </button>
+      </span>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Export
+        </button>
+      </span>
+      <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+        >
+          <path
+            d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+        </div>
+           <!-- Table -->
+  <div class="page-section border-theme">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="border-b border-gray-200">
+          <tr class="table-heading">
+            <th class="table-header">
+              <span>Security Groups</span>
+            </th>
+            <th class="table-header">
+              <span>Group Deletable</span>
+            </th>
+            <th class="table-header">
+              <span>Default Skin</span>
+            </th>
+            <th class="table-header">
+              <span>Startup Form</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="table-footer">
+    <div>
+      <p class="font-semibold">Page 1 of 15</p>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <button class="pagination-btn">&lt;</button>
+      <button class="pagination-btn">First</button>
+      <button class="pagination-btn pagination-active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <span class="w-9 h-9 flex items-center justify-center">...</span>
+      <button class="pagination-btn">15</button>
+      <button class="pagination-btn">Last</button>
+      <button class="pagination-btn">&gt;</button>
+    </div>
+  </div>
+  <div class="footer-container">
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected row. Are you sure?"
+    ></delete-modal>
+  </div>
+  `,
+      'tab3': `
+        <div class="flex justify-between">
+          <search-input></search-input>
+          <div class="flex flex-wrap gap-4 items-center justify-end">
+      <button
+        id="eng-companies-save-btn"
+        data-route="/admin/security/user-level/add"
+        data-close
+        class="theme-btn"
+      >
+        Add
+      </button>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Details
+        </button>
+      </span>
+      <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+        >
+          <path
+            d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+        </div>
+           <!-- Table -->
+  <div class="page-section border-theme">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="border-b border-gray-200">
+          <tr class="table-heading">
+            <th class="table-header">
+              <span>Security Groups</span>
+            </th>
+            <th class="table-header">
+              <span>Group Deletable</span>
+            </th>
+            <th class="table-header">
+              <span>Default Skin</span>
+            </th>
+            <th class="table-header">
+              <span>Startup Form</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="table-footer">
+    <div>
+      <p class="font-semibold">Page 1 of 15</p>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <button class="pagination-btn">&lt;</button>
+      <button class="pagination-btn">First</button>
+      <button class="pagination-btn pagination-active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <span class="w-9 h-9 flex items-center justify-center">...</span>
+      <button class="pagination-btn">15</button>
+      <button class="pagination-btn">Last</button>
+      <button class="pagination-btn">&gt;</button>
+    </div>
+  </div>
+  <div class="footer-container">
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected row. Are you sure?"
+    ></delete-modal>
+  </div>
+  `,
+    };
+
+    return `
+        <div id="${id}" class="tab-content ${id === 'tab1' ? '' : 'hidden'} space-y-4">
+          ${tabComponents[id]}
+        </div>
+      `;
+  }
+}
+customElements.define("admin-security", AdminSecurity);
+
+class AdminUsersFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
@@ -95,7 +587,7 @@ class AdminUsers extends HTMLElement {
     });
   }
 }
-customElements.define("admin-users-filter", AdminUsers);
+customElements.define("admin-users-filter", AdminUsersFilter);
 
 class Link extends HTMLElement {
   connectedCallback() {
@@ -166,7 +658,7 @@ class UnLink extends HTMLElement {
     this.innerHTML = `
         <!-- Trigger Button -->
        
-        <button id="openUnLinkModal" class="theme-btn"  aria-label="markOffered Modal">Unlink</button>
+        <button id="openUnLinkModal" class="theme-btn-primary-outline"  aria-label="markOffered Modal">Unlink</button>
         <!-- Modal Overlay -->
         <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
           <!-- Modal Content -->
@@ -312,6 +804,110 @@ class AddUser extends HTMLElement {
 }
 customElements.define("add-user", AddUser);
 
+class AddGroup extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 gap-4 items-center mt-6">
+            <!-- Input fields -->
+           
+    ${[
+        "Security Groups",
+      ]
+        .map(
+          (label) => `
+             <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+            `
+        )
+        .join("")}
+            ${["Group Deletable"]
+        .map(
+          (label) => `
+             <div class="col-span-1 space-y-1">
+        <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+      </div>
+      <div class="col-span-3"></div>
+                   
+                        `
+        )
+        .join("")}
+              
+                 ${[
+        "Default Skin",
+        "Startup Form"
+      ]
+        .map(
+          (label) => `
+              <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+            `
+        )
+        .join("")}
+                 
+                </div>
+    `;
+  }
+}
+customElements.define("add-group", AddGroup);
+
+class AddUserLevel extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 gap-4 items-center mt-6">
+            <!-- Input fields -->
+           
+    ${[
+        "Description",
+      ]
+        .map(
+          (label) => `
+             <div class="col-span-1 space-y-1">
+        <label class="block text-sm font-medium">${label}</label>
+        <input
+          type="text"
+          class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+          placeholder="Enter"
+        />
+      </div>
+      <div class="col-span-3"></div>
+            `
+        )
+        .join("")}
+            ${["Deleted"]
+        .map(
+          (label) => `
+             <div class="col-span-1 space-y-1">
+        <label class="flex items-center gap-2">
+                    <input type="radio" class="w-4 h-4" /> ${label}
+                    </label>
+      </div>
+      <div class="col-span-3"></div>
+                   
+                        `
+        )
+        .join("")}                 
+                </div>
+    `;
+  }
+}
+customElements.define("add-user-level", AddUserLevel);
+
 class FileUpload extends HTMLElement {
   connectedCallback() {
     const label = this.getAttribute("label");
@@ -325,28 +921,27 @@ class FileUpload extends HTMLElement {
       <div class="max-w-2xl w-full">
         <div class="flex items-center space-x-4">
 
-          ${
-            label
-              ? `<label for="${fileInputId}" class="text-sm text-gray-700 min-w-32">${label}</label>`
-              : ""
-          }
+          ${label
+        ? `<label for="${fileInputId}" class="text-sm text-gray-700 min-w-32">${label}</label>`
+        : ""
+      }
 
-          <div class="flex-1 flex items-center border border-theme rounded-md overflow-hidden h-10 bg-gray-50 ${
-            isDisabled ? "opacity-50 cursor-not-allowed" : ""
-          }">
+          <div class="flex-1 flex items-center border border-theme rounded-md overflow-hidden h-10 bg-theme-surface ${isDisabled ? "opacity-50 cursor-not-allowed" : ""
+      }">
             <div 
               id="${fileInputId}-filename"
-              class="flex-1 px-3 text-sm text-gray-600 leading-10 truncate"
+              class="flex-1 px-3 text-sm leading-10 truncate bg-theme-surface"
             >
               ${placeholder}
             </div>
           </div>
 
           <label class="relative px-4 h-10 flex items-center justify-center text-sm rounded-md 
-            ${isDisabled 
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
-              : "theme-btn cursor-pointer"}">
-            Browse
+            ${isDisabled
+        ? "bg-theme cursor-not-allowed"
+        : "bg-theme cursor-pointer"}">
+        <button class="theme-btn">
+            Browse</button>
             <input 
               type="file" 
               id="${fileInputId}" 
@@ -372,6 +967,274 @@ class FileUpload extends HTMLElement {
   }
 }
 customElements.define("file-upload", FileUpload);
+
+
+class ReportAdmin extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="space-y-4">
+        <div class="tab-header">
+          <button class="tab-button active" onclick="this.closest('report-admin').switchTab(event, 'tab1')">Reports</button>
+          <button class="tab-button" onclick="this.closest('report-admin').switchTab(event, 'tab2')">Settings</button>
+        </div>
+
+        ${this.getTabHTML('tab1', 'Reports')}
+        ${this.getTabHTML('tab2', 'Settings')}
+      </div>
+    `;
+  }
+  switchTab(event, tabId) {
+    const tabs = this.querySelectorAll(".tab-content");
+    const buttons = this.querySelectorAll(".tab-button");
+
+    tabs.forEach(tab => tab.classList.add("hidden"));
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    this.querySelector(`#${tabId}`).classList.remove("hidden");
+    event.currentTarget.classList.add("active");
+  }
+
+  getTabHTML(id, label) {
+    const tabComponents = {
+      'tab1': `
+        <div class="flex justify-between">
+          <search-input></search-input>
+          <div class="flex flex-wrap gap-4 items-center justify-end">
+      <button
+        id="admin-add-btn"
+        data-route="/admin/report-admin/add"
+        data-close
+        class="theme-btn"
+      >
+        Add
+      </button>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Export
+        </button>
+      </span>
+      <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6"
+        >
+          <path
+            d="M21 3V8M21 8H16M21 8L18 5.29168C16.4077 3.86656 14.3051 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.2832 21 19.8675 18.008 20.777 14"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+        </div>
+           <!-- Table -->
+  <div class="page-section border-theme">
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="border-b border-gray-200">
+          <tr class="table-heading">
+            <th class="table-header">
+              <span>Friendly Name</span>
+            </th>
+            <th class="table-header">
+              <span>Report Name</span>
+            </th>
+            <th class="table-header">
+              <span>Report Filename</span>
+            </th>
+            <th class="table-header">
+              <span>Is Admin Only</span>
+            </th>
+            <th class="table-header">
+              <span>Sort By</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="table-row-style even-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="table-footer">
+    <div>
+      <p class="font-semibold">Page 1 of 15</p>
+    </div>
+    <!-- Pagination -->
+    <div class="pagination-wrapper">
+      <button class="pagination-btn">&lt;</button>
+      <button class="pagination-btn">First</button>
+      <button class="pagination-btn pagination-active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <span class="w-9 h-9 flex items-center justify-center">...</span>
+      <button class="pagination-btn">15</button>
+      <button class="pagination-btn">Last</button>
+      <button class="pagination-btn">&gt;</button>
+    </div>
+  </div>
+  <div class="footer-container">
+   <button
+      id="admin-edit-btn"
+      data-route="/admin/report-admin/edit"
+      data-close
+      class="theme-btn-primary-outline"
+    >
+      Edit
+    </button>
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected row. Are you sure?"
+    ></delete-modal>
+    <button class="theme-btn whitespace-nowrap">Update</button>
+  </div>
+              `,
+      'tab2': `
+              <div class="space-y-4">
+            <div class="border border-theme rounded-md p-4 space-y-2">
+  <p class="text-xl font-semibold">Margins</p>
+  <div class="grid grid-cols-2 gap-10">
+    <div class="flex items-center gap-4">
+      <label class="block text-sm font-medium w-16">Top</label>
+      <input
+        type="text"
+        class="input-text bg-theme-background border-theme flex-1 rounded px-3 py-2 text-sm"
+        placeholder="Enter"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="block text-sm font-medium w-16">Bottom</label>
+      <input
+        type="text"
+        class="input-text bg-theme-background border-theme flex-1 rounded px-3 py-2 text-sm"
+        placeholder="Enter"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="block text-sm font-medium w-16">Left</label>
+      <input
+        type="text"
+        class="input-text bg-theme-background border-theme flex-1 rounded px-3 py-2 text-sm"
+        placeholder="Enter"
+      />
+    </div>
+    <div class="flex items-center gap-4">
+      <label class="block text-sm font-medium w-16">Right</label>
+      <input
+        type="text"
+        class="input-text bg-theme-background border-theme flex-1 rounded px-3 py-2 text-sm"
+        placeholder="Enter"
+      />
+    </div>
+  </div>
+</div>
+              </div>
+            <div class="border border-theme rounded-md p-4 space-y-4">
+  <p class="text-xl font-semibold">Options</p>
+
+  <label class="flex items-center gap-2">
+    <input type="radio" class="w-4 h-4" />
+    Include Sof Tags (Default)
+  </label>
+
+  <label class="flex items-center gap-2">
+    <input type="radio" class="w-4 h-4" />
+    Hide Search Criteria (Default)
+  </label>
+
+  <label class="flex items-center gap-2">
+    <input type="radio" class="w-4 h-4" />
+    Split Composite Reports by System and Subsystem
+  </label>
+
+  <label class="block">Skyline First Day Of Week</label>
+  
+  <div class="relative max-w-xs">
+    <select class="bg-theme-background select-input border-theme w-full pr-10 appearance-none">
+      <option>Select</option>
+    </select>
+    <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </span>
+  </div>
+</div>
+
+              <div class="footer-container">
+              <button class="theme-btn">Save</button>
+              </div>
+              </div>`
+    };
+
+    return `
+        <div id="${id}" class="tab-content ${id === 'tab1' ? '' : 'hidden'} space-y-4">
+          ${tabComponents[id]}
+        </div>
+      `;
+  }
+}
+customElements.define("report-admin", ReportAdmin);
 
 class AddReportAdmin extends HTMLElement {
   connectedCallback() {

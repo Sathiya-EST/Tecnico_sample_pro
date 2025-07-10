@@ -63,9 +63,7 @@ class DashboardFilter extends HTMLElement {
 
           <!-- Modal Footer -->
           <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
-            <button data-close class="theme-btn-outline font-semibold">Schedule</button>
-            <button class="theme-btn-outline">Clear</button>
-            <button data-close class="theme-btn">Filter</button>
+            <button data-close class="theme-btn">Apply</button>
           </div>
         </div>
       </div>
@@ -94,5 +92,4 @@ class DashboardFilter extends HTMLElement {
     });
   }
 }
-
 customElements.define("dashboard-filter", DashboardFilter);

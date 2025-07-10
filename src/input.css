@@ -310,7 +310,7 @@ button.active {
 }
 .active-badge {
   @apply shadow-lg;
-  background-color: rgb(var(--primary));
+  background-color: rgb(var(--brand-primary));
   color: white;
 }
 .active-theme {

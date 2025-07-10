@@ -1,29 +1,24 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Workpack & CTR Admin</p>
+    <p class="text-xl font-semibold">SubSystems</p>
 
     <div class="flex flex-wrap gap-4 items-center justify-end">
       <button
         id="project-info-add-btn"
-        data-route="/project-info/workpack-ctradmin/add"
+        data-route="/project-info/sub-systems/add"
         data-close
         class="theme-btn"
       >
-        Add
-      </button>
-      <button
-        id="project-info-add-btn"
-        data-route="/project-info/workpack-ctradmin/edit"
-        data-close
-        class="theme-btn"
-      >
-        Edit
+        Add New
       </button>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
         </button>
       </span>
+      <show-layout-modal></show-layout-modal>
+      <reset-grid-modal></reset-grid-modal>
+      <system-filter></system-filter>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
           viewBox="0 0 24 24"
@@ -42,21 +37,9 @@
       </button>
     </div>
   </div>
-  <div class="tab-header">
-    <button class="tab-button active" onclick="switchTab(event, 'tab1')">
-      Workpack Types
-    </button>
-    <button class="tab-button" onclick="switchTab(event, 'tab2')">
-      Procedure Types
-    </button>
-    <button class="tab-button" onclick="switchTab(event, 'tab2')">
-      Workflows
-    </button>
-  </div>
   <div>
     <search-input></search-input>
   </div>
-
   <!-- Table -->
   <div class="page-section border-theme">
     <div class="overflow-x-auto">
@@ -64,25 +47,25 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>Ref</span>
+              <span>Unit Ref</span>
             </th>
             <th class="table-header">
-              <span>Desc</span>
+              <span>System Ref</span>
             </th>
             <th class="table-header">
-              <span>Category</span>
+              <span>SubSystem Ref</span>
             </th>
             <th class="table-header">
-              <span>Authorisation Required</span>
+              <span>SubSystem Description</span>
             </th>
             <th class="table-header">
-              <span>Applies To Site Location</span>
+              <span>SubSystem Group</span>
             </th>
             <th class="table-header">
-              <span>Workflow</span>
+              <span>Pre-Walk Planned</span>
             </th>
             <th class="table-header">
-              <span>Download Punchists Offline</span>
+              <span>Pre-Walk Forecast</span>
             </th>
           </tr>
         </thead>
@@ -180,8 +163,5 @@
       <button class="pagination-btn">Last</button>
       <button class="pagination-btn">&gt;</button>
     </div>
-  </div>
-  <div class="footer-container">
-    <delete-modal></delete-modal>
   </div>
 </div>

@@ -1,6 +1,6 @@
 class ReportsSelect extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
       <div class="relative">
         <select
           class="bg-theme-background select-input border-theme pr-10 appearance-none min-w-50"
@@ -29,13 +29,13 @@ class ReportsSelect extends HTMLElement {
         </span>
       </div>
     `;
-    }
+  }
 }
 customElements.define("reporting-select", ReportsSelect);
 
 class ReportingStandardFilter extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
       <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -78,8 +78,8 @@ class ReportingStandardFilter extends HTMLElement {
               <!-- Select fields -->
              
               ${["Unit", "System", "SubSystem", "Site Location", "Module/Area", "Area Code", "Type", "SubType", "SubSystem Group", "Tag Group", "Tag Site Location", "LTP Number", "COW", "Spare Field 3", "Phase", "Contractor", "Material Type", "Check Type", "Punchlist Category", "PL Defect Type", "Punchlist Category", "Responsible Group", "Responsible Person", "Discipline", "Drawing Type", "Drawing Status", "Construction Phase", "Workpack No"]
-                .map(
-                    (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -94,8 +94,8 @@ class ReportingStandardFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
             </div>
           </div>
           <!-- Modal Footer -->
@@ -106,71 +106,156 @@ class ReportingStandardFilter extends HTMLElement {
       </div>
     `;
 
-        const button = this.querySelector("#filterBtn");
-        const popup = this.querySelector("#filterPopup");
+    const button = this.querySelector("#filterBtn");
+    const popup = this.querySelector("#filterPopup");
 
-        // Open modal
-        button.addEventListener("click", () => {
-            popup.classList.add("show");
-        });
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
 
-        // Close modal for all elements with data-close
-        this.querySelectorAll("[data-close]").forEach((btn) =>
-            btn.addEventListener("click", () => {
-                popup.classList.remove("show");
-            })
-        );
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
 
-        // Close when clicking outside modal
-        popup.addEventListener("click", (e) => {
-            if (e.target === popup) {
-                popup.classList.remove("show");
-            }
-        });
-    }
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
 }
 customElements.define("reporting-standard-filter", ReportingStandardFilter);
 
-//Scheduled Reports
-class ReportingScheduledFilter extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-      <button class="icon-btn" id="filterBtn" aria-label="Open Filter Modal">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.586V4z"
-          />
-        </svg>
-      </button>
-    `;
+class ClearReportsData extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openClearDownDB" class="theme-btn-primary-outline"  aria-label="Clear Down DB Modal">Clear</button>
+        <!-- Modal Overlay -->
+        <div id="ClearReportsData" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+              <svg viewBox="0 0 24 24" fill="none" class="w-10 h-10 text-yellow-500" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18A2 2 0 0 0 3.24 21H20.76A2 2 0 0 0 22.18 18L13.71 3.86A2 2 0 0 0 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+            </div>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Clear</p>
+              <p >This will Clear all the Reports data,</p>
+              <p >Are you sure?</p>
+            </div>
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+             <button data-close class="theme-warning-btn">Clear</button>
+            </div>
+          </div>
+        </div>
+      `;
 
-        const button = this.querySelector("#filterBtn");
-        const popup = this.querySelector("#filterPopup");
+    const modal = this.querySelector("#ClearReportsData");
+    const openBtn = this.querySelector("#openClearDownDB");
 
-        // Open modal
-        button.addEventListener("click", () => {
-            popup.classList.add("show");
-        });
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
 
-        // Close modal for all elements with data-close
-        this.querySelectorAll("[data-close]").forEach((btn) =>
-            btn.addEventListener("click", () => {
-                popup.classList.remove("show");
-            })
-        );
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
 
-        // Close when clicking outside modal
-        popup.addEventListener("click", (e) => {
-            if (e.target === popup) {
-                popup.classList.remove("show");
-            }
-        });
-    }
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
 }
-customElements.define("reporting-scheduled-filter", ReportingScheduledFilter);
+customElements.define("clear-reports-data", ClearReportsData);
+
+class AddToFavouriteModal extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openMarkOfferedModal" class="theme-btn-primary-outline" aria-label="Add To Favourites Modal">Add To Favourites</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+<svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+    <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+  </g>
+</svg>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Add To Favourites</p>
+              <p>This will add the selected reports to Favourites,</p>
+              <p>Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Add</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openMarkOfferedModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("add-to-favourite-modal", AddToFavouriteModal);
+
+//Scheduled Reports
 
 //Composite Reports 
 class AddCompositeReports extends HTMLElement {

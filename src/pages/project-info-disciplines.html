@@ -11,14 +11,6 @@
       >
         Add
       </button>
-      <button
-        id="disciplines-edit-btn"
-        data-route="/project-info/disciplines/edit"
-        data-close
-        class="theme-btn"
-      >
-        Edit
-      </button>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
@@ -54,10 +46,10 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>Type Ref</span>
+              <span>Ref</span>
             </th>
             <th class="table-header">
-              <span>Type Description</span>
+              <span>Description</span>
             </th>
           </tr>
         </thead>
@@ -118,5 +110,13 @@
   </div>
   <div class="footer-container">
     <delete-modal></delete-modal>
+    <button
+        id="disciplines-edit-btn"
+        data-route="/project-info/disciplines/edit"
+        data-close
+        class="theme-btn-primary-outline"
+      >
+        Edit
+      </button>
   </div>
 </div>

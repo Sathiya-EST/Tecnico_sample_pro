@@ -10,7 +10,7 @@
           data-close
           class="theme-btn"
         >
-          Add New
+          Add
         </button>
       </span>
       <span>
@@ -109,10 +109,7 @@
     </div>
   </div>
   <div class="footer-container">
-    <delete-modal
-      title="Delete"
-      description="This will delete the selected row. Are you sure?"
-    ></delete-modal>
+    <button id="view-btn" class="theme-btn-primary-outline">View Report</button>
     <button
       id="composite-edit-btn"
       data-route="/reporting/composite/edit"
@@ -121,6 +118,9 @@
     >
       Edit
     </button>
-    <button id="view-btn" class="theme-btn-primary-outline">View Report</button>
+    <delete-modal
+      title="Delete"
+      description="This will delete the selected row. Are you sure?"
+    ></delete-modal>
   </div>
 </div>

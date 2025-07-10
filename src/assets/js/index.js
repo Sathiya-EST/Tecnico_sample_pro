@@ -424,6 +424,9 @@ class NavigationManager {
   constructor() {
     this.currentRoute = "/overview/my-technico";
     this.menuEventsbound = false;
+    this.handleRouteClick = this.handleRouteClick.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handleToggleClick = this.handleToggleClick.bind(this);
     this.routeConfig = {
       "/overview/my-technico": {
         title: "My Technico",
@@ -431,19 +434,19 @@ class NavigationManager {
       },
       "/overview/my-technico/workpacks": {
         title: "Workpacks",
-        breadcrumb: ["Overview", "My Technico","Workpacks"],
+        breadcrumb: ["Overview", "My Technico", "Workpacks"],
       },
       "/overview/my-technico/checksheets": {
         title: "Checksheets",
-        breadcrumb: ["Overview", "My Technico","Checksheets"],
+        breadcrumb: ["Overview", "My Technico", "Checksheets"],
       },
       "/overview/my-technico/punchlists": {
         title: "Punchlists",
-        breadcrumb: ["Overview", "My Technico","Punchlists"],
+        breadcrumb: ["Overview", "My Technico", "Punchlists"],
       },
       "/overview/my-technico/technical-queries": {
         title: "Technical Queries",
-        breadcrumb: ["Overview", "My Technico","Technical Queries"],
+        breadcrumb: ["Overview", "My Technico", "Technical Queries"],
       },
       "/overview/dashboard": {
         title: "Dashboard",
@@ -548,7 +551,7 @@ class NavigationManager {
       },
       "/hoc/change-request/add": {
         title: "Add Requests",
-        breadcrumb: ["Management Of Change", "Change Requests", "Add Request"],
+        breadcrumb: ["Management Of Change", "Change Requests", "Add Change Request"],
       },
       "/hoc/administration": {
         title: "Administration",
@@ -562,6 +565,22 @@ class NavigationManager {
         title: "Add Unit",
         breadcrumb: ["Project Info", "Units", "Add Unit"],
       },
+      "/project-info/systems": {
+        title: "Systems",
+        breadcrumb: ["Project Info", "Systems"],
+      },
+      "/project-info/systems/add": {
+        title: "Add System",
+        breadcrumb: ["Project Info", "Systems", "Add System"],
+      },
+      "/project-info/sub-systems": {
+        title: "Sub Systems",
+        breadcrumb: ["Project Info", "Sub Systems"],
+      },
+      "/project-info/sub-systems/add": {
+        title: "Add Sub System",
+        breadcrumb: ["Project Info", "Sub Systems", "Add Sub System"],
+      },
       "/project-info/site-locations": {
         title: "Site Locations",
         breadcrumb: ["Project Info", "Site Locations"],
@@ -570,6 +589,22 @@ class NavigationManager {
         title: "Add Site Locations",
         breadcrumb: ["Project Info", "Site Locations", "Add Site Locations"],
       },
+      "/project-info/site-area": {
+        title: "Site Area",
+        breadcrumb: ["Project Info", "Site Area"],
+      },
+      "/project-info/site-area/add": {
+        title: "Add Site Area",
+        breadcrumb: ["Project Info", "Site Area", "Add Site Area"],
+      },
+      "/project-info/site-sub-area": {
+        title: "Site Sub Area",
+        breadcrumb: ["Project Info", "Site Sub Area"],
+      },
+      "/project-info/site-sub-area/add": {
+        title: "Add Site Sub Area",
+        breadcrumb: ["Project Info", "Site Sub Area", "Add Site Sub Area"],
+      },
       "/project-info/types": {
         title: "Types",
         breadcrumb: ["Project Info", "Types"],
@@ -577,6 +612,14 @@ class NavigationManager {
       "/project-info/types/add": {
         title: "Add Type",
         breadcrumb: ["Project Info", "Types", "Add Type"],
+      },
+      "/project-info/sub-types": {
+        title: "Sub Types",
+        breadcrumb: ["Project Info", "Sub Types"],
+      },
+      "/project-info/sub-types/add": {
+        title: "Add SubType",
+        breadcrumb: ["Project Info", "Sub Types", "Add SubType"],
       },
       "/project-info/verification": {
         title: "Verification",
@@ -614,13 +657,37 @@ class NavigationManager {
         title: "Add Punchlist Admin",
         breadcrumb: ["Project Info", "Punchlist Admin", "Add Punchlist Admin"],
       },
+      "/project-info/punchlist-admin/category-add": {
+        title: "Add PL Category",
+        breadcrumb: ["Project Info", "Punchlist Admin", "Add PL Category"],
+      },
+      "/project-info/punchlist-admin/common-items-add": {
+        title: "Add Common Items",
+        breadcrumb: ["Project Info", "Punchlist Admin", "Add Common Items"],
+      },
       "/project-info/tq-admin": {
         title: "TQ Admin",
         breadcrumb: ["Project Info", "TQ Admin"],
       },
-      "/project-info/tq-admin/add": {
-        title: "Add TQ Admin",
-        breadcrumb: ["Project Info", "TQ Admin", "Add TQ Admin"],
+      "/project-info/tq-admin/type/add": {
+        title: "Add Type",
+        breadcrumb: ["Project Info", "TQ Admin", "Add Type"],
+      },
+      "/project-info/tq-admin/defect/add": {
+        title: "Add Defect Type",
+        breadcrumb: ["Project Info", "TQ Admin", "Add Defect Type"],
+      },
+      "/project-info/tq-admin/defect/edit": {
+        title: "Edit Defect Type",
+        breadcrumb: ["Project Info", "TQ Admin", "Edit Defect Type"],
+      },
+      "/project-info/tq-admin/priority/add": {
+        title: "Add Priorities",
+        breadcrumb: ["Project Info", "TQ Admin", "Add Priorities"],
+      },
+      "/project-info/tq-admin/priority/edit": {
+        title: "Edit Priorities",
+        breadcrumb: ["Project Info", "TQ Admin", "Edit Priorities"],
       },
       "/project-info/ncr-admin": {
         title: "NCR Admin",
@@ -633,6 +700,14 @@ class NavigationManager {
       "/project-info/ncr-admin/edit": {
         title: "Edit NCR Type",
         breadcrumb: ["Project Info", "NCR Admin", "Edit NCR Type"],
+      },
+      "/project-info/ncr-admin/priority/add": {
+        title: "Add NCR Priorities",
+        breadcrumb: ["Project Info", "NCR Admin", "Add NCR Priorities"],
+      },
+      "/project-info/ncr-admin/priority/edit": {
+        title: "Edit NCR Priorities",
+        breadcrumb: ["Project Info", "NCR Admin", "Edit NCR Priorities"],
       },
       "/project-info/localisations": {
         title: "Localisations",
@@ -670,29 +745,53 @@ class NavigationManager {
         title: "Edit ITR Equivalence",
         breadcrumb: ["Project Info", "ITR Equivalence", "Edit ITR Equivalence"],
       },
-      "/project-info/shutdown-isolation": {
+      "/project-info/si": {
         title: "Shutdown & Isolation",
         breadcrumb: ["Project Info", "Shutdown & Isolation"],
       },
-      "/project-info/shutdown-isolation/add": {
+      "/project-info/si/shutdown/add": {
         title: "Add Shutdown",
         breadcrumb: ["Project Info", "Shutdown & Isolation", "Add Shutdown"],
       },
-      "/project-info/shutdown-isolation/edit": {
+      "/project-info/si/shutdown/edit": {
         title: "Edit Shutdown",
         breadcrumb: ["Project Info", "Shutdown & Isolation", "Edit Shutdown"],
       },
-      "/project-info/workpack-ctradmin": {
-        title: "Workpack & CTR Admin",
-        breadcrumb: ["Project Info", "Workpack & CTR Admin"],
+      "/project-info/si/isolation/add": {
+        title: "Add Shutdown",
+        breadcrumb: ["Project Info", "Shutdown & Isolation", "Add Shutdown"],
       },
-      "/project-info/workpack-ctradmin/add": {
-        title: "Add Workpack",
-        breadcrumb: ["Project Info", "Workpack & CTR Admin","Add Workpack"],
+      "/project-info/si/isolation/edit": {
+        title: "Edit Shutdown",
+        breadcrumb: ["Project Info", "Shutdown & Isolation", "Edit Shutdown"],
       },
-      "/project-info/workpack-ctradmin/edit": {
-        title: "Edit Workpack",
-        breadcrumb: ["Project Info", "Workpack & CTR Admin","Edit Workpack"],
+      "/project-info/workpack-ctpadmin": {
+        title: "Workpack & CTP Admin",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin"],
+      },
+      "/project-info/workpack-ctpadmin/workpack-type/add": {
+        title: "Add Workpack Type",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Add Workpack Type"],
+      },
+      "/project-info/workpack-ctpadmin/workpack-type/edit": {
+        title: "Edit Workpack Type",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Edit Workpack Type"],
+      },
+      "/project-info/workpack-ctpadmin/procedure-type/add": {
+        title: "Add Procedure Type",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Add Procedure Type"],
+      },
+      "/project-info/workpack-ctpadmin/procedure-type/edit": {
+        title: "Edit Procedure Type",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Edit Procedure Type"],
+      },
+      "/project-info/workpack-ctpadmin/workflow/add": {
+        title: "Add Workflows",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Add Workflows"],
+      },
+      "/project-info/workpack-ctpadmin/workflow/edit": {
+        title: "Edit Workflows",
+        breadcrumb: ["Project Info", "Workpack & CTP Admin", "Edit Workflows"],
       },
       "/project-info/checksheet-admin": {
         title: "Checksheet Admin",
@@ -700,11 +799,11 @@ class NavigationManager {
       },
       "/project-info/checksheet-admin/add": {
         title: "Add Checksheet",
-        breadcrumb: ["Project Info", "Checksheet Admin","Add Checksheet"],
+        breadcrumb: ["Project Info", "Checksheet Admin", "Add Checksheet"],
       },
       "/project-info/checksheet-admin/edit": {
         title: "Edit Checksheet",
-        breadcrumb: ["Project Info", "Checksheet Admin","Edit Checksheet"],
+        breadcrumb: ["Project Info", "Checksheet Admin", "Edit Checksheet"],
       },
       "/doc-reg/checksheet-master": {
         title: "Checksheet Masters",
@@ -720,11 +819,27 @@ class NavigationManager {
       },
       "/doc-reg/drawings/add": {
         title: "Add Drawing",
-        breadcrumb: ["Document Register", "Add Drawing"],
+        breadcrumb: ["Document Register", "Drawings", "Add Drawing"],
       },
       "/doc-reg/drawings/edit": {
         title: "Edit Drawing",
-        breadcrumb: ["Document Register", "Edit Drawing"],
+        breadcrumb: ["Document Register", "Drawings", "Edit Drawing"],
+      },
+      "/doc-reg/drawings-status/add": {
+        title: "Add Drawing Status",
+        breadcrumb: ["Document Register", "Drawings", "Add Drawing Status"],
+      },
+      "/doc-reg/drawings-status/edit": {
+        title: "Edit Drawing Status",
+        breadcrumb: ["Document Register", "Drawings", "Edit Drawing"],
+      },
+      "/doc-reg/drawings-type/add": {
+        title: "Add Drawing Type",
+        breadcrumb: ["Document Register", "Drawings", "Add Drawing Type"],
+      },
+      "/doc-reg/drawings-type/edit": {
+        title: "Edit Drawing Type",
+        breadcrumb: ["Document Register", "Drawings", "Edit Drawing Type"],
       },
       "/doc-reg/certificate-masters": {
         title: "Certificate Masters",
@@ -838,13 +953,21 @@ class NavigationManager {
         title: "Import Data",
         breadcrumb: ["Data Importing", "Import Data"],
       },
-      "/admin/user-acc": {
-        title: "User Accounts",
-        breadcrumb: ["Admin", "User Accounts"],
+      "/admin/security": {
+        title: "Security",
+        breadcrumb: ["Admin", "Security"],
       },
-      "/admin/user-acc/add": {
+      "/admin/security/user-acc/add": {
         title: "Add User",
-        breadcrumb: ["Admin", "User Accounts", "Add User"],
+        breadcrumb: ["Admin", "Security", "Add User"],
+      },
+      "/admin/security/user-group/add": {
+        title: "Add Group",
+        breadcrumb: ["Admin", "Security", "Add Group"],
+      },
+      "/admin/security/user-level/add": {
+        title: "Add User Level",
+        breadcrumb: ["Admin", "Security", "Add User Level"],
       },
       "/admin/admin-tasks": {
         title: "Admin Tasks",
@@ -890,55 +1013,72 @@ class NavigationManager {
     this.simulateURLChange();
   }
 
+  // bindEvents() {
+  //   this.removeEvents();
+
+  //   // Sidebar route links - EXCLUDE buttons with data-close attribute
+  //   const routeElements = document.querySelectorAll(
+  //     "[data-route]:not([data-close])"
+  //   );
+  //   routeElements.forEach((item) => {
+  //     item.addEventListener("click", this.handleRouteClick.bind(this));
+  //   });
+  //   if (!this.menuEventsbound) {
+  //     document.querySelectorAll("[data-toggle]").forEach((toggle) => {
+  //       toggle.addEventListener("click", this.handleToggleClick.bind(this));
+  //     });
+  //     this.menuEventsbound = true;
+  //   }
+  //   // Handle data-close buttons separately
+  //   const closeElements = document.querySelectorAll("[data-close]");
+
+  //   closeElements.forEach((button) => {
+  //     button.addEventListener("click", this.handleCloseClick.bind(this));
+  //   });
+  // }
   bindEvents() {
     this.removeEvents();
 
-    // Sidebar route links - EXCLUDE buttons with data-close attribute
-    const routeElements = document.querySelectorAll(
-      "[data-route]:not([data-close])"
-    );
-    routeElements.forEach((item) => {
-      item.addEventListener("click", this.handleRouteClick.bind(this));
+    document.querySelectorAll("[data-route]:not([data-close])").forEach((item) => {
+      item.addEventListener("click", this.handleRouteClick);
     });
 
-    // Toggle expandable menus (only bind once, not on content updates)
-    // if (!this.menuEventsbound) {
-    //   const toggleElements = document.querySelectorAll("[data-toggle]");
-    //   toggleElements.forEach((toggle) => {
-    //     toggle.addEventListener("click", this.handleToggleClick.bind(this));
-    //   });
-    //   this.menuEventsbound = true;
-    // }
     if (!this.menuEventsbound) {
       document.querySelectorAll("[data-toggle]").forEach((toggle) => {
-        toggle.addEventListener("click", this.handleToggleClick.bind(this));
+        toggle.addEventListener("click", this.handleToggleClick);
       });
       this.menuEventsbound = true;
     }
-    // Handle data-close buttons separately
-    const closeElements = document.querySelectorAll("[data-close]");
 
-    closeElements.forEach((button) => {
-      button.addEventListener("click", this.handleCloseClick.bind(this));
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+      btn.addEventListener("click", this.handleCloseClick);
     });
   }
-
   removeEvents() {
-    // Store bound functions to properly remove them
-    if (this.boundHandleRouteClick) {
-      document
-        .querySelectorAll("[data-route]:not([data-close])")
-        .forEach((item) => {
-          item.removeEventListener("click", this.boundHandleRouteClick);
-        });
-    }
+    document.querySelectorAll("[data-route]:not([data-close])").forEach((item) => {
+      item.removeEventListener("click", this.handleRouteClick);
+    });
 
-    if (this.boundHandleCloseClick) {
-      document.querySelectorAll("[data-close]").forEach((button) => {
-        button.removeEventListener("click", this.boundHandleCloseClick);
-      });
-    }
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+      btn.removeEventListener("click", this.handleCloseClick);
+    });
   }
+  // removeEvents() {
+  //   // Store bound functions to properly remove them
+  //   if (this.boundHandleRouteClick) {
+  //     document
+  //       .querySelectorAll("[data-route]:not([data-close])")
+  //       .forEach((item) => {
+  //         item.removeEventListener("click", this.boundHandleRouteClick);
+  //       });
+  //   }
+
+  //   if (this.boundHandleCloseClick) {
+  //     document.querySelectorAll("[data-close]").forEach((button) => {
+  //       button.removeEventListener("click", this.boundHandleCloseClick);
+  //     });
+  //   }
+  // }
 
   handleRouteClick(e) {
     e.preventDefault();
@@ -949,7 +1089,6 @@ class NavigationManager {
   handleToggleClick(e) {
     e.preventDefault();
     const menuId = e.currentTarget.getAttribute("data-toggle");
-    console.log("🔄 Toggle clicked:", menuId);
     this.toggleMenu(menuId);
   }
 
@@ -961,7 +1100,17 @@ class NavigationManager {
     }
   }
 
+  // navigateTo(route) {
+  //   this.currentRoute = route;
+  //   this.updateActiveNavigation();
+  //   this.updateContent();
+  //   this.updateURL();
+  // }
   navigateTo(route) {
+    if (this.routeConfig[this.currentRoute]?.cleanup) {
+      this.routeConfig[this.currentRoute].cleanup();
+    }
+
     this.currentRoute = route;
     this.updateActiveNavigation();
     this.updateContent();
@@ -999,12 +1148,10 @@ class NavigationManager {
       const navItem = activeItem.closest(".nav-item");
 
       if (navItem) {
-        // ✅ Always highlight parent nav-item regardless of whether sub-item or direct
         navItem.classList.add("active");
       }
 
       if (isSubItem) {
-        // ✅ Expand parent group
         const parentMenu = activeItem.closest(".nav-group");
         if (parentMenu) {
           parentMenu.classList.add("expanded");
@@ -1069,17 +1216,14 @@ class NavigationManager {
   }
 
   isSidebarCollapsed() {
-    const sidebar = document.querySelector(".sidebar");
-    return sidebar && sidebar.classList.contains("collapsed");
+    return document.querySelector(".sidebar")?.classList.contains("collapsed") ?? false;
   }
 
   updateContent() {
     const config = this.routeConfig[this.currentRoute];
     const contentContainer = document.getElementById("main-content");
+    if (!contentContainer || !config) return;
 
-    if (!contentContainer || !config) {
-      return;
-    }
     const pagePath = `./pages/${routeToFile(this.currentRoute)}`;
 
     fetch(pagePath)
@@ -1088,7 +1232,10 @@ class NavigationManager {
         return res.text();
       })
       .then((html) => {
-        contentContainer.innerHTML = html;
+        const temp = document.createElement("div");
+        temp.innerHTML = html;
+        contentContainer.replaceChildren(...temp.childNodes);
+
         this.updateBreadcrumb(config.breadcrumb);
         document.title = config.title;
         this.bindContentEvents();
@@ -1099,23 +1246,18 @@ class NavigationManager {
   }
 
   bindContentEvents() {
-    this.boundHandleRouteClick = this.handleRouteClick.bind(this);
-    this.boundHandleCloseClick = this.handleCloseClick.bind(this);
+    document.querySelectorAll("[data-route]:not([data-close])").forEach((item) => {
+      if (!item.hasAttribute("data-toggle")) {
+        item.removeEventListener("click", this.handleRouteClick);
+        item.addEventListener("click", this.handleRouteClick);
+      }
+    });
 
-    document
-      .querySelectorAll("[data-route]:not([data-close])")
-      .forEach((item) => {
-        if (!item.hasAttribute("data-toggle")) {
-          item.removeEventListener("click", this.boundHandleRouteClick);
-          item.addEventListener("click", this.boundHandleRouteClick);
-        }
-      });
     document.querySelectorAll("[data-close]").forEach((button) => {
-      button.removeEventListener("click", this.boundHandleCloseClick);
-      button.addEventListener("click", this.boundHandleCloseClick);
+      button.removeEventListener("click", this.handleCloseClick);
+      button.addEventListener("click", this.handleCloseClick);
     });
   }
-
   updateBreadcrumb(items) {
     const breadcrumbContainer = document.getElementById("breadcrumb");
     if (!breadcrumbContainer) return;
@@ -1147,14 +1289,6 @@ class NavigationManager {
     window.addEventListener("popstate", () => {
       this.updateActiveNavigation();
     });
-  }
-
-  goToAddTag() {
-    this.navigateTo("/database/tags/add");
-  }
-
-  goToTags() {
-    this.navigateTo("/database/tags");
   }
 }
 
@@ -1222,7 +1356,7 @@ document.getElementById("helpModal").addEventListener("click", (e) => {
 //Logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
   localStorage.removeItem("isLoggedIn");
-  window.location.href = "./pages/login.html";
+  window.location.href = "index.html";
 });
 
 class DeleteModal extends HTMLElement {
@@ -1296,7 +1430,6 @@ class DeleteModal extends HTMLElement {
     });
   }
 }
-
 customElements.define("delete-modal", DeleteModal);
 
 class SearchInput extends HTMLElement {
@@ -1326,7 +1459,7 @@ customElements.define("search-input", SearchInput);
 class ProjectSelect extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-     <div class="relative max-w-80 min-w-36">
+     <div class="relative max-w-auto min-w-[5rem]">
   <!-- Dropdown Trigger -->
   <div
     id="dropdownTrigger"
@@ -1393,7 +1526,7 @@ class ProjectSelect extends HTMLElement {
       Entire Project
     </div>
 
-    <!-- Project Beta -->
+    <!-- Site Locations -->
     <div class="accordion-toggle flex items-center px-4 py-2 cursor-pointer">
       <svg
         class="w-4 h-4 icon"
@@ -1409,7 +1542,7 @@ class ProjectSelect extends HTMLElement {
           d="M19 9l-7 7-7-7"
         />
       </svg>
-      Project Beta
+      Site Locations
     </div>
     <div class="accordion-panel">
       <div
@@ -1459,7 +1592,6 @@ class ProjectSelect extends HTMLElement {
   }
 }
 customElements.define("project-select", ProjectSelect);
-
 
 class ResetGridModal extends HTMLElement {
   connectedCallback() {
@@ -1522,3 +1654,103 @@ class ResetGridModal extends HTMLElement {
   }
 }
 customElements.define("reset-grid-modal", ResetGridModal);
+
+class ShowLayoutsModal extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <button class="theme-btn-primary-outline whitespace-nowrap" id="layoutBtn" aria-label="Open Filter Modal">
+        Layouts
+      </button>
+
+      <div class="modal-overlay" id="layoutPopup">
+        <div class=" rounded-lg w-full max-w-md shadow-lg border border-theme bg-theme-background">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between px-6 py-2 border-b border-theme">
+            <h2 class="text-lg font-semibold">Choose layout</h2>
+            <div class="space-x-4 flex items-center">
+              <button data-close class="theme-btn-primary-outline ">Save Current Layout</button>
+              <button data-close class="text-2xl w-5 h-5 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Modal Body -->
+         <div class="p-6 space-y-4">
+  ${["Layout 1", "Layout 2", "Layout 3", "Layout 4"]
+        .map(
+          (label) => `
+        <label class="flex items-center gap-2 text-sm">
+          <input type="radio" class="w-4 h-4" name="layoutOption" value="${label}" /> ${label}
+        </label>
+      `
+        )
+        .join("")}
+</div>
+
+
+          <!-- Modal Footer -->
+          <div class="bg-theme-surface py-3 flex justify-center gap-4 rounded-b-lg">
+            <button data-close class="theme-btn w-[6rem]">Save</button>
+          </div>
+
+        </div>
+      </div>
+
+    `;
+
+    const button = this.querySelector("#layoutBtn");
+    const popup = this.querySelector("#layoutPopup");
+
+    // Open modal
+    button.addEventListener("click", () => {
+      popup.classList.add("show");
+    });
+
+    // Close modal for all elements with data-close
+    this.querySelectorAll("[data-close]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        popup.classList.remove("show");
+      })
+    );
+
+    // Close when clicking outside modal
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("show");
+      }
+    });
+  }
+}
+customElements.define("show-layout-modal", ShowLayoutsModal);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  if (!isLoggedIn) {
+    document.body.innerHTML = "";
+
+    fetch("./pages/login.html")
+      .then((res) => res.text())
+      .then((html) => {
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch((err) => {
+        console.error("Failed to load login page:", err);
+      });
+  }
+});

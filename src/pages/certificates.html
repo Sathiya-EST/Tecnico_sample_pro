@@ -2,26 +2,16 @@
   <div class="flex flex-wrap justify-between gap-2 items-center">
     <p class="text-xl font-semibold">Certificates</p>
 
-    <div class="flex flex-wrap gap-4 items-center justify-end">
+    <div class="flex flex-wrap gap-2 items-center justify-end">
       <project-select></project-select>
       <div class="w-px h-8 bg-theme-border"></div>
       <span>
-        <button class="theme-btn whitespace-nowrap">Create Cert</button>
+        <button class="theme-btn whitespace-nowrap">Create</button>
       </span>
       <span>
-        <button class="theme-btn whitespace-nowrap">Add Partial Cert</button>
+        <button class="theme-btn whitespace-nowrap">Add Partial</button>
       </span>
-      <span>
-        <button class="theme-btn whitespace-nowrap">View Req</button>
-      </span>
-      <span>
-        <button class="theme-btn whitespace-nowrap">Update Attachment</button>
-      </span>
-      <span>
-        <button class="theme-btn-primary-outline whitespace-nowrap">
-          Layouts
-        </button>
-      </span>
+      <show-layout-modal></show-layout-modal>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Tag Details
@@ -30,6 +20,11 @@
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Import
+        </button>
+      </span>
+      <span>
+        <button class="theme-btn-primary-outline whitespace-nowrap">
+          Export
         </button>
       </span>
       <span>
@@ -194,6 +189,16 @@
     </div>
   </div>
   <div class="footer-container">
+    <span>
+      <button class="theme-btn-primary-outline whitespace-nowrap">
+        View Req
+      </button>
+    </span>
+    <span>
+      <button class="theme-btn-primary-outline whitespace-nowrap">
+        Update Attachment
+      </button>
+    </span>
     <button class="theme-btn-primary-outline">Update Cert</button>
     <delete-cert></delete-cert>
     <mark-offered></mark-offered>

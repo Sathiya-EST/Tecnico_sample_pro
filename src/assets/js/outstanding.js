@@ -79,20 +79,20 @@ class EditPhase extends HTMLElement {
             <!-- Input fields -->
            
             ${["Issued"]
-              .map(
-                (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2 text-sm">
                 <input type="radio" class="w-4 h-4" name="${label.replace(
-                  /\s+/g,
-                  ""
-                )}" /> ${label}
+            /\s+/g,
+            ""
+          )}" /> ${label}
                 </label>
             `
-              )
-              .join("")}
+        )
+        .join("")}
     ${["Issued To", "Responsible Issued Group"]
-      .map(
-        (label) => `
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -102,11 +102,11 @@ class EditPhase extends HTMLElement {
                 />
             </div>
             `
-      )
-      .join("")}
+        )
+        .join("")}
                 ${["Issued At"]
-                  .map(
-                    (label) => `
+        .map(
+          (label) => `
                     <div class="space-y-1">
                             <label class="block text-sm font-medium">${label}</label>
                         <input
@@ -118,26 +118,26 @@ class EditPhase extends HTMLElement {
             />
                         </div>
                             `
-                  )
-                  .join("")}
+        )
+        .join("")}
        ${[
-         "ID",
-         "Checksheet ID",
-         "Unit Ref",
-         "System Ref",
-         "SubSystem Ref",
-         "Tag No",
-         "Tag Desc",
-         "Document Type",
-         "Checksheet Phase",
-         "Name/Ref",
-         "Description",
-         "Sheet Type",
-         "Tag Discipline Ref",
-         "Discipline",
-       ]
-         .map(
-           (label) => `
+        "ID",
+        "Checksheet ID",
+        "Unit Ref",
+        "System Ref",
+        "SubSystem Ref",
+        "Tag No",
+        "Tag Desc",
+        "Document Type",
+        "Checksheet Phase",
+        "Name/Ref",
+        "Description",
+        "Sheet Type",
+        "Tag Discipline Ref",
+        "Discipline",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -147,33 +147,33 @@ class EditPhase extends HTMLElement {
                 />
             </div>
             `
-         )
-         .join("")}
+        )
+        .join("")}
                  ${["Electronic"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2 text-sm">
                 <input type="radio" class="w-4 h-4" name="${label.replace(
-                  /\s+/g,
-                  ""
-                )}" /> ${label}
+            /\s+/g,
+            ""
+          )}" /> ${label}
                 </label>
             `
-                   )
-                   .join("")}
+        )
+        .join("")}
        ${[
-         "Type Ref",
-         "SybType Ref",
-         "Site Location Ref",
-         "Module/Area Ref",
-         "Area Code Ref",
-         "Tag Group Ref",
-         "Loop tag",
-         "MC RFI No",
-         "Workpack No",
-       ]
-         .map(
-           (label) => `
+        "Type Ref",
+        "SybType Ref",
+        "Site Location Ref",
+        "Module/Area Ref",
+        "Area Code Ref",
+        "Tag Group Ref",
+        "Loop tag",
+        "MC RFI No",
+        "Workpack No",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -183,8 +183,8 @@ class EditPhase extends HTMLElement {
                 />
             </div>
             `
-         )
-         .join("")}
+        )
+        .join("")}
                 </div>
     `;
   }
@@ -236,8 +236,8 @@ class ChecksheetsFilter extends HTMLElement {
               <!-- Select fields -->
              
               ${["Unit", "System", "SubSystem"]
-                .map(
-                  (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -252,22 +252,22 @@ class ChecksheetsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
                  ${["Checksheet ID"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-                   )
-                   .join("")}
+        )
+        .join("")}
                
               ${["Site Location", "Module/Area", "Area Code"]
-                .map(
-                  (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -282,31 +282,31 @@ class ChecksheetsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
                  ${["Tag No", "Tag Desc"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-                   )
-                   .join("")}
+        )
+        .join("")}
             
  ${[
-   "Type",
-   "SubType",
-   "Tag Group",
-   "Phase",
-   "Checksheet Type",
-   "Discipline",
-   "Electronic",
-   "Check Ref",
- ]
-   .map(
-     (label) => `
+        "Type",
+        "SubType",
+        "Tag Group",
+        "Phase",
+        "Checksheet Type",
+        "Discipline",
+        "Electronic",
+        "Check Ref",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -321,11 +321,11 @@ class ChecksheetsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-   )
-   .join("")}
+        )
+        .join("")}
 ${["Added Date"]
-  .map(
-    (label) => `
+        .map(
+          (label) => `
                     <div class="space-y-1">
                             <label class="block text-sm font-medium">${label}</label>
                         <input
@@ -337,11 +337,11 @@ ${["Added Date"]
             />
                         </div>
                             `
-  )
-  .join("")}
+        )
+        .join("")}
    ${["Issued To", "Contractor"]
-     .map(
-       (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -356,31 +356,31 @@ ${["Added Date"]
                   </div>
                 </div>
               `
-     )
-     .join("")}
+        )
+        .join("")}
     ${["Workspace No"]
-      .map(
-        (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-      )
-      .join("")}
+        )
+        .join("")}
                    ${[
-                     "Include Descriptions",
-                     "Show Custom Data",
-                     "Show Outstanding Only",
-                   ]
-                     .map(
-                       (label) => `
+        "Include Descriptions",
+        "Show Custom Data",
+        "Show Outstanding Only",
+      ]
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-                     )
-                     .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -440,14 +440,15 @@ class AddToNewFCRModal extends HTMLElement {
           
           <!-- Body -->
           <div class="space-y-2 text-center">
-            <p class="text-xl font-semibold">Are you sure to add to new FCR?</p>
-            <p>This will create a new FCR record.</p>
+            <p class="text-xl font-semibold">Add to New FCR</p>
+            <p>This will move this Checksheet to new FCR,</p>
+            <p> Are you sure?</p>
           </div>
           
           <!-- Footer -->
           <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
             <button data-close class="theme-btn-outline">Cancel</button>
-            <button data-close class="theme-btn">Proceed</button>
+            <button data-close class="theme-btn">Yes,Proceed</button>
           </div>
         </div>
       </div>
@@ -477,6 +478,134 @@ class AddToNewFCRModal extends HTMLElement {
   }
 }
 customElements.define("add-to-new-fcr-modal", AddToNewFCRModal);
+
+class MarkAsComplete extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openMarkOfferedModal" class="theme-btn" aria-label="Mark as Complete Modal">Mark as Complete</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+<svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="SVGRepo_iconCarrier">
+    <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+    <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+  </g>
+</svg>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Mark as Complete</p>
+              <p>This will mark the selected Checksheet as completed,</p>
+              <p>Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openMarkOfferedModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("mark-complete", MarkAsComplete);
+
+class IssueChecksheet extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openMarkOfferedModal" class="theme-btn-primary-outline" aria-label="Print Modal">Issue</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+              <svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+                  <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Issue Checksheet</p>
+              <p>This will issue the selected Checksheet,</p>
+              <p>Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openMarkOfferedModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("issue-checksheet", IssueChecksheet);
 
 // Punchlists
 class PunchlistsFilter extends HTMLElement {
@@ -523,25 +652,25 @@ class PunchlistsFilter extends HTMLElement {
             <div class="grid grid-cols-4 gap-4 items-center">
               <!-- Select fields -->
                  ${["Punchlist No", "Tag No", "Tag Description"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-                   )
-                   .join("")}
+        )
+        .join("")}
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Site Location",
-                "Module/Area",
-                "Area Code",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Site Location",
+        "Module/Area",
+        "Area Code",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -556,30 +685,30 @@ class PunchlistsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
                  ${["Raised By", "Category"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <input type="text" class="input-text border-theme w-full" placeholder="Enter" />
                 </div>
               `
-                   )
-                   .join("")}
+        )
+        .join("")}
                
               ${[
-                "PL Defect Type",
-                "PL Priority",
-                "Construction Phase",
-                "Discipline",
-                "Responsible Group",
-                "Workpack Type",
-                "Requisitioned Items",
-              ]
-                .map(
-                  (label) => `
+        "PL Defect Type",
+        "PL Priority",
+        "Construction Phase",
+        "Discipline",
+        "Responsible Group",
+        "Workpack Type",
+        "Requisitioned Items",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -594,23 +723,23 @@ class PunchlistsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
             ${[
-              "Highlight expired est.",
-              "Include Descriptions",
-              "Show Deleted",
-              "Show Tag Custom Data",
-              "Show Outstanding Only",
-            ]
-              .map(
-                (label) => `
+        "Highlight expired est.",
+        "Include Descriptions",
+        "Show Deleted",
+        "Show Tag Custom Data",
+        "Show Outstanding Only",
+      ]
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-              )
-              .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -652,8 +781,7 @@ class AddPunchlistSaveButton extends HTMLElement {
     this.innerHTML = `
       <span>
         <!-- Add Button (triggers modal) -->
-        <button id="openAddPunchlistModal" class="theme-btn whitespace-nowrap">Add</button>
-        
+        <button id="openAddPunchlistModal" class="theme-btn whitespace-nowrap w-[6rem]">Add</button>
         <!-- Modal Overlay -->
         <div id="addPunchlistModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
           <!-- Modal Content -->
@@ -674,7 +802,6 @@ class AddPunchlistSaveButton extends HTMLElement {
               <p >This will add the new Punchclist,</p>
               <p>Are you sure?</p>
             </div>
-            
             <!-- Footer -->
             <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
               <button data-close class="theme-btn-outline">Cancel</button>
@@ -717,32 +844,32 @@ class AddPunchList extends HTMLElement {
             <!-- Input fields -->
            
     ${[
-      "Punchlist ID",
-      "Reference",
-      "Punchlist Unit",
-      "Punchlist System",
-      "Punchlist SybSystem",
-      "Punchlist Tag",
-      "Workpack No",
-      "Punchlist Desc",
-      "Raised By",
-      "Raised At",
-      "Category",
-      "SMCC Type",
-      "IFS Task Number",
-      "Checksheet",
-      "RFQ",
-      "MRR",
-      "Comments",
-      "Drawing",
-      "Discipline",
-      "Responsible Group",
-      "Responsible Person",
-      "Priority",
-      "Defect Type",
-    ]
-      .map(
-        (label) => `
+        "Punchlist ID",
+        "Reference",
+        "Punchlist Unit",
+        "Punchlist System",
+        "Punchlist SybSystem",
+        "Punchlist Tag",
+        "Workpack No",
+        "Punchlist Desc",
+        "Raised By",
+        "Raised At",
+        "Category",
+        "SMCC Type",
+        "IFS Task Number",
+        "Checksheet",
+        "RFQ",
+        "MRR",
+        "Comments",
+        "Drawing",
+        "Discipline",
+        "Responsible Group",
+        "Responsible Person",
+        "Priority",
+        "Defect Type",
+      ]
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -752,21 +879,21 @@ class AddPunchList extends HTMLElement {
                 />
             </div>
             `
-      )
-      .join("")}
+        )
+        .join("")}
         
                 ${["Completed"]
-                  .map(
-                    (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-                  )
-                  .join("")}
+        )
+        .join("")}
                   ${["Completed Date"]
-                    .map(
-                      (label) => `
+        .map(
+          (label) => `
                     <div class="space-y-1">
                             <label class="block text-sm font-medium">${label}</label>
                         <input
@@ -778,11 +905,11 @@ class AddPunchList extends HTMLElement {
             />
                         </div>
                             `
-                    )
-                    .join("")}
+        )
+        .join("")}
                   ${["Completed By", "Completed By Group", "Completed Notes"]
-                    .map(
-                      (label) => `
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -792,8 +919,8 @@ class AddPunchList extends HTMLElement {
                 />
             </div>
             `
-                    )
-                    .join("")}
+        )
+        .join("")}
                 </div>
     `;
   }
@@ -1217,21 +1344,21 @@ class PreservationFilter extends HTMLElement {
             <div class="grid grid-cols-4 gap-4 items-center">
               <!-- Select fields -->
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Site Location",
-                "Module/Area",
-                "Area Code",
-                "Type",
-                "SubType",
-                "Discipline",
-                "Checksheet",
-                "Due Within",
-                "Electronic",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Site Location",
+        "Module/Area",
+        "Area Code",
+        "Type",
+        "SubType",
+        "Discipline",
+        "Checksheet",
+        "Due Within",
+        "Electronic",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -1246,17 +1373,17 @@ class PreservationFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
             ${["Include Descriptions", "Show Outstanding Only"]
-              .map(
-                (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-              )
-              .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -1337,8 +1464,8 @@ class LoopTagsFilter extends HTMLElement {
           <div class="p-6 space-y-4">
             <div class="grid grid-cols-4 gap-4 items-center">
               ${["Tag No", "Tag Description"]
-                .map(
-                  (label) => `
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -1348,28 +1475,28 @@ class LoopTagsFilter extends HTMLElement {
                 />
             </div>
             `
-                )
-                .join("")}
+        )
+        .join("")}
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Discipline",
-                "SubSystem Group",
-                "Type",
-                "SubType",
-                "Tag Group",
-                "Cable Tag",
-                "Spare Field 3",
-                "Site Location",
-                "Module/Area",
-                "Area Code",
-                "Tag Location",
-                "LTP Number",
-                "Electronic",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Discipline",
+        "SubSystem Group",
+        "Type",
+        "SubType",
+        "Tag Group",
+        "Cable Tag",
+        "Spare Field 3",
+        "Site Location",
+        "Module/Area",
+        "Area Code",
+        "Tag Location",
+        "LTP Number",
+        "Electronic",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -1384,21 +1511,21 @@ class LoopTagsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
             ${[
-              "Include Descriptions",
-              "Include Soft Tags",
-              "Show Outstanding Only",
-            ]
-              .map(
-                (label) => `
+        "Include Descriptions",
+        "Include Soft Tags",
+        "Show Outstanding Only",
+      ]
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-              )
-              .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -1479,25 +1606,25 @@ class ApprovalsFilter extends HTMLElement {
           <div class="p-6 space-y-4">
             <div class="grid grid-cols-4 gap-4 items-center">
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Site Location",
-                "Module/Area",
-                "Area Code",
-                "Contractor",
-                "Type",
-                "SubType",
-                "Check Ref",
-                "Discipline",
-                "Checksheet Type",
-                "Phase",
-                "Tag Group",
-                "LTP Number",
-                "Electronic",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Site Location",
+        "Module/Area",
+        "Area Code",
+        "Contractor",
+        "Type",
+        "SubType",
+        "Check Ref",
+        "Discipline",
+        "Checksheet Type",
+        "Phase",
+        "Tag Group",
+        "LTP Number",
+        "Electronic",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -1512,17 +1639,17 @@ class ApprovalsFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
             ${["Include Descriptions", "Show Approved"]
-              .map(
-                (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-              )
-              .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
@@ -1558,3 +1685,66 @@ class ApprovalsFilter extends HTMLElement {
   }
 }
 customElements.define("approvals-filter", ApprovalsFilter);
+
+class MarkAsApproved extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <!-- Trigger Button -->
+       
+        <button id="openMarkOfferedModal" class="theme-btn" aria-label="Mark as Approved Modal">Mark as Approved</button>
+        <!-- Modal Overlay -->
+        <div id="markOfferedModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50  hidden">
+          <!-- Modal Content -->
+          <div class="theme-modal-bg rounded-lg shadow-lg max-w-md w-full relative">
+            <!-- Header -->
+             <div class="w-full flex items-center justify-center gap-3 p-4">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75Z"></path>
+                <path d="M12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12ZM12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75Z"></path>
+              </g>
+            </svg>
+            </div>
+            <!-- Body -->
+            <div class="space-y-2 text-center">
+              <p class="text-xl font-semibold">Mark as Approved</p>
+              <p>This will mark the selected as Approved,</p>
+              <p>Are you sure?</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-6 flex justify-center gap-3 bg-theme-surface p-2 rounded-b-lg">
+              <button data-close class="theme-btn-outline">Cancel</button>
+              <button data-close class="theme-btn">Yes, Proceed</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+    const modal = this.querySelector("#markOfferedModal");
+    const openBtn = this.querySelector("#openMarkOfferedModal");
+
+    // Open modal
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    // Close modal
+    this.querySelectorAll("[data-close]").forEach((el) => {
+      el.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    });
+
+    // Click outside to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+}
+customElements.define("mark-approved", MarkAsApproved);

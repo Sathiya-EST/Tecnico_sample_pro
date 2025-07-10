@@ -106,7 +106,7 @@ nav .collapsed .icon-container.active {
 }
 
 .nav-group.expanded {
-  max-height: 700px;
+  max-height: 1000px;
   opacity: 1;
 }
 .nav-item.active {

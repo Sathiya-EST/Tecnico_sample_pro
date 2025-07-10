@@ -1,29 +1,23 @@
 <div class="content space-y-4">
   <div class="flex flex-wrap justify-between gap-2 items-center">
-    <p class="text-xl font-semibold">Shutdown & Isolation</p>
+    <p class="text-xl font-semibold">Site SubArea</p>
 
     <div class="flex flex-wrap gap-4 items-center justify-end">
       <button
         id="project-info-add-btn"
-        data-route="/project-info/shutdown-isolation/add"
+        data-route="/project-info/site-sub-area/add"
         data-close
         class="theme-btn"
       >
-        Add
-      </button>
-      <button
-        id="project-info-add-btn"
-        data-route="/project-info/shutdown-isolation/edit"
-        data-close
-        class="theme-btn"
-      >
-        Edit
+        Add New
       </button>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
         </button>
       </span>
+      <reset-grid-modal></reset-grid-modal>
+      <site-location-filter></site-location-filter>
       <button class="plain-icon" id="RefreshBtn" aria-label="Refresh">
         <svg
           viewBox="0 0 24 24"
@@ -42,18 +36,9 @@
       </button>
     </div>
   </div>
-  <div class="tab-header">
-    <button class="tab-button active" onclick="switchTab(event, 'tab1')">
-      Shutdown
-    </button>
-    <button class="tab-button" onclick="switchTab(event, 'tab2')">
-      Isolation
-    </button>
-  </div>
   <div>
     <search-input></search-input>
   </div>
-
   <!-- Table -->
   <div class="page-section border-theme">
     <div class="overflow-x-auto">
@@ -61,16 +46,16 @@
         <thead class="border-b border-gray-200">
           <tr class="table-heading">
             <th class="table-header">
-              <span>Title</span>
+              <span>Location Ref</span>
             </th>
             <th class="table-header">
-              <span>Start Date</span>
+              <span>Area Ref</span>
             </th>
             <th class="table-header">
-              <span>End Date</span>
+              <span>SubArea Ref</span>
             </th>
             <th class="table-header">
-              <span>Notes</span>
+              <span>SubArea Description</span>
             </th>
           </tr>
         </thead>
@@ -144,8 +129,5 @@
       <button class="pagination-btn">Last</button>
       <button class="pagination-btn">&gt;</button>
     </div>
-  </div>
-  <div class="footer-container">
-    <delete-modal></delete-modal>
   </div>
 </div>
