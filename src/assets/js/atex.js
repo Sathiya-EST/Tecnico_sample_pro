@@ -381,6 +381,141 @@ class ATEXTestEquipmentFilter extends HTMLElement {
 }
 customElements.define("atex-test-equipment-filter", ATEXTestEquipmentFilter);
 
+class AddTestEquipments extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+        <div class="grid grid-cols-4 gap-4 items-center mt-6">
+            <!-- Input fields -->
+           
+    ${["Identification No", "Equipment Desc", "Serial No"]
+        .map(
+          (label) => `
+            <div class="space-y-1">
+                <label class="block text-sm font-medium">${label}</label>
+                <input
+                type="text"
+                class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                placeholder="Enter"
+                />
+            </div>
+            `
+        )
+        .join("")}
+      ${["Date Received"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+        ${["Calibration Certification Ref"]
+        .map(
+          (label) => `
+                    <div class="space-y-1">
+                        <label class="block text-sm font-medium">${label}</label>
+                        <input
+                        type="text"
+                        class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                        placeholder="Enter"
+                        />
+                    </div>
+                    `
+        )
+        .join("")}
+
+
+       ${["Calibration Required"]
+        .map(
+          (label) => `
+                <label class="flex items-center gap-2">
+                  <input type="radio" class="w-4 h-4" /> ${label}
+                </label>
+              `
+        )
+        .join("")}
+          ${["Calibration Date"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+         ${["Result"]
+        .map(
+          (label) => `
+                    <div class="space-y-1">
+                        <label class="block text-sm font-medium">${label}</label>
+                        <input
+                        type="text"
+                        class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                        placeholder="Enter"
+                        />
+                    </div>
+                    `
+        )
+        .join("")}
+               ${["Next Calibration Due"]
+        .map(
+          (label) => `
+                          <div class="space-y-1">
+                                  <label class="block text-sm font-medium">${label}</label>
+                              <input
+                      type="date"
+                      id="issueDate"
+                      name="issueDate"
+                      placeholder="Date"
+                      class="input-text  bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                  />
+                              </div>
+                                  `
+        )
+        .join("")}
+        ${[
+        "Engineering Company",
+        "Calibration Procedure Ref",
+        "Accuracy Req",
+        "Cal Duration (Days)",
+        "Cal Month",
+        "Discipline",
+        "Notes",
+      ]
+        .map(
+          (label) => `
+                    <div class="space-y-1">
+                        <label class="block text-sm font-medium">${label}</label>
+                        <input
+                        type="text"
+                        class="input-text bg-theme-background border-theme w-full rounded px-3 py-2 text-sm"
+                        placeholder="Enter"
+                        />
+                    </div>
+                    `
+        )
+        .join("")}
+                </div>
+    `;
+  }
+}
+customElements.define("add-test-equipments", AddTestEquipments);
+
 class CompleteChangeReq extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -500,7 +635,6 @@ class AcceptChangeReq extends HTMLElement {
   }
 }
 customElements.define("accept-change-req", AcceptChangeReq);
-
 
 class RejectChangeReq extends HTMLElement {
   connectedCallback() {
