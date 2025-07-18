@@ -5,7 +5,7 @@
     <div class="flex flex-wrap gap-4 items-center justify-end">
       <project-select></project-select>
       <div class="w-px h-8 bg-theme-border"></div>
-           <show-layout-modal></show-layout-modal>
+      <show-layout-modal></show-layout-modal>
       <span>
         <button class="theme-btn-primary-outline whitespace-nowrap">
           Export
@@ -38,129 +38,7 @@
     <search-input></search-input>
   </div>
   <!-- Table -->
-  <div class="page-section border-theme">
-    <div class="overflow-x-auto">
-      <table class="w-full">
-        <thead class="border-b border-gray-200">
-          <tr class="table-heading">
-            <th class="table-header">
-              <span>Checksheet Ref</span>
-            </th>
-            <th class="table-header">
-              <span>Checksheet Desc</span>
-            </th>
-            <th class="table-header">
-              <span>Electronic</span>
-            </th>
-            <th class="table-header">
-              <span>Tag No</span>
-            </th>
-            <th class="table-header">
-              <span>Tag Desc</span>
-            </th>
-            <th class="table-header">
-              <span>Unit Ref</span>
-            </th>
-            <th class="table-header">
-              <span>System Ref</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="table-row-style">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="table-row-style even-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- Pagination -->
-  <div class="table-footer">
-    <div>
-      <p class="font-semibold">Page 1 of 15</p>
-    </div>
-    <!-- Pagination -->
-    <div class="pagination-wrapper">
-      <button class="pagination-btn">&lt;</button>
-      <button class="pagination-btn">First</button>
-      <button class="pagination-btn pagination-active">1</button>
-      <button class="pagination-btn">2</button>
-      <button class="pagination-btn">3</button>
-      <span class="w-9 h-9 flex items-center justify-center">...</span>
-      <button class="pagination-btn">15</button>
-      <button class="pagination-btn">Last</button>
-      <button class="pagination-btn">&gt;</button>
-    </div>
-  </div>
+  <outstanding-preservation-table></outstanding-preservation-table>
   <div class="footer-container">
     <complete-preservation></complete-preservation>
   </div>

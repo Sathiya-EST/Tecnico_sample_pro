@@ -1,4 +1,60 @@
 // Checksheet master
+class ChecksheetsMasterTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Checksheet Name","Checksheet Description","Checksheet Revision","Discipline Ref",
+      "Checksheet Type (A/B/C)","Checksheet Manhours","Contractor","Electronic","Requires 2 Step Completion",
+      "Filepath","Comments Disabled"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("checksheet-master-table", ChecksheetsMasterTable);
+
 class AddCheckSheetMaster extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

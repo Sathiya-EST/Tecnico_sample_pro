@@ -1,5 +1,67 @@
 // Checksheets
 
+class OutstandingChecksheetsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Issued", "Issued To", "Responsible Issued Group", "Issued At", "ID", "Checksheet ID", "Unit Ref",
+      "System Ref", "SubSystem Ref", "Tag No", "Tag Desc", "Doc Type", "Checksheet Phase", "Name/Ref", "Description",
+      "Sheet Type", "Tag Discipline Ref", "Discipline", "Electronic", "Type Ref", "SubType Ref", "Site Location Ref",
+      "Module Area Ref", "Area Code Ref", "Tag Group Ref", "Loop Tag", "MC RFI No.", "Workpack No", "Checksheet", "Executed",
+      "Executed By", "Executed By Group", "Executed At", "Completed", "Completed By", "Completed Group", "Completed At",
+      "Approved", "Approved By", "Approved At", "Approved By Group", "Sheet Revision", "Checksheet Has Master",
+      "Soft Tag", "Cable Tag", "Is Loop", "Printed", "Printed At", "Printed By", "A Punchlist Outstanding", "SubSystem Group",
+      "Scanned At", "Scanned By", "Group", "Progress", "Tag Added At", "Attach Id", "Added Manually", "Added By",
+      "Requires 2 Step Completion"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("outstanding-checksheets-table", OutstandingChecksheetsTable);
+
 class EditPhaseButton extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -608,6 +670,64 @@ class IssueChecksheet extends HTMLElement {
 customElements.define("issue-checksheet", IssueChecksheet);
 
 // Punchlists
+class OutstandingPunchlistsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Punchlist ID","Reference","Applies To","Punchlist Unit","Punchlist System","Punchlist SubSystem",
+      "Punchlist Tag","Workpack No","Punchlist Description","Raised By","Raised At","Category","SMCC Type",
+      "IFS Task Number","Checksheet","RFQ","MRR","Comments","Drawing","Discipline","Responsible Group",
+      "Responsible Person","Priority","Defect Type","Completed","Completed Date","Completed By","Completed By Group",
+      "Completed Notes","Estimated Man Hours","Cleared","Cleared Date","Cleared By","Cleared By Group","Estimated Completed Date"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("outstanding-punchlists-table", OutstandingPunchlistsTable);
+
 class PunchlistsFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -1300,6 +1420,66 @@ class CompletePreservationModal extends HTMLElement {
 customElements.define("complete-preservation", CompletePreservationModal);
 
 // Preservation
+class OutstandingPreservationTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Checksheet Ref","Checksheet Description","Electronic","Tag No","Tag Desc",
+      "Unit Ref","System Ref","SubSystem Ref","SubSubSystem Ref","Type Ref","SubType Ref",
+      "Tag Discipline Ref","Tag Site Location","Tag Site Location Ref","Module Area Ref",
+      "Module Area Code Ref","Date Due","Days Overdue","Days Remaining","Start Date",
+      "Duration","Completed By","Completed Responsible Group","Date Completed","LTP Number",
+      "Group","Printed","Printed At","Locked","Locked At","Locked By","Locked By Host",
+      "Issued","Issued To","Issued Responsible Group","Issued At","Test Equipment","Man Hours"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("outstanding-preservation-table", OutstandingPreservationTable);
+
 class PreservationFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -1421,6 +1601,65 @@ class PreservationFilter extends HTMLElement {
 customElements.define("preservation-filter", PreservationFilter);
 
 // Loop Tags
+class OutstandingLoopTagsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Tag No","Tag Description","Complete","Type Ref","SubType Ref","Discipline Ref",
+      "Site Site Location Ref","Module Area Ref","Module Area Code Ref","Unit Ref",
+      "System Ref","SubSystem Ref","SubSubSystem Ref","Tag Group","From","To","Parent Tag",
+      "Cable Tag","Hazardous Tag","Loop Tag","Loop Tag No","Preservation Live","Soft Tag",
+      "Tag Site Location","LTP Number","Primary Drawing","SubSystem Group","Checksheets",
+      "Man Hours","Child Checksheets Counts","Child Man Hours Counts"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("outstanding-loop-tags-table", OutstandingLoopTagsTable);
+
 class LoopTagsFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -1563,6 +1802,63 @@ class LoopTagsFilter extends HTMLElement {
 customElements.define("loop-tags-filter", LoopTagsFilter);
 
 // Approvals
+class OutstandingApprovalTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "FCR Id","FCR Ref","Tag No","Tag Description","Doc Type","Checksheet ID","Type",
+      "Checksheet Description","Sub Type","Checksheet","Check Type","Unit Ref","System Ref",
+      "Sub System Ref","WorkPack No","Site Location","Module/Area","Area Code","Tag Discipline",
+      "Checksheet","Tag Group","Building Number","LTP Number","Executed","Executed By"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("outstanding-approvals-table", OutstandingApprovalTable);
+
 class ApprovalsFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `

@@ -244,12 +244,13 @@ nav .collapsed .icon-container.active {
 }
 
 .table-heading {
-  @apply text-left  px-6 font-semibold;
+  @apply text-left px-6 font-semibold;
   background-color: rgb(var(--t-header-background));
 }
 .table-header {
   @apply text-left py-3 px-3 font-semibold;
 }
+
 .table-row-style td {
   @apply px-4 py-2 h-[40px];
 }
@@ -265,7 +266,7 @@ nav .collapsed .icon-container.active {
   @apply flex items-center gap-2 rounded-md;
 }
 .table-footer {
-  @apply flex justify-between items-center p-2 rounded-lg border;
+  @apply flex justify-between items-center p-2 rounded-lg border mb-2;
   background-color: rgb(var(--brand-header));
   border-color: rgb(var(--border));
 }

@@ -88,9 +88,9 @@
   @apply bg-none overflow-auto flex;
 }
 
-.tab-header::-webkit-scrollbar {
+/* .tab-header::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .tab-button {
   color: rgb(var(--text-label));

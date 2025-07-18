@@ -1,3 +1,68 @@
+class TagTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Tag No", "Tag Desc", "Unit", "System Ref", "Sub System Ref", "Location", "Area", "Type", "Sub Type", "Discipline",
+      "Tag Is Soft", "Tag Is Loop", "Manufacturer", "PO Number", "Parent Tag", "Loop Tag", "Commodity Code", "From Tag",
+      "To Tag", "Cable Length", "Spool Tag", "Tag Group", "Tag is Hazardous", "Serial Number", "Primary Drawing",
+      "Tag Import Source", "RFID", "Tag Is Cable", "Tag Is Spool", "Spool Length", "Is Line", "Is Joint", "Haz PO Number",
+      "Haz Manufacturer", "Haz ModelNo", "Haz Serial No", "Haz Protection type", "Haz IPR Rating", "Haz ATEX Code",
+      "Haz Comments", "Haz Manufacturer type", "Haz Area Classification", "Haz TE Time", "Haz Equipment category and EPL",
+      "Haz Equipment IP Rating", "Haz Equipment Ex Technique", "Haz Equipment Gas group", "Haz Equipment Temp Class",
+      "Haz Equipment Anbient Temp", "Haz Certifying Authority", "Haz Certifyication No", "Haz Is Circuits Limits And Values",
+      "Haz Special Conditions", "Haz Contractor Ex Reg No", "Tag Eng Co", "Tag Barrier Modal", "Tag ATEX Cert No",
+      "Tag Building No", "Tag Building No 3", "Tag SubArea", "Tag CWP", "Tag Module", "TagsC1", "TagsC2", "TagsC3", "TagsC4",
+      "TagsC5", "TagsC6", "TagsC7", "TagsC8", "TagsC9", "TagsC10", "Tag SubSystem Ref", "Deleted?", "Tag Construction Phase Ref",
+      "Tag Status"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("tag-table", TagTable);
+
 class DatabaseFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -93,6 +158,7 @@ class DatabaseFilter extends HTMLElement {
         "Include Soft Tags",
         "Include Descriptions",
         "Loop Tags Only",
+        "Show Custom Data"
       ]
         .map(
           (label) => `

@@ -1,4 +1,63 @@
 // Certificate
+class CertificatesTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Cert No", "Cert Type", "Applies To", "System Ref", "SubSystem Ref", "SubSystem Group",
+      "Progress", "Progress (%)", "Checksheets Completed", "Checksheets Outstanding", "Outstanding Items",
+      "Completed Items", "Ready", "Offered", "Accepted", "SubSubSystem Ref", "Offered By", "Offered Group",
+      "Offered Date", "Offered Comments", "Accepted By", "Accepted Group", "SubModule Area Ref", "Accepted Date",
+      "Accepted Comments", "Partial", "Cert Description", "Requirements", "Punchlists Outstanding", "Punchlists Completed",
+      "Planned Date", "Proposed Planned Date", "Certs Outstanding", "Certs Completed"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("certificates-table", CertificatesTable);
+
 class CertificateFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -42,15 +101,15 @@ class CertificateFilter extends HTMLElement {
           <div class="p-6 space-y-4">
             <div class="grid grid-cols-4 gap-4 items-center">
               ${[
-                "Unit",
-                "System",
-                "SubSystem",
-                "Site Location",
-                "Module/Area",
-                "Certificate Type",
-              ]
-                .map(
-                  (label) => `
+        "Unit",
+        "System",
+        "SubSystem",
+        "Site Location",
+        "Module/Area",
+        "Certificate Type",
+      ]
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -65,11 +124,11 @@ class CertificateFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
                 ${["SubSystem Group", "Workpack"]
-                  .map(
-                    (label) => `
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -79,8 +138,8 @@ class CertificateFilter extends HTMLElement {
                 />
             </div>
             `
-                  )
-                  .join("")}
+        )
+        .join("")}
       ${["Shutdown", "Status"]
         .map(
           (label) => `
@@ -101,8 +160,8 @@ class CertificateFilter extends HTMLElement {
         )
         .join("")}
                  ${["Certificate No"]
-                   .map(
-                     (label) => `
+        .map(
+          (label) => `
             <div class="space-y-1">
                 <label class="block text-sm font-medium">${label}</label>
                 <input
@@ -112,17 +171,17 @@ class CertificateFilter extends HTMLElement {
                 />
             </div>
             `
-                   )
-                   .join("")}
+        )
+        .join("")}
             ${["Include Descriptions", "Show Accepted", "Highlight Overdue"]
-              .map(
-                (label) => `
+        .map(
+          (label) => `
                 <label class="flex items-center gap-2">
                   <input type="radio" class="w-4 h-4" /> ${label}
                 </label>
               `
-              )
-              .join("")}
+        )
+        .join("")}
             </div>
           </div>
 
