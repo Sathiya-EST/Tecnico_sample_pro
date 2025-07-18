@@ -511,6 +511,9 @@
   .min-w-80 {
     min-width: calc(var(--spacing) * 80);
   }
+  .min-w-\[2rem\] {
+    min-width: 2rem;
+  }
   .min-w-\[5rem\] {
     min-width: 5rem;
   }
@@ -519,6 +522,9 @@
   }
   .min-w-\[50vw\] {
     min-width: 50vw;
+  }
+  .min-w-\[max-content\] {
+    min-width: max-content;
   }
   .flex-1 {
     flex: 1;
@@ -1165,6 +1171,16 @@
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
+    }
+  }
+  .md\:mt-0 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
     }
   }
 }
@@ -1820,6 +1836,7 @@ nav .collapsed .icon-container.active {
   border-radius: var(--radius-md);
 }
 .table-footer {
+  margin-bottom: calc(var(--spacing) * 2);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1975,9 +1992,6 @@ input:focus + .switch-slider {
   overflow: auto;
   background-image: none;
 }
-.tab-header::-webkit-scrollbar {
-  display: none;
-}
 .tab-button {
   color: rgb(var(--text-label));
   position: relative;
@@ -2038,6 +2052,8 @@ input:focus + .switch-slider {
   --t-header-background: 233 233 233;
   --tr-even-background: 246, 246, 246;
   --modal-background: 255, 255, 255;
+  --scroll-thumb: 200, 200, 200;
+  --scroll-track: 245, 245, 245;
 }
 .dark {
   --primary: 45, 37, 125;
@@ -2061,6 +2077,8 @@ input:focus + .switch-slider {
   --t-header-background: 10 10 10;
   --tr-even-background: 31, 31, 31;
   --modal-background: 31, 31, 31;
+  --scroll-thumb: 100, 100, 100;
+  --scroll-track: 40, 40, 40;
 }
 .blue {
   --primary: 45, 37, 125;
@@ -2081,6 +2099,24 @@ input:focus + .switch-slider {
   --t-header-background: 45 37 125;
   --tr-even-background: 44, 38, 103;
   --modal-background: 45, 37, 125;
+  --scroll-thumb: 160, 160, 255;
+  --scroll-track: 30, 30, 70;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--scroll-thumb));
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(var(--scroll-track));
+  border-radius: 6px;
+}
+* {
+  scrollbar-color: rgb(var(--scroll-thumb)) rgb(var(--scroll-track));
+  scrollbar-width: thin;
 }
 .icon-color {
   color: rgb(var(--brand-icon));

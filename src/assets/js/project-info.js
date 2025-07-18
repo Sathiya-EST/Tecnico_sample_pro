@@ -1,3 +1,59 @@
+// Unit
+class UnitTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Reference", "Unit Description", "Imported", "Verified", "Verified By", "Verifying Responsible Group", "Verified At", "Under MoC",
+      "Prevent Auto Population Of Certificates", "Unit C1", "Archived"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("unit-table", UnitTable);
+
 class UnitFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -192,6 +248,61 @@ class AddUnit extends HTMLElement {
 }
 customElements.define("add-unit", AddUnit);
 
+//System
+class SystemTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "System Ref", "System Description", "Sys C1", "System Engineer 1", "System Engineer 2"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("system-table", SystemTable);
+
 class SystemFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -306,6 +417,62 @@ class AddSystem extends HTMLElement {
   }
 }
 customElements.define("add-system", AddSystem);
+//Sub System
+class SubSystemTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "System Ref", "SubSystem Ref", "SubSystem Description", "SubSystem Group", "Pre-Walk Planned", "Pre-Walk Forecast",
+      "Pre-Walk Actual", "Walk Down Planned", "Walk Down Actual", "Home Drawing Ref", "Phase", "SubSys C1", "SubSys Engineer 1",
+      "SubSys Engineer 2", "Deleted?"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("sub-system-table", SubSystemTable);
 
 class AddSubSystem extends HTMLElement {
   connectedCallback() {
@@ -342,6 +509,61 @@ class AddSubSystem extends HTMLElement {
   }
 }
 customElements.define("add-sub-system", AddSubSystem);
+//Site Location
+class SiteLocationTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Site Location", "Site Location Description", "Added At", "Added By", "Imported", "Completed", "Verified",
+      "Verified By", "Verifying Responsible Group", "Verified At"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("site-location-table", SiteLocationTable);
 
 class SitLocationFilter extends HTMLElement {
   connectedCallback() {
@@ -535,6 +757,61 @@ class AddSiteLocation extends HTMLElement {
 }
 customElements.define("add-site-location", AddSiteLocation);
 
+//Site Area
+class SiteAreaTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Location Ref", "Area Ref", "Area Description", "Area Is Hazardous"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("site-area-table", SiteAreaTable);
+
 class AddSiteArea extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -576,6 +853,61 @@ class AddSiteArea extends HTMLElement {
   }
 }
 customElements.define("add-site-area", AddSiteArea);
+
+//Site Sub Area
+class SiteSubAreaTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Location Ref", "Area Ref", "SubArea Ref", "SubArea Description"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("site-sub-area-table", SiteSubAreaTable);
 
 class AddSiteSubArea extends HTMLElement {
   connectedCallback() {
@@ -761,6 +1093,62 @@ class AddSubType extends HTMLElement {
   }
 }
 customElements.define("add-sub-type", AddSubType);
+
+// Verification
+class VerificationTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "System Ref", "SubSystem Ref", "Discipline Ref", "1st Pass By", "1st Pass Responsible Group",
+      "1st Pass At", "2nd Pass By", "2nd Pass Responsible Group", "2nd Pass At", "Verified"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("verification-table", VerificationTable);
 
 class VerificationFilter extends HTMLElement {
   connectedCallback() {
@@ -1105,6 +1493,310 @@ class SecondPassModal extends HTMLElement {
 }
 customElements.define("second-pass-modal", SecondPassModal);
 
+//Integrity
+class IntegritySysWithNoSubSystemTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "Unit Description", "System Ref", "System Description", "System Completed"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("integrity-sys-with-no-subsystem-table", IntegritySysWithNoSubSystemTable);
+
+class IntegritySubSysWithNoTagsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "Unit Description", "Tag No", "Tag Description", "Tag Completed"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("integrity-subsys-with-no-tags-table", IntegritySubSysWithNoTagsTable);
+
+class IntegrityTagsWithNoChacksheetsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "Unit Description", "Checksheet Id", "Checksheet Description", "Checksheet Completed"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("integrity-tag-with-no-checksheets-table", IntegrityTagsWithNoChacksheetsTable);
+
+class IntegrityCablesWithNoToFormEntitiesTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Unit Ref", "Unit Description", "Cable No", "Cable Description", "Cable Completed"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("integrity-table-with-no-to-form-entities-table", IntegrityCablesWithNoToFormEntitiesTable);
+
+class IntegrityTabs extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <div class="space-y-4">
+        <div class="tab-header">
+          <button class="tab-button active" data-tab="tab1">Systems with no SubSystems</button>
+          <button class="tab-button" data-tab="tab2">Systems with no Tags</button>
+          <button class="tab-button" data-tab="tab3">Tags with no Checksheets</button>
+          <button class="tab-button" data-tab="tab4">Cables with no To/From Entries</button>
+          <button class="tab-button" data-tab="tab5">Orphaned Child tags</button>
+          <button class="tab-button" data-tab="tab6">Orphaned Loop tags</button>
+        </div>
+
+        ${this.getTabHTML('tab1')}
+        ${this.getTabHTML('tab2')}
+        ${this.getTabHTML('tab3')}
+        ${this.getTabHTML('tab4')}
+        ${this.getTabHTML('tab5')}
+        ${this.getTabHTML('tab6')}
+      </div>
+    `;
+
+    this.querySelectorAll(".tab-button").forEach(button => {
+      button.addEventListener("click", (e) => {
+        const tabId = button.getAttribute("data-tab");
+        this.switchTab(e, tabId);
+      });
+    });
+  }
+
+  switchTab(event, tabId) {
+    const tabs = this.querySelectorAll(".tab-content");
+    const buttons = this.querySelectorAll(".tab-button");
+
+    tabs.forEach(tab => tab.classList.add("hidden"));
+    buttons.forEach(btn => btn.classList.remove("active"));
+
+    this.querySelector(`#${tabId}`).classList.remove("hidden");
+    event.currentTarget.classList.add("active");
+  }
+
+  getTabHTML(id) {
+    const tabComponents = {
+      'tab1': `
+      <div class="space-y-4">
+      <div>
+        <search-input></search-input>
+      </div>
+      <integrity-sys-with-no-subsystem-table></integrity-sys-with-no-subsystem-table>
+      </div>
+    
+    `,
+      'tab2': `
+       <div class="space-y-4">
+      <div>
+        <search-input></search-input>
+      </div>
+      <integrity-subsys-with-no-tags-table></integrity-subsys-with-no-tags-table>
+      </div>`,
+      'tab3': `
+       <div class="space-y-4">
+      <div>
+        <search-input></search-input>
+      </div>
+      <integrity-tag-with-no-checksheets-table></integrity-tag-with-no-checksheets-table>
+      </div>`,
+      'tab4': `
+       <div class="space-y-4">
+      <div>
+        <search-input></search-input>
+      </div>
+      <integrity-table-with-no-to-form-entities-table></integrity-table-with-no-to-form-entities-table>
+      </div>`,
+      'tab5': ``,
+      'tab6': ``
+    };
+
+    return `
+      <div id="${id}" class="tab-content ${id === 'tab1' ? '' : 'hidden'} space-y-4">
+        ${tabComponents[id]}
+      </div>
+    `;
+  }
+}
+customElements.define("integrity-tabs", IntegrityTabs);
+
+// Discipline
 class DisciplineFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -3427,8 +4119,8 @@ class PunchlistAdmin extends HTMLElement {
             <table class="w-full">
               <thead class="border-b border-theme">
                 <tr class="table-heading">
-                  <th class="table-header">Punchlist Category</th>
-                  <th class="table-header">Prevent Checksheet Completion</th>
+                  <th class="table-header">Punch Category</th>
+                  <th class="table-header">Punch Checksheet Completion</th>
                   <th class="table-header">Added At</th>
                   <th class="table-header">Added By</th>
                   <th class="table-header">2 Step Verification</th>
@@ -3886,10 +4578,10 @@ class TQAdmin extends HTMLElement {
               <thead class="border-b border-theme">
                 <tr class="table-heading">
                  <th class="table-header">
-                <span>Reference</span>
+                <span>TQ Reference</span>
               </th>
               <th class="table-header">
-                <span>Description</span>
+                <span>TQ Description</span>
               </th>
               <th class="table-header">
                 <span>Added By</span>

@@ -25,8 +25,8 @@ class DashboardFilter extends HTMLElement {
             <div class="grid grid-cols-4 gap-4 items-center">
               <!-- Select fields -->
               ${["Select Layout", "Type", "SubType"]
-                .map(
-                  (label) => `
+        .map(
+          (label) => `
                 <div class="space-y-1">
                   <label class="block">${label}</label>
                   <div class="relative">
@@ -41,8 +41,8 @@ class DashboardFilter extends HTMLElement {
                   </div>
                 </div>
               `
-                )
-                .join("")}
+        )
+        .join("")}
               <div class="space-y-1">
                 <label class="block">Unit</label>
                 <div>Value</div>
@@ -93,3 +93,65 @@ class DashboardFilter extends HTMLElement {
   }
 }
 customElements.define("dashboard-filter", DashboardFilter);
+
+class WorkPackTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Workpack No", "Title", "Type", "Type Ref", "Type Desc", "Unit", "Unit Ref", "Unit Desc", "System", "System Ref", "System Desc",
+      "Sub System", "Sub System Ref", "Sub System Desc", "Site Location Ref", "Module Area Ref", "Sub Module Area Ref", "Added By",
+      "Status Ref", "Status", "Workflow", "Owner", "Contractor", "Shutdown", "Shutdown Title", "Engineer 1", "Engineer 2",
+      "Engineer 3", "Engineer 4", "ByPass Authorization", "Authorisation 1 Authorisation Given", "Authorisation 2 Authorisation Given",
+      "Authorisation 3 Authorisation Given", "Authorisation 4 Authorisation Given", "Cancelled", "Planned WP Created Date",
+      "Planned WP Assigned Date", "Planned WP Inspection Date Date", "Planned WP Completed Date", "Issued to IM", "Applies To", "Checksheet",
+      "MC RFI No.", "COM RFI No.", "Module_Area", "Week", "Locked", "Locked By", "Locked At", "Locked By Host", "Assigned By", "Checksheets",
+      "Punchlists", "Checksheets Executed By", "Checksheets Executed At", "Users Assigned to Execute", "Checksheets Completed By",
+      "Checksheets Completed At", "Users Assigned to Complete"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("workpack-table", WorkPackTable);

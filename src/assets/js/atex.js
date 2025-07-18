@@ -1,3 +1,64 @@
+// Hazardous Area Equipment
+class ATEXHazAreaTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Tag Desc", "Unit", "System", "SubSystem", "Discipline", "Type", "SubType", "Hazardous", "Hazardous Module Area",
+      "Haz Po No", "Haz Manufacturer", "Haz Model No", "Haz Serial", "Haz Protection Type", "Haz IP Rating",
+      "ATEX Code", "Comments", "Haz ATEX Cert. No", "Haz Barrier Model", "Tag Group", "Haz Manufacturer Type",
+      "Haz Module Area Classification", "Haz TE Time", "Haz Equipment Category and EPL", "Haz Equipment IP Rating",
+      "Haz Equipment Ex Technique", "Haz Equipment Gas Group", "Haz Equipment Temperature Class", "Haz Equipment Ambient Temp",
+      "Haz Certifying Authority", "Haz Certification No", "Haz IS Circuits Limits and Values", "Haz Special Condition",
+      "Haz Contractor Ex Register Nos"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("atex-haz-area-table", ATEXHazAreaTable);
+
 class ATEXHazAreaFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -53,7 +114,7 @@ class ATEXHazAreaFilter extends HTMLElement {
         .join("")}
                
                         
- ${[,"Unit","System","SubSystem"]
+ ${[, "Unit", "System", "SubSystem"]
         .map(
           (label) => `
                 <div class="space-y-1">
@@ -153,6 +214,62 @@ class ATEXHazAreaFilter extends HTMLElement {
 }
 customElements.define("atex-haz-area-filter", ATEXHazAreaFilter);
 
+// Engineering Data
+class ATEXEngDataTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Company Name", "Tag No", "Tag Description", "Type Ref", "Sub Type Ref", "System Ref", "Sub System Ref",
+      "Discipline Ref", "Tag Eng Comments"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("atex-eng-data-table", ATEXEngDataTable);
+
 class ATEXEngDataFilter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -241,6 +358,61 @@ class ATEXEngDataFilter extends HTMLElement {
 }
 customElements.define("atex-eng-data-filter", ATEXEngDataFilter);
 
+// Engineering Companies
+class ATEXEngCompaniesTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Company Name", "Country", "Tel No", "Fax No", "Contact Name", "Email", "Website", "Title"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("atex-eng-companies-table", ATEXEngCompaniesTable);
+
 class AddEngCompany extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -274,6 +446,63 @@ class AddEngCompany extends HTMLElement {
   }
 }
 customElements.define("add-eng-company", AddEngCompany);
+
+// Test Equipments
+class ATEXTestEquipmentsTable extends HTMLElement {
+  connectedCallback() {
+    const columns = [
+      "Make", "Model", "Serial No.", "Date Received", "Calibration Certification Ref", "Calibration Required", "Calibration Date",
+      "Result", "Engineering Company", "Calibration Procedure Ref", "Accuracy Req.", "Cal Duration (Days)", "Discipline",
+      "Notes", "Location", "Date Returned", "Day Rate"
+    ];
+
+    const rowCount = 8;
+    const pageCount = 15;
+    const currentPage = 1;
+
+    this.innerHTML = `
+      <div class="page-section border-theme">
+        <div class="overflow-x-auto w-full tag-table-scrollable">
+          <table class="w-full min-w-[max-content]">
+            <thead class="border-b border-gray-200">
+              <tr class="table-heading">
+                ${columns.map(col => `
+                  <th class="table-header min-w-[2rem] whitespace-nowrap px-2 py-1">
+                    <span>${col}</span>
+                  </th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${Array.from({ length: rowCount }).map((_, idx) => `
+                <tr class="table-row-style ${idx % 2 === 1 ? "even-row" : ""}">
+                  ${columns.map(() => `
+                    <td class="min-w-[2rem] whitespace-nowrap px-2 py-1"></td>`).join("")}
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-footer mt-4 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p class="font-semibold">Page ${currentPage} of ${pageCount}</p>
+        </div>
+        <div class="pagination-wrapper flex gap-2 mt-2 md:mt-0">
+          <button class="pagination-btn">&lt;</button>
+          <button class="pagination-btn">First</button>
+          <button class="pagination-btn pagination-active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <span class="w-9 h-9 flex items-center justify-center">...</span>
+          <button class="pagination-btn">${pageCount}</button>
+          <button class="pagination-btn">Last</button>
+          <button class="pagination-btn">&gt;</button>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("atex-test-equipments-table", ATEXTestEquipmentsTable);
 
 class ATEXTestEquipmentFilter extends HTMLElement {
   connectedCallback() {
